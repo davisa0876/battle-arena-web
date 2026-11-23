@@ -3,6 +3,11 @@
 Phase 1 frontend for Battle Arena. It provides the game landing page and reports
 the availability of the Battle Arena API.
 
+## Stack
+
+- React + Vite + TypeScript
+- Tailwind CSS (no Bootstrap)
+
 ## Requirements
 
 - Node.js 22

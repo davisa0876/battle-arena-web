@@ -4,6 +4,18 @@ import { apiClient } from '../api/client'
 type ConnectionStatus = 'connecting' | 'connected' | 'offline'
 type HealthResponse = Record<string, unknown>
 
+const statusLabel: Record<ConnectionStatus, string> = {
+  connecting: 'Connecting...',
+  connected: 'API Connected',
+  offline: 'API Offline',
+}
+
+const statusDotClass: Record<ConnectionStatus, string> = {
+  connecting: 'bg-signal-warn shadow-[0_0_10px_currentColor]',
+  connected: 'bg-signal-ok shadow-[0_0_10px_currentColor]',
+  offline: 'bg-signal-bad shadow-[0_0_10px_currentColor]',
+}
+
 export function SystemStatus() {
   const [status, setStatus] = useState<ConnectionStatus>('connecting')
   const [attempt, setAttempt] = useState(0)
@@ -29,15 +41,24 @@ export function SystemStatus() {
   }, [attempt])
 
   return (
-    <div className={`system-status system-status--${status}`} role="status" aria-live="polite">
-      <span className="status-dot" aria-hidden="true" />
-      <span>
-        {status === 'connecting' && 'Connecting...'}
-        {status === 'connected' && 'API Connected'}
-        {status === 'offline' && 'API Offline'}
-      </span>
+    <div
+      className="flex items-center gap-2 rounded-full border border-arena-700 bg-arena-950/80 px-3 py-2 text-[13px] text-arena-400"
+      role="status"
+      aria-live="polite"
+    >
+      <span
+        className={`size-1.5 rounded-full ${statusDotClass[status]}`}
+        aria-hidden="true"
+      />
+      <span>{statusLabel[status]}</span>
       {status === 'offline' && (
-        <button type="button" onClick={retry}>Retry</button>
+        <button
+          type="button"
+          onClick={retry}
+          className="cursor-pointer border-0 bg-transparent pl-1 font-[inherit] text-ember-300 underline underline-offset-3"
+        >
+          Retry
+        </button>
       )}
     </div>
   )
