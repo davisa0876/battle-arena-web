@@ -42,6 +42,11 @@
       "specialDefense": "Defensa especial",
       "speed": "Velocidad",
       "unavailable": "—"
+    },
+    "evolutions": {
+      "title": "Evoluciones",
+      "description": "Próximas formas posibles de esta criatura. Abre una forma para ver el resto de la cadena.",
+      "stage": "Nivel {{stage}}"
     }
   },
   "image": {

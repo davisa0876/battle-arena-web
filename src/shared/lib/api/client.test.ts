@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import i18n from '../../../i18n'
+import i18n, { resources } from '../../../i18n'
 import { ApiClient, ApiError } from './client'
 
 const fetchMock = vi.fn<typeof fetch>()
@@ -130,6 +130,33 @@ describe('ApiClient', () => {
     expect(error).toBeInstanceOf(ApiError)
     expect((error as ApiError).message).toBe('API request failed with status 500')
     expect((error as ApiError).status).toBe(500)
+  })
+
+  it('localizes status, timeout and offline messages using the errors namespace', async () => {
+    await i18n.changeLanguage('fr')
+    const client = new ApiClient({ baseUrl: 'http://api.test', timeoutMs: 20 })
+
+    fetchMock.mockImplementationOnce(async () => jsonResponse({}, { status: 503 }))
+    await expect(client.get('/api/x')).rejects.toMatchObject({
+      message: resources.fr.errors.requestFailed.replace('{{status}}', '503'),
+      status: 503,
+    })
+
+    fetchMock.mockImplementationOnce(hangingFetch())
+    await expect(client.get('/api/x')).rejects.toMatchObject({
+      message: resources.fr.errors.timeout.replace('{{ms}}', '20'),
+    })
+
+    fetchMock.mockRejectedValueOnce(new TypeError('Failed to fetch'))
+    await expect(client.get('/api/x')).rejects.toMatchObject({ message: resources.fr.errors.offline })
+  })
+
+  it('uses the English resource strings by default', async () => {
+    fetchMock.mockImplementationOnce(async () => jsonResponse({}, { status: 500 }))
+
+    await expect(new ApiClient({ baseUrl: 'http://api.test' }).get('/api/x')).rejects.toMatchObject({
+      message: resources.en.errors.requestFailed.replace('{{status}}', '500'),
+    })
   })
 
   it('preserves a 404 status so callers can distinguish not found', async () => {

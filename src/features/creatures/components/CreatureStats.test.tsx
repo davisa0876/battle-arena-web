@@ -85,6 +85,15 @@ describe('CreatureStats', () => {
     expect(within(section).getAllByText('65')).toHaveLength(2) // both special stats
   })
 
+  it('formats height and weight with the active locale', async () => {
+    await i18n.changeLanguage('fr')
+    render(<CreatureStats creature={creature} />)
+
+    const normalize = (text: string | null) => (text ?? '').replace(/[\u00a0\u202f]/g, ' ')
+    expect(normalize(screen.getByText(i18n.t('creatures:detail.stats.height')).nextElementSibling?.textContent ?? null)).toBe('0,70 m')
+    expect(normalize(screen.getByText(i18n.t('creatures:detail.stats.weight')).nextElementSibling?.textContent ?? null)).toBe('6,9 kg')
+  })
+
   it('renders labels in the active language', async () => {
     await i18n.changeLanguage('fr')
     render(<CreatureStats creature={creature} />)

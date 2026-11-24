@@ -50,7 +50,7 @@ export class ApiClient {
       })
 
       if (!response.ok) {
-        throw new ApiError(`API request failed with status ${response.status}`, response.status)
+        throw new ApiError(i18n.t('errors:requestFailed', { status: response.status }), response.status)
       }
 
       return await response.json() as TResponse
@@ -59,9 +59,9 @@ export class ApiClient {
         throw error
       }
       if (timeoutController.signal.aborted) {
-        throw new ApiError(`API request timed out after ${this.timeoutMs}ms`, undefined, error)
+        throw new ApiError(i18n.t('errors:timeout', { ms: this.timeoutMs }), undefined, error)
       }
-      throw new ApiError('Unable to connect to the API', undefined, error)
+      throw new ApiError(i18n.t('errors:offline'), undefined, error)
     } finally {
       window.clearTimeout(timeoutId)
     }

@@ -21,8 +21,11 @@ export interface Creature {
   weight_g: number | null
   image_ref: string | null
   image_url?: string | null
+  evolution_stage?: number
   types: CreatureType[]
   base_stats: CreatureBaseStats
+  evolves_from?: Creature | null
+  evolutions?: Creature[]
 }
 
 export interface PaginationMeta {

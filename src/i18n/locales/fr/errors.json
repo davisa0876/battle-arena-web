@@ -2,5 +2,8 @@
   "catalogLoad": "Impossible de charger le catalogue des créatures.",
   "notFound": "Créature introuvable.",
   "detailLoad": "Impossible de charger cette créature.",
-  "missingSlug": "Identifiant de créature manquant."
+  "missingSlug": "Identifiant de créature manquant.",
+  "requestFailed": "La requête API a échoué avec le statut {{status}}",
+  "timeout": "La requête API a expiré après {{ms}} ms",
+  "offline": "Impossible de se connecter à l’API"
 }

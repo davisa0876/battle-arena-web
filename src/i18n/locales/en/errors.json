@@ -2,5 +2,8 @@
   "catalogLoad": "Unable to load the creature catalog.",
   "notFound": "Creature not found.",
   "detailLoad": "Unable to load this creature.",
-  "missingSlug": "Missing creature slug."
+  "missingSlug": "Missing creature slug.",
+  "requestFailed": "API request failed with status {{status}}",
+  "timeout": "API request timed out after {{ms}}ms",
+  "offline": "Unable to connect to the API"
 }

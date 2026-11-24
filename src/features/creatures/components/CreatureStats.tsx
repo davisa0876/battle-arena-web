@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { normalizeLanguage } from '../../../i18n'
 import { StatBar } from '../../../shared/components/ui/StatBar'
 import { formatHeight, formatWeight } from '../../../shared/lib/formatters/creatures'
 import type { Creature } from '../types'
@@ -8,7 +9,8 @@ interface CreatureStatsProps {
 }
 
 export function CreatureStats({ creature }: CreatureStatsProps) {
-  const { t } = useTranslation('creatures')
+  const { t, i18n } = useTranslation('creatures')
+  const locale = normalizeLanguage(i18n.resolvedLanguage ?? i18n.language)
   const unavailable = t('detail.stats.unavailable')
 
   return (
@@ -17,13 +19,13 @@ export function CreatureStats({ creature }: CreatureStatsProps) {
         <div className="rounded-2xl border border-border bg-surface/70 p-5 shadow-card">
           <dt className="text-arena-300/70">{t('detail.stats.height')}</dt>
           <dd className="m-0 mt-1 font-display text-lg text-white">
-            {formatHeight(creature.height_cm, unavailable)}
+            {formatHeight(creature.height_cm, unavailable, locale)}
           </dd>
         </div>
         <div className="rounded-2xl border border-border bg-surface/70 p-5 shadow-card">
           <dt className="text-arena-300/70">{t('detail.stats.weight')}</dt>
           <dd className="m-0 mt-1 font-display text-lg text-white">
-            {formatWeight(creature.weight_g, unavailable)}
+            {formatWeight(creature.weight_g, unavailable, locale)}
           </dd>
         </div>
       </dl>

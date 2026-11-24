@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
+import { CreatureEvolutions } from '../components/CreatureEvolutions'
 import { CreatureHero } from '../components/CreatureHero'
 import { CreatureStats } from '../components/CreatureStats'
 import { useCreatureDetail } from '../hooks/useCreatureDetail'
@@ -42,6 +43,7 @@ export function CreatureDetailPage() {
         <article className="mt-8">
           <CreatureHero creature={viewState.creature} />
           <CreatureStats creature={viewState.creature} />
+          <CreatureEvolutions creature={viewState.creature} />
         </article>
       )}
     </section>

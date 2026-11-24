@@ -86,6 +86,7 @@ describe('CreatureDetailPage', () => {
     expect(screen.getByText('Height').nextElementSibling).toHaveTextContent('0.60 m')
     expect(screen.getByText('Weight').nextElementSibling).toHaveTextContent('8.5 kg')
     expect(screen.getByRole('heading', { level: 2, name: 'Base stats' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { level: 2, name: 'Evolutions' })).not.toBeInTheDocument()
 
     const expected: Record<string, number> = {
       HP: 39,
@@ -132,6 +133,55 @@ describe('CreatureDetailPage', () => {
     expect(
       await screen.findByRole('img', { name: 'No artwork available for Charmander' }),
     ).toBeInTheDocument()
+  })
+
+  it('renders evolutions below the stats', async () => {
+    mockedApi.fetchCreatureBySlug.mockResolvedValue({
+      data: {
+        ...charmander,
+        evolution_stage: 1,
+        evolutions: [
+          {
+            id: 5,
+            name: 'Charmeleon',
+            slug: 'charmeleon',
+            height_cm: 110,
+            weight_g: 19000,
+            image_ref: null,
+            image_url: null,
+            evolution_stage: 2,
+            types: [{ id: 1, name: 'Fire', slug: 'fire' }],
+            base_stats: charmander.base_stats,
+            evolutions: [
+              {
+                id: 6,
+                name: 'Charizard',
+                slug: 'charizard',
+                height_cm: 170,
+                weight_g: 90500,
+                image_ref: null,
+                image_url: null,
+                evolution_stage: 3,
+                types: [
+                  { id: 1, name: 'Fire', slug: 'fire' },
+                  { id: 3, name: 'Flying', slug: 'flying' },
+                ],
+                base_stats: charmander.base_stats,
+                evolutions: [],
+              },
+            ],
+          },
+        ],
+      },
+    })
+
+    renderDetail()
+
+    await screen.findByRole('heading', { level: 2, name: 'Evolutions' })
+    expect(screen.getByRole('link', { name: /Charmeleon/i })).toHaveAttribute('href', '/creatures/charmeleon')
+    expect(screen.getByRole('link', { name: /Charizard/i })).toHaveAttribute('href', '/creatures/charizard')
+    expect(screen.getByText('Stage 2')).toBeInTheDocument()
+    expect(screen.getByText('Stage 3')).toBeInTheDocument()
   })
 
   it('links back to the catalog', async () => {

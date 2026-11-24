@@ -2,5 +2,8 @@
   "catalogLoad": "No se pudo cargar el catálogo de criaturas.",
   "notFound": "Criatura no encontrada.",
   "detailLoad": "No se pudo cargar esta criatura.",
-  "missingSlug": "Falta el slug de la criatura."
+  "missingSlug": "Falta el slug de la criatura.",
+  "requestFailed": "La solicitud a la API falló con el estado {{status}}",
+  "timeout": "La solicitud a la API agotó el tiempo de espera tras {{ms}} ms",
+  "offline": "No se puede conectar con la API"
 }
