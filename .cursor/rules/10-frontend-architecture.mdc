@@ -1,0 +1,21 @@
+---
+description: Feature-oriented React architecture
+globs: src/**/*.{ts,tsx}
+alwaysApply: false
+---
+
+# Frontend Architecture
+
+- Pages orchestrate hooks + composition.
+- API calls live in `features/*/api` or `shared/lib/api`.
+- Presentation components do not own fetch logic.
+- Prefer focused components (`CreatureCard`, `CreatureImage`) over mega pages.
+- Preserve query params for search/type/page.
+
+```tsx
+// ❌ BAD
+useEffect(() => { fetch('/api/creatures').then(...) }, [])
+
+// ✅ GOOD
+const state = useCreatureCatalog(filters)
+```

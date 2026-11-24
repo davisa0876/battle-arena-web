@@ -1,0 +1,27 @@
+{
+  "home": {
+    "phase": "Rediseño de fase",
+    "heroTitle": "Battle Arena",
+    "heroSubtitle": "Forma tu equipo. Domina tu estrategia. Entra en la arena.",
+    "modesEyebrow": "Elige tu camino",
+    "modesTitle": "La arena toma forma",
+    "status": {
+      "comingSoon": "Próximamente",
+      "available": "Disponible"
+    },
+    "modes": {
+      "solo": {
+        "title": "Batalla en solitario",
+        "description": "Pon a prueba tu equipo contra rivales exigentes de la arena."
+      },
+      "online": {
+        "title": "Batalla en línea",
+        "description": "Enfréntate a jugadores de todo el mundo en tiempo real."
+      },
+      "collection": {
+        "title": "Colección de criaturas",
+        "description": "Explora el catálogo importado y estudia las estadísticas base."
+      }
+    }
+  }
+}

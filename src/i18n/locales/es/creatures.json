@@ -1,0 +1,51 @@
+{
+  "catalog": {
+    "eyebrow": "Colección de criaturas",
+    "title": "Catálogo",
+    "description": "Explora las criaturas guardadas en Battle Arena. La búsqueda y los filtros usan la API Laravel, nunca el proveedor externo.",
+    "loading": "Cargando criaturas...",
+    "errorTitle": "No se pudo cargar el catálogo",
+    "retry": "Reintentar",
+    "emptyTitle": "No se encontraron criaturas",
+    "emptyDescription": "Prueba otra búsqueda, limpia los filtros o importa el catálogo inicial desde la API.",
+    "resultsSummary": "Mostrando página {{page}} de {{lastPage}} · {{total}} criaturas",
+    "filters": {
+      "aria": "Filtrar criaturas",
+      "searchLabel": "Buscar por nombre",
+      "searchPlaceholder": "p. ej. Emberfang",
+      "typeLabel": "Tipo",
+      "typeAria": "Filtrar por tipo",
+      "allTypes": "Todos los tipos",
+      "searchAction": "Buscar",
+      "clearAction": "Limpiar"
+    },
+    "pagination": {
+      "aria": "Paginación del catálogo",
+      "previous": "Anterior",
+      "next": "Siguiente",
+      "page": "Página {{page}} / {{lastPage}}"
+    }
+  },
+  "detail": {
+    "backToCatalog": "← Volver al catálogo",
+    "loading": "Cargando criatura...",
+    "retry": "Reintentar",
+    "eyebrow": "Detalle de criatura",
+    "stats": {
+      "height": "Altura",
+      "weight": "Peso",
+      "baseStats": "Estadísticas base",
+      "hp": "PS",
+      "attack": "Ataque",
+      "defense": "Defensa",
+      "specialAttack": "Ataque especial",
+      "specialDefense": "Defensa especial",
+      "speed": "Velocidad",
+      "unavailable": "—"
+    }
+  },
+  "image": {
+    "loading": "Cargando imagen...",
+    "fallback": "No hay ilustración disponible para {{name}}"
+  }
+}

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 450" role="img" aria-label="Battle Arena logo horizontal">
+<defs>
+  <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FF8B4B"/><stop offset=".45" stop-color="#FF543E"/><stop offset=".55" stop-color="#2CDEEE"/><stop offset="1" stop-color="#188DD6"/></linearGradient>
+  <linearGradient id="ember" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#E72D39"/><stop offset="1" stop-color="#FFAC46"/></linearGradient>
+  <linearGradient id="ice" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#1571CD"/><stop offset="1" stop-color="#5FEAFA"/></linearGradient>
+  <linearGradient id="wordmark" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#FF9D50"/><stop offset=".6" stop-color="#FF6A36"/><stop offset="1" stop-color="#F54844"/></linearGradient>
+</defs>
+<g transform="translate(34 15) scale(.86)">
+<path d="M256 31 430 126 430 317 256 480 82 317 82 126Z" fill="#101726" stroke="#35435B" stroke-width="10" stroke-linejoin="round"/>
+<path d="M256 51 410 136 410 306 256 454 102 306 102 136Z" fill="none" stroke="url(#rim)" stroke-width="13" stroke-linejoin="round"/>
+<path d="M127 151 193 106 162 172 210 159 129 276 151 207 118 224Z" fill="url(#ember)"/>
+<path d="M385 151 319 106 350 172 302 159 383 276 361 207 394 224Z" fill="url(#ice)"/>
+<path d="M153 351 249 144 270 193 213 314 286 314 304 354 153 354Z" fill="url(#ember)"/>
+<path d="M359 351 263 144 242 193 299 314 226 314 208 354 359 354Z" fill="url(#ice)" opacity=".97"/>
+<path d="M256 224 281 278 231 278Z" fill="#101726"/>
+<path d="M203 359H309" stroke="#E9F3FF" stroke-width="11" stroke-linecap="round"/>
+<path d="M234 389 256 405 278 389" fill="none" stroke="#A2B8D1" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<text x="465" y="205" font-family="Lato,Arial,sans-serif" font-size="137" font-weight="900" letter-spacing="10" fill="#EDF5FF">BATTLE</text>
+<text x="461" y="335" font-family="Lato,Arial,sans-serif" font-size="146" font-weight="900" letter-spacing="11" fill="url(#wordmark)">ARENA</text>
+<text x="473" y="390" font-family="Lato,Arial,sans-serif" font-size="23" font-weight="700" letter-spacing="8" fill="#8191AA">STRATEGY   ·   EVOLUTION   ·   VICTORY</text>
+</svg>

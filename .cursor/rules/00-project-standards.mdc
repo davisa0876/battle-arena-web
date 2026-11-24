@@ -1,0 +1,13 @@
+---
+description: Core Battle Arena web standards
+alwaysApply: true
+---
+
+# Battle Arena Web Standards
+
+- Keep this repo independent from API/mobile/infra.
+- Prefer feature folders under `src/features` over dumping logic in pages.
+- No hardcoded user-facing strings. Use `t('namespace.key')` for `en/fr/pt-BR/it/es`.
+- TypeScript strict. Do not use `any` for API payloads.
+- Do not commit copyrighted artwork. Remote demo sprites stay URL-only.
+- Do not claim lint/typecheck/tests passed without running them.

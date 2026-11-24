@@ -1,0 +1,13 @@
+---
+description: Web internationalization rules
+globs: "{src/**/*.{ts,tsx},src/i18n/**/*.json}"
+alwaysApply: false
+---
+
+# Web i18n
+
+- Locales: `en`, `fr`, `pt-BR`, `it`, `es` with key parity.
+- Persist selection in localStorage; detect browser language on first visit.
+- Set `document.documentElement.lang` and send `Accept-Language` on API calls.
+- Format numbers with `Intl` APIs, never hardcoded separators.
+- When adding a key, update all five locale files in the same change.

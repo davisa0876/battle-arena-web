@@ -1,0 +1,27 @@
+{
+  "home": {
+    "phase": "Redesign fase",
+    "heroTitle": "Battle Arena",
+    "heroSubtitle": "Crea la tua squadra. Domina la strategia. Entra nell’arena.",
+    "modesEyebrow": "Scegli il percorso",
+    "modesTitle": "L’arena sta prendendo forma",
+    "status": {
+      "comingSoon": "In arrivo",
+      "available": "Disponibile"
+    },
+    "modes": {
+      "solo": {
+        "title": "Battaglia in solitaria",
+        "description": "Metti alla prova la squadra contro avversari dell’arena impegnativi."
+      },
+      "online": {
+        "title": "Battaglia online",
+        "description": "Sfida giocatori di tutto il mondo in tempo reale."
+      },
+      "collection": {
+        "title": "Collezione creature",
+        "description": "Sfoglia il catalogo importato e studia le statistiche base."
+      }
+    }
+  }
+}

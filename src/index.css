@@ -3,22 +3,28 @@
 @theme {
   --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Oxanium", ui-sans-serif, system-ui, sans-serif;
-  --color-arena-950: #07080f;
-  --color-arena-900: #0d0f1a;
-  --color-arena-800: #16192a;
-  --color-arena-700: #23273b;
-  --color-arena-400: #9aa0b8;
-  --color-arena-300: #c7cbd9;
-  --color-ember-400: #ff8a4c;
-  --color-ember-300: #ffb088;
-  --color-signal-ok: #34d399;
-  --color-signal-warn: #f0b429;
-  --color-signal-bad: #fb7185;
+  --color-background: #0B0F1B;
+  --color-surface: #151C2B;
+  --color-border: #303C52;
+  --color-ember: #FF6542;
+  --color-electric: #27C9EC;
+  --color-gold: #FFB84D;
+  --color-arena-950: #0B0F1B;
+  --color-arena-900: #111827;
+  --color-arena-800: #151C2B;
+  --color-arena-700: #303C52;
+  --color-arena-400: #9CA9BD;
+  --color-arena-300: #D6DEEA;
+  --color-signal-ok: #34D399;
+  --color-signal-warn: #FFB84D;
+  --color-signal-bad: #FB7185;
+  --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.28);
+  --shadow-ember: 0 18px 60px rgba(255, 101, 66, 0.16);
 }
 
 @layer base {
   html {
-    @apply bg-arena-950 text-arena-300 antialiased;
+    @apply bg-background text-arena-300 antialiased;
   }
 
   body {
@@ -27,5 +33,16 @@
 
   #root {
     @apply min-h-svh;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }

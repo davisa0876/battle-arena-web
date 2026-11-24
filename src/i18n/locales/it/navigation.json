@@ -1,0 +1,17 @@
+{
+  "mainNavigation": "Navigazione principale",
+  "brandAlt": "Logo Battle Arena",
+  "homeAria": "Home Battle Arena",
+  "creatures": "Creature",
+  "language": {
+    "label": "Seleziona lingua",
+    "shortLabel": "Lingua"
+  },
+  "status": {
+    "connecting": "Connessione...",
+    "connected": "API connessa",
+    "offline": "API offline",
+    "retry": "Riprova"
+  },
+  "footer": "© {{year}} Battle Arena · Preparati alla battaglia"
+}

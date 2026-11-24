@@ -1,0 +1,51 @@
+{
+  "catalog": {
+    "eyebrow": "Creature Collection",
+    "title": "Catalog",
+    "description": "Browse creatures persisted in Battle Arena. Search and filters hit the Laravel API, never the external data provider.",
+    "loading": "Loading creatures...",
+    "errorTitle": "Could not load the catalog",
+    "retry": "Retry",
+    "emptyTitle": "No creatures found",
+    "emptyDescription": "Try another search, clear filters, or import the starter catalog on the API.",
+    "resultsSummary": "Showing page {{page}} of {{lastPage}} · {{total}} creatures",
+    "filters": {
+      "aria": "Filter creatures",
+      "searchLabel": "Search by name",
+      "searchPlaceholder": "e.g. Emberfang",
+      "typeLabel": "Type",
+      "typeAria": "Filter by type",
+      "allTypes": "All types",
+      "searchAction": "Search",
+      "clearAction": "Clear"
+    },
+    "pagination": {
+      "aria": "Catalog pagination",
+      "previous": "Previous",
+      "next": "Next",
+      "page": "Page {{page}} / {{lastPage}}"
+    }
+  },
+  "detail": {
+    "backToCatalog": "← Back to catalog",
+    "loading": "Loading creature...",
+    "retry": "Retry",
+    "eyebrow": "Creature Detail",
+    "stats": {
+      "height": "Height",
+      "weight": "Weight",
+      "baseStats": "Base stats",
+      "hp": "HP",
+      "attack": "Attack",
+      "defense": "Defense",
+      "specialAttack": "Special Attack",
+      "specialDefense": "Special Defense",
+      "speed": "Speed",
+      "unavailable": "—"
+    }
+  },
+  "image": {
+    "loading": "Loading image...",
+    "fallback": "No artwork available for {{name}}"
+  }
+}

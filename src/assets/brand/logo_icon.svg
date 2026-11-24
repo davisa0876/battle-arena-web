@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Battle Arena emblem">
+<defs>
+  <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FF8B4B"/><stop offset=".45" stop-color="#FF543E"/><stop offset=".55" stop-color="#2CDEEE"/><stop offset="1" stop-color="#188DD6"/></linearGradient>
+  <linearGradient id="ember" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#E72D39"/><stop offset="1" stop-color="#FFAC46"/></linearGradient>
+  <linearGradient id="ice" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#1571CD"/><stop offset="1" stop-color="#5FEAFA"/></linearGradient>
+</defs>
+<!-- original hexagonal arena crest, no sphere motif -->
+<path d="M256 31 430 126 430 317 256 480 82 317 82 126Z" fill="#101726" stroke="#35435B" stroke-width="10" stroke-linejoin="round"/>
+<path d="M256 51 410 136 410 306 256 454 102 306 102 136Z" fill="none" stroke="url(#rim)" stroke-width="13" stroke-linejoin="round"/>
+<path d="M127 151 193 106 162 172 210 159 129 276 151 207 118 224Z" fill="url(#ember)"/>
+<path d="M385 151 319 106 350 172 302 159 383 276 361 207 394 224Z" fill="url(#ice)"/>
+<!-- Split energy-chevron A: two opposing combatants meeting at the apex -->
+<path d="M153 351 249 144 270 193 213 314 286 314 304 354 153 354Z" fill="url(#ember)"/>
+<path d="M359 351 263 144 242 193 299 314 226 314 208 354 359 354Z" fill="url(#ice)" opacity=".97"/>
+<!-- Central cut-out gives the emblem its own angular geometry -->
+<path d="M256 224 281 278 231 278Z" fill="#101726"/>
+<path d="M203 359H309" stroke="#E9F3FF" stroke-width="11" stroke-linecap="round"/>
+<path d="M234 389 256 405 278 389" fill="none" stroke="#A2B8D1" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

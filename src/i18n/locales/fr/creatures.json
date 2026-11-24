@@ -1,0 +1,51 @@
+{
+  "catalog": {
+    "eyebrow": "Collection de créatures",
+    "title": "Catalogue",
+    "description": "Parcourez les créatures enregistrées dans Battle Arena. La recherche et les filtres utilisent l’API Laravel, jamais le fournisseur externe.",
+    "loading": "Chargement des créatures...",
+    "errorTitle": "Impossible de charger le catalogue",
+    "retry": "Réessayer",
+    "emptyTitle": "Aucune créature trouvée",
+    "emptyDescription": "Essayez une autre recherche, effacez les filtres ou importez le catalogue de départ depuis l’API.",
+    "resultsSummary": "Page {{page}} sur {{lastPage}} · {{total}} créatures",
+    "filters": {
+      "aria": "Filtrer les créatures",
+      "searchLabel": "Rechercher par nom",
+      "searchPlaceholder": "ex. Emberfang",
+      "typeLabel": "Type",
+      "typeAria": "Filtrer par type",
+      "allTypes": "Tous les types",
+      "searchAction": "Rechercher",
+      "clearAction": "Effacer"
+    },
+    "pagination": {
+      "aria": "Pagination du catalogue",
+      "previous": "Précédent",
+      "next": "Suivant",
+      "page": "Page {{page}} / {{lastPage}}"
+    }
+  },
+  "detail": {
+    "backToCatalog": "← Retour au catalogue",
+    "loading": "Chargement de la créature...",
+    "retry": "Réessayer",
+    "eyebrow": "Détail de la créature",
+    "stats": {
+      "height": "Taille",
+      "weight": "Poids",
+      "baseStats": "Statistiques de base",
+      "hp": "PV",
+      "attack": "Attaque",
+      "defense": "Défense",
+      "specialAttack": "Attaque spéciale",
+      "specialDefense": "Défense spéciale",
+      "speed": "Vitesse",
+      "unavailable": "—"
+    }
+  },
+  "image": {
+    "loading": "Chargement de l’image...",
+    "fallback": "Aucune illustration disponible pour {{name}}"
+  }
+}

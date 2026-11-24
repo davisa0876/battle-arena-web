@@ -1,0 +1,27 @@
+{
+  "home": {
+    "phase": "Redesign da fase",
+    "heroTitle": "Battle Arena",
+    "heroSubtitle": "Monte sua equipe. Domine sua estratégia. Entre na arena.",
+    "modesEyebrow": "Escolha seu caminho",
+    "modesTitle": "A arena está ganhando forma",
+    "status": {
+      "comingSoon": "Em breve",
+      "available": "Disponível"
+    },
+    "modes": {
+      "solo": {
+        "title": "Batalha solo",
+        "description": "Teste sua equipe contra oponentes desafiadores da arena."
+      },
+      "online": {
+        "title": "Batalha online",
+        "description": "Enfrente jogadores do mundo todo em tempo real."
+      },
+      "collection": {
+        "title": "Coleção de criaturas",
+        "description": "Navegue pelo catálogo importado e estude os atributos base."
+      }
+    }
+  }
+}

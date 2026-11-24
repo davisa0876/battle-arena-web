@@ -1,0 +1,6 @@
+{
+  "catalogLoad": "No se pudo cargar el catálogo de criaturas.",
+  "notFound": "Criatura no encontrada.",
+  "detailLoad": "No se pudo cargar esta criatura.",
+  "missingSlug": "Falta el slug de la criatura."
+}

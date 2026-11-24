@@ -1,0 +1,6 @@
+{
+  "catalogLoad": "Unable to load the creature catalog.",
+  "notFound": "Creature not found.",
+  "detailLoad": "Unable to load this creature.",
+  "missingSlug": "Missing creature slug."
+}

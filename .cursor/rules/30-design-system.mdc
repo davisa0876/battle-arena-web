@@ -1,0 +1,13 @@
+---
+description: Design tokens and UI constraints
+globs: "{src/**/*.{ts,tsx,css},src/assets/brand/**}"
+alwaysApply: false
+---
+
+# Design System
+
+- Tokens: background `#0B0F1B`, surface `#151C2B`, border `#303C52`, ember `#FF6542`, electric `#27C9EC`, gold `#FFB84D`.
+- Fonts: Oxanium headings/numbers, Sora UI/body.
+- Use brand assets from `src/assets/brand`. Never import Pokémon symbols from mockups.
+- Prefer subtle motion; honor `prefers-reduced-motion`.
+- Accessible focus states and image alts required.

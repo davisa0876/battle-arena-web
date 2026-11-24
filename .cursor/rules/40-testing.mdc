@@ -1,0 +1,12 @@
+---
+description: Web testing standards
+globs: "{src/**/*.test.{ts,tsx},vitest.config.ts}"
+alwaysApply: false
+---
+
+# Testing
+
+- Prefer behavior tests over brittle snapshots.
+- Mock API modules; cover loading/empty/error/retry and language selector persistence.
+- CreatureImage must cover missing/failed remote image fallback.
+- Run `npm run typecheck`, `npm run lint`, `npm test` (Node 22+).

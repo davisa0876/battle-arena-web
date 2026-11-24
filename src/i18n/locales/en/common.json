@@ -1,0 +1,27 @@
+{
+  "home": {
+    "phase": "Phase redesign",
+    "heroTitle": "Battle Arena",
+    "heroSubtitle": "Build your team. Master your strategy. Enter the arena.",
+    "modesEyebrow": "Choose your path",
+    "modesTitle": "The arena is taking shape",
+    "status": {
+      "comingSoon": "Coming Soon",
+      "available": "Available"
+    },
+    "modes": {
+      "solo": {
+        "title": "Solo Battle",
+        "description": "Test your team against challenging arena opponents."
+      },
+      "online": {
+        "title": "Online Battle",
+        "description": "Face players from around the world in real time."
+      },
+      "collection": {
+        "title": "Creature Collection",
+        "description": "Browse the imported creature catalog and study base stats."
+      }
+    }
+  }
+}

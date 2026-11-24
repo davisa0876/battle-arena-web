@@ -2,11 +2,12 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { ApiError } from '../api/client'
-import * as creaturesApi from '../api/creatures'
-import { CreatureCatalogPage } from './CreatureCatalogPage'
+import { ApiError } from '../shared/lib/api/client'
+import * as creaturesApi from '../features/creatures/api/creatures'
+import { CreatureCatalogPage } from '../features/creatures/pages/CreatureCatalogPage'
+import '../i18n'
 
-vi.mock('../api/creatures')
+vi.mock('../features/creatures/api/creatures')
 
 const mockedApi = vi.mocked(creaturesApi)
 
@@ -38,6 +39,7 @@ describe('CreatureCatalogPage', () => {
           height_cm: 60,
           weight_g: 8500,
           image_ref: null,
+          image_url: 'https://example.test/charmander.png',
           types: [{ id: 1, name: 'Fire', slug: 'fire' }],
           base_stats: {
             hp: 39,
@@ -64,7 +66,7 @@ describe('CreatureCatalogPage', () => {
     expect(screen.getByText('Loading creatures...')).toBeInTheDocument()
 
     expect(await screen.findByRole('heading', { name: 'Charmander' })).toBeInTheDocument()
-    expect(mockedApi.fetchCreatures).toHaveBeenCalled()
+    expect(mockedApi.fetchCreatures).toHaveBeenCalledWith({ page: 1, per_page: 12 }, expect.any(AbortSignal))
   })
 
   it('shows an empty catalog state', async () => {
@@ -100,6 +102,7 @@ describe('CreatureCatalogPage', () => {
             height_cm: 70,
             weight_g: 6900,
             image_ref: null,
+            image_url: null,
             types: [{ id: 2, name: 'Grass', slug: 'grass' }],
             base_stats: {
               hp: 45,
