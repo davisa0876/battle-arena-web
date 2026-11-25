@@ -1,0 +1,81 @@
+{
+  "page": {
+    "eyebrow": "Profil de dresseur",
+    "title": "Mon profil",
+    "editAction": "Modifier le profil",
+    "publicAction": "Voir la page publique",
+    "collectionAction": "Ouvrir ma collection"
+  },
+  "identity": {
+    "avatarAlt": "Avatar de {{name}}",
+    "handle": "@{{handle}}",
+    "noBio": "Pas encore de biographie.",
+    "emailVerified": "E-mail vérifié",
+    "emailUnverified": "E-mail non vérifié"
+  },
+  "stats": {
+    "title": "Statistiques du dresseur",
+    "level": "Niveau de dresseur",
+    "totalXp": "XP total",
+    "creatures": "Créatures possédées",
+    "activeCreature": "Créature active",
+    "noActiveCreature": "Aucune sélectionnée",
+    "collection": "Visibilité de la collection",
+    "collectionPublic": "Publique",
+    "collectionPrivate": "Privée",
+    "unavailable": "Indisponible"
+  },
+  "edit": {
+    "eyebrow": "Paramètres",
+    "title": "Modifier le profil",
+    "subtitle": "Mettez à jour votre identité publique, votre mot de passe et votre avatar.",
+    "back": "Retour au profil",
+    "profileSection": "Informations du profil",
+    "displayName": "Nom affiché",
+    "handle": "Identifiant",
+    "bio": "Biographie",
+    "collectionPublic": "Rendre ma collection publique",
+    "collectionPublicHint": "Les autres dresseurs peuvent voir vos créatures sur votre page publique.",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "saved": "Profil mis à jour.",
+    "passwordSection": "Changer le mot de passe",
+    "currentPassword": "Mot de passe actuel",
+    "newPassword": "Nouveau mot de passe",
+    "confirmPassword": "Confirmer le nouveau mot de passe",
+    "changePassword": "Mettre à jour le mot de passe",
+    "changingPassword": "Mise à jour...",
+    "passwordChanged": "Mot de passe mis à jour.",
+    "avatarSection": "Avatar",
+    "avatarHint": "JPG, PNG ou WebP jusqu’à {{maxMb}} Mo.",
+    "chooseFile": "Choisir une image",
+    "selectedFile": "Sélectionné : {{name}}",
+    "upload": "Envoyer l’avatar",
+    "uploading": "Envoi...",
+    "remove": "Supprimer l’avatar",
+    "removing": "Suppression...",
+    "avatarUploaded": "Avatar mis à jour.",
+    "avatarRemoved": "Avatar supprimé."
+  },
+  "public": {
+    "eyebrow": "Dresseur",
+    "loading": "Chargement du dresseur...",
+    "retry": "Réessayer",
+    "collectionTitle": "Collection",
+    "collectionPrivate": "Ce dresseur garde sa collection privée.",
+    "collectionEmpty": "Ce dresseur n’a pas encore de créatures.",
+    "backToCreatures": "Parcourir les créatures",
+    "title": "Profil public",
+    "home": "Retour à l'accueil"
+  },
+  "allowances": {
+    "title": "Sélections de créatures",
+    "hint": "Nombre de créatures que vous pouvez encore sélectionner, par stade d'évolution. Les quotas viennent du serveur.",
+    "stage": "Stade {{stage}}",
+    "remaining": "{{remaining}} sur {{total}} restantes",
+    "used": "{{used}} utilisées",
+    "pvp": "PvP",
+    "pvpUnlocked": "Débloqué",
+    "pvpLocked": "Verrouillé"
+  }
+}

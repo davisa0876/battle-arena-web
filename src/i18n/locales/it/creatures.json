@@ -2,7 +2,7 @@
   "catalog": {
     "eyebrow": "Collezione creature",
     "title": "Catalogo",
-    "description": "Sfoglia le creature salvate in Battle Arena. Ricerca e filtri usano l’API Laravel, mai il provider esterno.",
+    "description": "Studia ogni creatura conosciuta nell Arena. Cerca per nome, filtra per tipo e scopri i loro punti di forza prima di formare la squadra.",
     "loading": "Caricamento creature...",
     "errorTitle": "Impossibile caricare il catalogo",
     "retry": "Riprova",
@@ -24,7 +24,9 @@
       "previous": "Precedente",
       "next": "Successiva",
       "page": "Pagina {{page}} / {{lastPage}}"
-    }
+    },
+    "ownedBadge": "Nella tua squadra",
+    "viewDetails": "Vedi dettagli"
   },
   "detail": {
     "backToCatalog": "← Torna al catalogo",
@@ -47,10 +49,25 @@
       "title": "Evoluzioni",
       "description": "Prossime forme possibili di questa creatura. Apri una forma per vedere il resto della catena.",
       "stage": "Livello {{stage}}"
-    }
+    },
+    "ownedBadge": "Gia nella tua collezione"
   },
   "image": {
     "loading": "Caricamento immagine...",
     "fallback": "Nessuna illustrazione disponibile per {{name}}"
+  },
+  "selection": {
+    "add": "Aggiungi alla collezione",
+    "adding": "Aggiunta...",
+    "owned": "Gia posseduta",
+    "failed": "Impossibile aggiungere questa creatura.",
+    "reasons": {
+      "unauthenticated": "Accedi per aggiungere creature.",
+      "owned": "Possiedi gia questa creatura.",
+      "starter_required": "Scegli prima uno starter.",
+      "no_allowance": "Nessuno slot rimasto per questo stadio.",
+      "stage_locked": "Questo stadio evolutivo e bloccato.",
+      "unavailable": "Questa creatura non puo essere selezionata."
+    }
   }
 }

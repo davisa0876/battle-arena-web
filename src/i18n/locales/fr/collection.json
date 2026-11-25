@@ -1,0 +1,42 @@
+{
+  "eyebrow": "Collection",
+  "title": "Ma collection",
+  "subtitle": "Vos créatures, leurs niveaux et ce qu’elles peuvent devenir.",
+  "loading": "Chargement de votre collection...",
+  "retry": "Réessayer",
+  "count": "Créatures possédées : {{count}}",
+  "empty": {
+    "title": "Votre collection est vide",
+    "description": "Choisissez une créature de départ pour commencer votre aventure."
+  },
+  "starter": {
+    "title": "Choisissez votre starter",
+    "subtitle": "Sélectionnez une créature pour démarrer votre collection.",
+    "loading": "Chargement des créatures de départ...",
+    "retry": "Réessayer",
+    "empty": "Aucune créature de départ n’est disponible pour le moment.",
+    "disabled": "Le choix du starter n’est pas disponible pour le moment.",
+    "choose": "Choisir {{name}}",
+    "choosing": "Sélection...",
+    "viewDetails": "Voir les détails"
+  },
+  "owned": {
+    "active": "Active",
+    "setActive": "Définir comme active",
+    "settingActive": "Activation...",
+    "acquired": "Obtenue le {{date}}",
+    "xp": "{{xp}} XP",
+    "details": "Voir l’espèce"
+  },
+  "evolution": {
+    "title": "Évolution",
+    "none": "Cette créature n’a plus d’évolution.",
+    "locked": "Verrouillée",
+    "eligible": "Prête",
+    "notAvailable": "L’évolution n’est pas encore disponible.",
+    "reasons": {
+      "requirements_not_defined": "Les conditions d’évolution ne sont pas encore définies.",
+      "unknown": "Pas encore disponible."
+    }
+  }
+}

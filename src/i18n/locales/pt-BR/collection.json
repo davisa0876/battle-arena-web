@@ -1,0 +1,42 @@
+{
+  "eyebrow": "Coleção",
+  "title": "Minha coleção",
+  "subtitle": "Suas criaturas, seus níveis e o que elas podem se tornar.",
+  "loading": "Carregando sua coleção...",
+  "retry": "Tentar novamente",
+  "count": "Criaturas possuídas: {{count}}",
+  "empty": {
+    "title": "Sua coleção está vazia",
+    "description": "Escolha uma criatura inicial para começar sua jornada."
+  },
+  "starter": {
+    "title": "Escolha seu inicial",
+    "subtitle": "Selecione uma criatura para iniciar sua coleção.",
+    "loading": "Carregando criaturas iniciais...",
+    "retry": "Tentar novamente",
+    "empty": "Nenhuma criatura inicial está disponível ainda.",
+    "disabled": "A escolha do inicial não está disponível no momento.",
+    "choose": "Escolher {{name}}",
+    "choosing": "Escolhendo...",
+    "viewDetails": "Ver detalhes"
+  },
+  "owned": {
+    "active": "Ativa",
+    "setActive": "Definir como ativa",
+    "settingActive": "Definindo...",
+    "acquired": "Obtida em {{date}}",
+    "xp": "{{xp}} XP",
+    "details": "Ver espécie"
+  },
+  "evolution": {
+    "title": "Evolução",
+    "none": "Esta criatura não tem mais evoluções.",
+    "locked": "Bloqueada",
+    "eligible": "Pronta",
+    "notAvailable": "A evolução ainda não está disponível.",
+    "reasons": {
+      "requirements_not_defined": "Os requisitos de evolução ainda não foram definidos.",
+      "unknown": "Ainda não disponível."
+    }
+  }
+}

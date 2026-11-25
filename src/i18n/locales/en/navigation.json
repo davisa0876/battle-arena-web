@@ -3,6 +3,21 @@
   "brandAlt": "Battle Arena logo",
   "homeAria": "Battle Arena home",
   "creatures": "Creatures",
+  "gameRules": "Game Rules",
+  "login": "Log in",
+  "register": "Sign up",
+  "profile": "Profile",
+  "myCollection": "My Collection",
+  "settings": "Settings",
+  "logout": "Log out",
+  "menu": {
+    "open": "Open menu",
+    "close": "Close menu"
+  },
+  "userMenu": {
+    "label": "Account menu",
+    "level": "Level {{level}}"
+  },
   "language": {
     "label": "Select language",
     "shortLabel": "Language"

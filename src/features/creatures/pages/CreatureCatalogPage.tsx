@@ -102,7 +102,10 @@ export function CreatureCatalogPage() {
                 total: loadState.total,
               })}
             </p>
-            <CreatureGrid creatures={loadState.creatures} />
+            <CreatureGrid
+              creatures={loadState.creatures}
+              onCollectionChanged={() => setRetryToken((value) => value + 1)}
+            />
             <CatalogPagination page={loadState.page} lastPage={loadState.lastPage} onPageChange={(nextPage) => applyFilters({ page: nextPage })} />
           </>
         )}

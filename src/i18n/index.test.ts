@@ -3,7 +3,18 @@ import i18n, { languageLabels, normalizeLanguage, resources, supportedLanguages 
 
 type Tree = { [key: string]: string | Tree }
 
-const namespaces = ['common', 'navigation', 'creatures', 'errors'] as const
+const namespaces = [
+  'common',
+  'navigation',
+  'creatures',
+  'errors',
+  'validation',
+  'auth',
+  'profile',
+  'progression',
+  'collection',
+  'gameRules',
+] as const
 
 function flatten(tree: Tree, prefix = ''): Record<string, string> {
   return Object.entries(tree).reduce<Record<string, string>>((acc, [key, value]) => {
@@ -78,7 +89,7 @@ describe('resources', () => {
     expect(Object.keys(resources).sort()).toEqual([...supportedLanguages].sort())
   })
 
-  it.each(supportedLanguages)('%s includes the common, navigation, creatures and errors namespaces', (language) => {
+  it.each(supportedLanguages)('%s includes every registered namespace', (language) => {
     expect(Object.keys(resources[language]).sort()).toEqual([...namespaces].sort())
     for (const namespace of namespaces) {
       expect(Object.keys(resources[language][namespace]).length).toBeGreaterThan(0)
@@ -119,6 +130,8 @@ describe('resources', () => {
     }
     for (const key of [
       'catalog.title',
+      'catalog.ownedBadge',
+      'catalog.viewDetails',
       'catalog.loading',
       'catalog.retry',
       'catalog.emptyTitle',
@@ -127,13 +140,52 @@ describe('resources', () => {
       'catalog.filters.searchAction',
       'catalog.filters.clearAction',
       'detail.backToCatalog',
+      'detail.ownedBadge',
       'detail.loading',
+      'selection.add',
+      'selection.owned',
+      'selection.reasons.no_allowance',
       'image.fallback',
     ]) {
       expect(creatures[key], `creatures.${key}`).toBeTruthy()
     }
     for (const key of ['catalogLoad', 'notFound', 'detailLoad', 'missingSlug']) {
       expect(errors[key], `errors.${key}`).toBeTruthy()
+    }
+  })
+
+  it.each(supportedLanguages)('%s defines the Phase 3 keys used by auth, profile, collection and rules', (language) => {
+    const required: Record<(typeof namespaces)[number], string[]> = {
+      common: [],
+      creatures: [],
+      navigation: ['login', 'register', 'gameRules', 'profile', 'myCollection', 'settings', 'logout', 'menu.open', 'menu.close'],
+      errors: ['unauthenticated', 'sessionExpired', 'tooManyRequests', 'validationFailed', 'rulesLoad', 'collectionLoad'],
+      validation: ['required', 'invalidEmail', 'passwordTooShort', 'passwordMismatch', 'avatarType', 'avatarSize'],
+      auth: ['login.title', 'register.title', 'forgot.title', 'reset.title', 'verify.title', 'passwordToggle.show'],
+      profile: ['page.title', 'edit.title', 'public.collectionPrivate', 'stats.title', 'allowances.title', 'allowances.remaining', 'allowances.pvpLocked'],
+      progression: ['level', 'xpProgress', 'maxLevel'],
+      collection: ['title', 'starter.title', 'evolution.title', 'evolution.reasons.requirements_not_defined'],
+      gameRules: [
+        'title',
+        'sections.a.title',
+        'sections.b.title',
+        'sections.c.title',
+        'sections.d.title',
+        'sections.e.title',
+        'sections.f.title',
+        'sections.b.stage1',
+        'sections.c.pve',
+        'sections.d.comingSoon',
+        'features.pve',
+        'features.pvp',
+      ],
+    }
+
+    for (const namespace of namespaces) {
+      const tree = flatten(resources[language][namespace] as Tree)
+      for (const key of required[namespace]) {
+        expect(tree[key], `${language}:${namespace}.${key}`).toBeTruthy()
+      }
     }
   })
 
@@ -151,7 +203,7 @@ describe('i18n instance', () => {
     expect(i18n.isInitialized).toBe(true)
     expect(i18n.options.fallbackLng).toEqual(['en'])
     expect(i18n.options.defaultNS).toBe('common')
-    expect(i18n.options.ns).toEqual(['common', 'navigation', 'creatures', 'errors'])
+    expect(i18n.options.ns).toEqual([...namespaces])
   })
 
   it('translates keys and interpolates values', async () => {

@@ -9,6 +9,7 @@
   --color-ember: #FF6542;
   --color-electric: #27C9EC;
   --color-gold: #FFB84D;
+  --color-neon: #39FF14;
   --color-arena-950: #0B0F1B;
   --color-arena-900: #111827;
   --color-arena-800: #151C2B;
@@ -20,6 +21,7 @@
   --color-signal-bad: #FB7185;
   --shadow-card: 0 18px 60px rgba(0, 0, 0, 0.28);
   --shadow-ember: 0 18px 60px rgba(255, 101, 66, 0.16);
+  --shadow-neon: 0 0 24px rgba(57, 255, 20, 0.28);
 }
 
 @layer base {

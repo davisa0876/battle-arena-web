@@ -1,0 +1,42 @@
+{
+  "eyebrow": "Collezione",
+  "title": "La mia collezione",
+  "subtitle": "Le tue creature, i loro livelli e ciò che possono diventare.",
+  "loading": "Caricamento della collezione...",
+  "retry": "Riprova",
+  "count": "Creature possedute: {{count}}",
+  "empty": {
+    "title": "La tua collezione è vuota",
+    "description": "Scegli una creatura iniziale per cominciare il tuo viaggio."
+  },
+  "starter": {
+    "title": "Scegli il tuo starter",
+    "subtitle": "Seleziona una creatura per iniziare la collezione.",
+    "loading": "Caricamento delle creature iniziali...",
+    "retry": "Riprova",
+    "empty": "Nessuna creatura iniziale è ancora disponibile.",
+    "disabled": "La scelta dello starter al momento non è disponibile.",
+    "choose": "Scegli {{name}}",
+    "choosing": "Selezione...",
+    "viewDetails": "Vedi dettagli"
+  },
+  "owned": {
+    "active": "Attiva",
+    "setActive": "Imposta come attiva",
+    "settingActive": "Impostazione...",
+    "acquired": "Ottenuta il {{date}}",
+    "xp": "{{xp}} XP",
+    "details": "Vedi specie"
+  },
+  "evolution": {
+    "title": "Evoluzione",
+    "none": "Questa creatura non ha altre evoluzioni.",
+    "locked": "Bloccata",
+    "eligible": "Pronta",
+    "notAvailable": "L’evoluzione non è ancora disponibile.",
+    "reasons": {
+      "requirements_not_defined": "I requisiti di evoluzione non sono ancora stati definiti.",
+      "unknown": "Non ancora disponibile."
+    }
+  }
+}

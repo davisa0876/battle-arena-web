@@ -1,0 +1,81 @@
+{
+  "page": {
+    "eyebrow": "Profilo allenatore",
+    "title": "Il mio profilo",
+    "editAction": "Modifica profilo",
+    "publicAction": "Vedi pagina pubblica",
+    "collectionAction": "Apri la mia collezione"
+  },
+  "identity": {
+    "avatarAlt": "Avatar di {{name}}",
+    "handle": "@{{handle}}",
+    "noBio": "Nessuna bio per ora.",
+    "emailVerified": "E-mail verificata",
+    "emailUnverified": "E-mail non verificata"
+  },
+  "stats": {
+    "title": "Statistiche dell’allenatore",
+    "level": "Livello allenatore",
+    "totalXp": "XP totali",
+    "creatures": "Creature possedute",
+    "activeCreature": "Creatura attiva",
+    "noActiveCreature": "Nessuna selezionata",
+    "collection": "Visibilità della collezione",
+    "collectionPublic": "Pubblica",
+    "collectionPrivate": "Privata",
+    "unavailable": "Non disponibile"
+  },
+  "edit": {
+    "eyebrow": "Impostazioni",
+    "title": "Modifica profilo",
+    "subtitle": "Aggiorna la tua identità pubblica, la password e l’avatar.",
+    "back": "Torna al profilo",
+    "profileSection": "Dettagli del profilo",
+    "displayName": "Nome visualizzato",
+    "handle": "Identificativo",
+    "bio": "Bio",
+    "collectionPublic": "Rendi pubblica la mia collezione",
+    "collectionPublicHint": "Gli altri allenatori possono vedere le tue creature sulla tua pagina pubblica.",
+    "save": "Salva modifiche",
+    "saving": "Salvataggio...",
+    "saved": "Profilo aggiornato.",
+    "passwordSection": "Cambia password",
+    "currentPassword": "Password attuale",
+    "newPassword": "Nuova password",
+    "confirmPassword": "Conferma nuova password",
+    "changePassword": "Aggiorna password",
+    "changingPassword": "Aggiornamento...",
+    "passwordChanged": "Password aggiornata.",
+    "avatarSection": "Avatar",
+    "avatarHint": "JPG, PNG o WebP fino a {{maxMb}} MB.",
+    "chooseFile": "Scegli immagine",
+    "selectedFile": "Selezionato: {{name}}",
+    "upload": "Carica avatar",
+    "uploading": "Caricamento...",
+    "remove": "Rimuovi avatar",
+    "removing": "Rimozione...",
+    "avatarUploaded": "Avatar aggiornato.",
+    "avatarRemoved": "Avatar rimosso."
+  },
+  "public": {
+    "eyebrow": "Allenatore",
+    "loading": "Caricamento allenatore...",
+    "retry": "Riprova",
+    "collectionTitle": "Collezione",
+    "collectionPrivate": "Questo allenatore tiene privata la sua collezione.",
+    "collectionEmpty": "Questo allenatore non ha ancora creature.",
+    "backToCreatures": "Sfoglia le creature",
+    "title": "Profilo pubblico",
+    "home": "Torna alla home"
+  },
+  "allowances": {
+    "title": "Selezioni di creature",
+    "hint": "Quante creature puoi ancora selezionare, per stadio evolutivo. Le quote arrivano dal server.",
+    "stage": "Stadio {{stage}}",
+    "remaining": "{{remaining}} di {{total}} rimaste",
+    "used": "{{used}} usate",
+    "pvp": "PvP",
+    "pvpUnlocked": "Sbloccato",
+    "pvpLocked": "Bloccato"
+  }
+}

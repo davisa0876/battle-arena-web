@@ -2,7 +2,7 @@
   "catalog": {
     "eyebrow": "Coleção de criaturas",
     "title": "Catálogo",
-    "description": "Explore as criaturas salvas no Battle Arena. Busca e filtros usam a API Laravel, nunca o provedor externo.",
+    "description": "Estude cada criatura conhecida da Arena. Busque pelo nome, filtre por tipo e descubra os pontos fortes antes de montar seu time.",
     "loading": "Carregando criaturas...",
     "errorTitle": "Não foi possível carregar o catálogo",
     "retry": "Tentar novamente",
@@ -24,7 +24,9 @@
       "previous": "Anterior",
       "next": "Próxima",
       "page": "Página {{page}} / {{lastPage}}"
-    }
+    },
+    "ownedBadge": "No seu time",
+    "viewDetails": "Ver detalhes"
   },
   "detail": {
     "backToCatalog": "← Voltar ao catálogo",
@@ -47,10 +49,25 @@
       "title": "Evoluções",
       "description": "Próximas formas possíveis desta criatura. Abra uma forma para ver o restante da cadeia.",
       "stage": "Nível {{stage}}"
-    }
+    },
+    "ownedBadge": "Ja esta na sua colecao"
   },
   "image": {
     "loading": "Carregando imagem...",
     "fallback": "Nenhuma arte disponível para {{name}}"
+  },
+  "selection": {
+    "add": "Adicionar a colecao",
+    "adding": "Adicionando...",
+    "owned": "Ja possui",
+    "failed": "Nao foi possivel adicionar esta criatura.",
+    "reasons": {
+      "unauthenticated": "Entre para adicionar criaturas.",
+      "owned": "Voce ja possui esta criatura.",
+      "starter_required": "Escolha um starter primeiro.",
+      "no_allowance": "Sem vagas de selecao neste estagio.",
+      "stage_locked": "Este estagio de evolucao esta bloqueado.",
+      "unavailable": "Esta criatura nao pode ser selecionada."
+    }
   }
 }

@@ -1,0 +1,42 @@
+{
+  "eyebrow": "Collection",
+  "title": "My collection",
+  "subtitle": "Your creatures, their levels and what they can become.",
+  "loading": "Loading your collection...",
+  "retry": "Try again",
+  "count": "Creatures owned: {{count}}",
+  "empty": {
+    "title": "Your collection is empty",
+    "description": "Choose a starter creature to begin your journey."
+  },
+  "starter": {
+    "title": "Choose your starter",
+    "subtitle": "Pick one creature to start your collection.",
+    "loading": "Loading starter creatures...",
+    "retry": "Try again",
+    "empty": "No starter creatures are available yet.",
+    "disabled": "Starter selection is not available right now.",
+    "choose": "Choose {{name}}",
+    "choosing": "Choosing...",
+    "viewDetails": "View details"
+  },
+  "owned": {
+    "active": "Active",
+    "setActive": "Set as active",
+    "settingActive": "Setting...",
+    "acquired": "Acquired {{date}}",
+    "xp": "{{xp}} XP",
+    "details": "View species"
+  },
+  "evolution": {
+    "title": "Evolution",
+    "none": "This creature has no further evolutions.",
+    "locked": "Locked",
+    "eligible": "Ready",
+    "notAvailable": "Evolution is not available yet.",
+    "reasons": {
+      "requirements_not_defined": "Evolution requirements have not been defined yet.",
+      "unknown": "Not available yet."
+    }
+  }
+}

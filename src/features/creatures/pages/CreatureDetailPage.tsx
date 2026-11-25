@@ -41,7 +41,10 @@ export function CreatureDetailPage() {
 
       {viewState.status === 'ready' && (
         <article className="mt-8">
-          <CreatureHero creature={viewState.creature} />
+          <CreatureHero
+            creature={viewState.creature}
+            onCollectionChanged={() => setRetryToken((value) => value + 1)}
+          />
           <CreatureStats creature={viewState.creature} />
           <CreatureEvolutions creature={viewState.creature} />
         </article>

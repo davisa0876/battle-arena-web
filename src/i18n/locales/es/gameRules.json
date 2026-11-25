@@ -1,0 +1,91 @@
+{
+  "eyebrow": "Reglamento",
+  "title": "Reglas del juego",
+  "subtitle": "Reglas publicadas por el servidor para los niveles de entrenador, la selección de criaturas y los combates.",
+  "version": "Versión de las reglas {{version}}",
+  "loading": "Cargando las reglas...",
+  "retry": "Reintentar",
+  "sections": {
+    "a": {
+      "title": "Niveles de entrenador",
+      "intro": "El nivel de entrenador es la progresion de la cuenta. Cada entrenador empieza en el nivel {{startingLevel}} con {{startingXp}} XP, y el XP necesario para avanzar crece una cantidad fija en cada nivel — los valores vienen del servidor.",
+      "incrementLabel": "Incremento de XP por nivel: {{xp}}",
+      "formulaLabel": "Fórmula",
+      "maxLevel": "Nivel máximo: {{level}}",
+      "tableCaption": "XP necesaria para avanzar (servidor)",
+      "level": "Nivel",
+      "xpToNext": "XP al siguiente nivel",
+      "totalXp": "XP total para alcanzarlo",
+      "empty": "El servidor no proporcionó muestras de la curva de XP.",
+      "note": "La XP solo la conceden sistemas de juego de confianza."
+    },
+    "b": {
+      "title": "Selección de criaturas",
+      "intro": "Seleccionar una criatura añade una especie del catálogo a tu colección. Cuántas puedes seleccionar depende de tu nivel de entrenador y de la etapa de evolución de la criatura.",
+      "stage1": "Criaturas de etapa 1: se desbloquean en el nivel de entrenador {{unlock}}. Tu cupo es igual a tu nivel de entrenador, con un máximo de {{cap}}.",
+      "stage2": "Criaturas de etapa 2: se desbloquean en el nivel de entrenador {{unlock}} con {{atUnlock}} permitida al desbloquear, más {{increment}} adicional en cada nivel posterior.",
+      "stage2Through": "Estas reglas están definidas hasta el nivel de entrenador {{through}}.",
+      "stageUnlock": "Criaturas de etapa {{stage}}: se desbloquean en el nivel de entrenador {{unlock}}.",
+      "stageUndefined": "Criaturas de etapa {{stage}}: las reglas de selección aún no están definidas.",
+      "samplesCaption": "Cupo de selección por nivel de entrenador (servidor)",
+      "trainerLevel": "Nivel de entrenador",
+      "stage1Column": "Etapa 1",
+      "stage2Column": "Etapa 2",
+      "samplesEmpty": "El servidor no proporcionó muestras de selección.",
+      "startersLabel": "Iniciales disponibles",
+      "noStarters": "El servidor no listó ningún inicial.",
+      "note": "Los cupos se cuentan según la etapa de evolución original de la criatura al seleccionarla, no su etapa actual."
+    },
+    "c": {
+      "title": "Acceso a los combates",
+      "intro": "Los modos de combate se abren en niveles de entrenador distintos.",
+      "pve": "El PvE (combates en solitario) se abre en el nivel de entrenador {{level}}.",
+      "pvp": "El PvP (combates contra otros entrenadores) se abre en el nivel de entrenador {{level}}.",
+      "unknown": "El servidor no publicó este requisito.",
+      "notPlayable": "Los combates aún no son jugables. Estos niveles describen el acceso futuro.",
+      "playable": "Los combates son jugables."
+    },
+    "d": {
+      "title": "Recompensas de XP de combate",
+      "intro": "XP de entrenador concedida por cada resultado de combate, tal como la publica el servidor.",
+      "tableCaption": "XP de entrenador por resultado de combate",
+      "mode": "Modo",
+      "win": "Victoria",
+      "loss": "Derrota",
+      "pve": "PvE",
+      "pvp": "PvP",
+      "xp": "{{xp}} XP",
+      "comingSoon": "Próximamente",
+      "notEarnable": "Estas recompensas aún no se pueden obtener porque los combates no son jugables.",
+      "empty": "El servidor no publicó recompensas de combate."
+    },
+    "e": {
+      "title": "Evolución y nivel de entrenador",
+      "intro": "En Battle Arena existen tres números distintos y nunca se mezclan.",
+      "point1": "El nivel de entrenador es la progresión de tu cuenta. Decide cuántas criaturas puedes seleccionar y a qué modos de combate puedes acceder.",
+      "point2": "La etapa de evolución es una propiedad de una criatura del catálogo (etapa 1, 2 o 3). Nunca cambia tu nivel de entrenador.",
+      "point3": "El nivel de una criatura poseída pertenece a esa criatura de tu colección y progresa de forma independiente a tu nivel de entrenador.",
+      "locked": "La evolución aún no está disponible.",
+      "enabled": "La evolución está activada en el servidor."
+    },
+    "f": {
+      "title": "Estado del desarrollo",
+      "intro": "Battle Arena es un proyecto técnico de portafolio en evolución. La disponibilidad de las funciones proviene de la API en vivo.",
+      "enabled": "Disponible",
+      "comingSoon": "Próximamente"
+    }
+  },
+  "features": {
+    "auth": "Cuentas e inicio de sesión",
+    "profiles": "Perfiles de entrenador",
+    "collection": "Colección de criaturas",
+    "starter_selection": "Elección del inicial",
+    "creature_selection": "Selección de criaturas",
+    "pve": "Combates PvE",
+    "pvp": "Combates PvP",
+    "evolution_execution": "Evolución",
+    "multiplayer": "Multijugador",
+    "rankings": "Clasificaciones",
+    "achievements": "Logros"
+  }
+}

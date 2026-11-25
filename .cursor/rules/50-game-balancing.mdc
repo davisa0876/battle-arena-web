@@ -1,0 +1,11 @@
+---
+description: Game balancing ownership (backend is authoritative)
+alwaysApply: true
+---
+
+# Game Balancing
+
+- Game balancing rules must live in backend policies/configuration. Frontends may display them but must never become authoritative.
+- Render XP curves, selection quotas, battle minimum levels and rewards only from `GET /api/game/rules` / `/api/me`. No hardcoded balancing numbers (XP steps, caps, unlock levels, rewards) in components or locale copy; pass values to i18n via interpolation.
+- Trainer level (account progression), creature `evolution_stage` (catalog property: 1/2/3) and owned-creature level (per collection entry) are three separate concepts. Never mix, derive or alias one from another.
+- `/game-rules` is public (outside `ProtectedRoute`).

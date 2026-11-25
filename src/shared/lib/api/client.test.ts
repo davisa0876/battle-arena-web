@@ -305,3 +305,254 @@ describe('ApiClient', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
 })
+
+function setXsrfCookie(value: string | null) {
+  document.cookie = value === null
+    ? 'XSRF-TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/'
+    : `XSRF-TOKEN=${value}; path=/`
+}
+
+function emptyResponse(status = 204): Response {
+  return new Response(null, { status })
+}
+
+describe('ApiClient credentials, CSRF and mutations', () => {
+  beforeEach(async () => {
+    vi.stubGlobal('fetch', fetchMock)
+    setXsrfCookie(null)
+    await i18n.changeLanguage('en')
+  })
+
+  afterEach(async () => {
+    setXsrfCookie(null)
+    vi.clearAllMocks()
+    fetchMock.mockReset()
+    vi.unstubAllGlobals()
+    vi.useRealTimers()
+    localStorage.clear()
+    sessionStorage.clear()
+    await i18n.changeLanguage('en')
+  })
+
+  it('sends credentials: include on GET requests without adding XSRF headers', async () => {
+    setXsrfCookie('abc')
+    fetchMock.mockImplementation(async () => jsonResponse({ ok: true }))
+
+    await new ApiClient({ baseUrl: 'http://api.test' }).get('/api/me')
+
+    const init = fetchMock.mock.calls[0][1]
+    expect(init?.credentials).toBe('include')
+    expect(init?.method).toBe('GET')
+    expect(init?.headers).not.toHaveProperty('X-XSRF-TOKEN')
+  })
+
+  it('ensureCsrfCookie calls GET {base}/sanctum/csrf-cookie with credentials', async () => {
+    fetchMock.mockImplementation(async () => emptyResponse())
+
+    await new ApiClient({ baseUrl: 'http://api.test/' }).ensureCsrfCookie()
+
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    const [url, init] = fetchMock.mock.calls[0]
+    expect(url).toBe('http://api.test/sanctum/csrf-cookie')
+    expect(init?.method).toBe('GET')
+    expect(init?.credentials).toBe('include')
+  })
+
+  it('POSTs a JSON body with the decoded XSRF cookie, Accept and Accept-Language', async () => {
+    setXsrfCookie(encodeURIComponent('tok=en/with+chars'))
+    fetchMock.mockImplementation(async () => jsonResponse({ ok: true }))
+    await i18n.changeLanguage('pt-BR')
+
+    const result = await new ApiClient({ baseUrl: 'http://api.test' }).post<{ ok: boolean }>('/api/login', {
+      email: 'a@b.co',
+      password: 'secret',
+    })
+
+    expect(result).toEqual({ ok: true })
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    const [url, init] = fetchMock.mock.calls[0]
+    expect(url).toBe('http://api.test/api/login')
+    expect(init?.method).toBe('POST')
+    expect(init?.credentials).toBe('include')
+    expect(init?.body).toBe(JSON.stringify({ email: 'a@b.co', password: 'secret' }))
+    expect(init?.headers).toEqual({
+      Accept: 'application/json',
+      'Accept-Language': 'pt-BR',
+      'Content-Type': 'application/json',
+      'X-XSRF-TOKEN': 'tok=en/with+chars',
+    })
+  })
+
+  it('fetches the CSRF cookie first when a mutating request has no XSRF cookie yet', async () => {
+    fetchMock.mockImplementationOnce(async () => {
+      setXsrfCookie('fresh')
+      return emptyResponse()
+    })
+    fetchMock.mockImplementationOnce(async () => jsonResponse({ done: true }))
+
+    await new ApiClient({ baseUrl: 'http://api.test' }).patch('/api/me/profile', { bio: 'hi' })
+
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+    expect(fetchMock.mock.calls[0][0]).toBe('http://api.test/sanctum/csrf-cookie')
+    expect(fetchMock.mock.calls[1][0]).toBe('http://api.test/api/me/profile')
+    expect(fetchMock.mock.calls[1][1]?.method).toBe('PATCH')
+    expect(fetchMock.mock.calls[1][1]?.headers).toMatchObject({ 'X-XSRF-TOKEN': 'fresh' })
+  })
+
+  it('supports DELETE and empty (204) responses', async () => {
+    setXsrfCookie('abc')
+    fetchMock.mockImplementation(async () => emptyResponse())
+
+    const result = await new ApiClient({ baseUrl: 'http://api.test' }).delete('/api/me/avatar')
+
+    expect(result).toBeUndefined()
+    expect(fetchMock.mock.calls[0][1]?.method).toBe('DELETE')
+    expect(fetchMock.mock.calls[0][1]?.body).toBeUndefined()
+    expect(fetchMock.mock.calls[0][1]?.headers).not.toHaveProperty('Content-Type')
+  })
+
+  it('uploads FormData without a manual Content-Type and without JSON encoding', async () => {
+    setXsrfCookie('abc')
+    fetchMock.mockImplementation(async () => jsonResponse({ ok: true }))
+    const form = new FormData()
+    form.append('avatar', new File(['x'], 'a.png', { type: 'image/png' }))
+
+    await new ApiClient({ baseUrl: 'http://api.test' }).upload('/api/me/avatar', form)
+
+    const init = fetchMock.mock.calls[0][1]
+    expect(init?.method).toBe('POST')
+    expect(init?.body).toBe(form)
+    expect(init?.credentials).toBe('include')
+    expect(init?.headers).not.toHaveProperty('Content-Type')
+    expect(init?.headers).toMatchObject({ 'X-XSRF-TOKEN': 'abc' })
+  })
+
+  it('parses Laravel 422 validation errors into ApiError.errors', async () => {
+    setXsrfCookie('abc')
+    fetchMock.mockImplementation(async () =>
+      jsonResponse(
+        { message: 'The email field is required.', errors: { email: ['The email field is required.'], handle: ['Taken'] } },
+        { status: 422 },
+      ),
+    )
+
+    const error = await new ApiClient({ baseUrl: 'http://api.test' })
+      .post('/api/register', {})
+      .catch((caught: unknown) => caught)
+
+    expect(error).toBeInstanceOf(ApiError)
+    const apiError = error as ApiError
+    expect(apiError.status).toBe(422)
+    expect(apiError.isValidation).toBe(true)
+    expect(apiError.message).toBe('The email field is required.')
+    expect(apiError.errors).toEqual({ email: ['The email field is required.'], handle: ['Taken'] })
+    expect(apiError.firstError('handle')).toBe('Taken')
+    expect(apiError.firstError('missing')).toBeUndefined()
+  })
+
+  it('falls back to a localized message for a 422 without a body message', async () => {
+    setXsrfCookie('abc')
+    fetchMock.mockImplementation(async () => jsonResponse({}, { status: 422 }))
+
+    await expect(new ApiClient({ baseUrl: 'http://api.test' }).post('/api/x', {})).rejects.toMatchObject({
+      status: 422,
+      message: resources.en.errors.validationFailed,
+      errors: {},
+    })
+  })
+
+  it('retries exactly once after a 419 by refreshing the CSRF cookie', async () => {
+    setXsrfCookie('stale')
+    fetchMock
+      .mockImplementationOnce(async () => jsonResponse({ message: 'CSRF token mismatch.' }, { status: 419 }))
+      .mockImplementationOnce(async () => {
+        setXsrfCookie('renewed')
+        return emptyResponse()
+      })
+      .mockImplementationOnce(async () => jsonResponse({ ok: true }))
+
+    const result = await new ApiClient({ baseUrl: 'http://api.test' }).post('/api/logout')
+
+    expect(result).toEqual({ ok: true })
+    expect(fetchMock.mock.calls.map((call) => call[0])).toEqual([
+      'http://api.test/api/logout',
+      'http://api.test/sanctum/csrf-cookie',
+      'http://api.test/api/logout',
+    ])
+    expect(fetchMock.mock.calls[2][1]?.headers).toMatchObject({ 'X-XSRF-TOKEN': 'renewed' })
+  })
+
+  it('does not retry a second 419 and surfaces a localized session error', async () => {
+    setXsrfCookie('stale')
+    fetchMock.mockImplementation(async (input) =>
+      String(input).endsWith('/csrf-cookie') ? emptyResponse() : jsonResponse({}, { status: 419 }),
+    )
+
+    await expect(new ApiClient({ baseUrl: 'http://api.test' }).post('/api/logout')).rejects.toMatchObject({
+      status: 419,
+      message: resources.en.errors.sessionExpired,
+    })
+    // request, csrf refresh, single retry -> 3 calls, no further loop.
+    expect(fetchMock).toHaveBeenCalledTimes(3)
+  })
+
+  it('notifies the unauthorized handler on 401 and rejects with a localized ApiError', async () => {
+    const onUnauthorized = vi.fn()
+    fetchMock.mockImplementation(async () => jsonResponse({ message: 'Unauthenticated.' }, { status: 401 }))
+    const client = new ApiClient({ baseUrl: 'http://api.test', onUnauthorized })
+
+    await expect(client.get('/api/me')).rejects.toMatchObject({
+      status: 401,
+      message: resources.en.errors.unauthenticated,
+    })
+    expect(onUnauthorized).toHaveBeenCalledTimes(1)
+    expect(onUnauthorized.mock.calls[0][0]).toBeInstanceOf(ApiError)
+
+    client.setUnauthorizedHandler(undefined)
+    await expect(client.get('/api/me')).rejects.toMatchObject({ status: 401 })
+    expect(onUnauthorized).toHaveBeenCalledTimes(1)
+  })
+
+  it('maps 403 and 429 to localized messages', async () => {
+    const client = new ApiClient({ baseUrl: 'http://api.test' })
+
+    fetchMock.mockImplementationOnce(async () => jsonResponse({}, { status: 403 }))
+    await expect(client.get('/api/x')).rejects.toMatchObject({ message: resources.en.errors.forbidden })
+
+    fetchMock.mockImplementationOnce(async () => jsonResponse({}, { status: 429 }))
+    await expect(client.get('/api/x')).rejects.toMatchObject({ message: resources.en.errors.tooManyRequests })
+  })
+
+  it('never writes tokens or credentials to localStorage / sessionStorage', async () => {
+    setXsrfCookie('abc')
+    const setItem = vi.spyOn(Storage.prototype, 'setItem')
+    fetchMock.mockImplementation(async () => jsonResponse({ token: 'bearer-looking' }))
+
+    await new ApiClient({ baseUrl: 'http://api.test' }).post('/api/login', { email: 'a@b.co', password: 'x' })
+
+    expect(setItem).not.toHaveBeenCalled()
+    expect(Object.keys(localStorage).filter((key) => /token|auth|bearer|session/i.test(key))).toEqual([])
+    expect(sessionStorage.length).toBe(0)
+    setItem.mockRestore()
+  })
+
+  it('never sends an Authorization header', async () => {
+    setXsrfCookie('abc')
+    fetchMock.mockImplementation(async () => jsonResponse({}))
+    const client = new ApiClient({ baseUrl: 'http://api.test' })
+
+    await client.get('/api/me')
+    await client.post('/api/logout')
+
+    for (const call of fetchMock.mock.calls) {
+      expect(call[1]?.headers).not.toHaveProperty('Authorization')
+    }
+  })
+
+  it('resolveUrl keeps absolute URLs and prefixes relative paths', () => {
+    const client = new ApiClient({ baseUrl: 'http://api.test/' })
+
+    expect(client.resolveUrl('/api/avatars/1')).toBe('http://api.test/api/avatars/1')
+    expect(client.resolveUrl('https://cdn.test/a.png')).toBe('https://cdn.test/a.png')
+  })
+})

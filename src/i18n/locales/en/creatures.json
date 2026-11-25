@@ -2,7 +2,7 @@
   "catalog": {
     "eyebrow": "Creature Collection",
     "title": "Catalog",
-    "description": "Browse creatures persisted in Battle Arena. Search and filters hit the Laravel API, never the external data provider.",
+    "description": "Study every creature known to the Arena. Search by name, filter by type, and learn their strengths before you choose your team.",
     "loading": "Loading creatures...",
     "errorTitle": "Could not load the catalog",
     "retry": "Retry",
@@ -24,7 +24,9 @@
       "previous": "Previous",
       "next": "Next",
       "page": "Page {{page}} / {{lastPage}}"
-    }
+    },
+    "ownedBadge": "In your team",
+    "viewDetails": "View details"
   },
   "detail": {
     "backToCatalog": "← Back to catalog",
@@ -47,10 +49,25 @@
       "title": "Evolutions",
       "description": "Possible next forms for this creature. Open a form to see its own evolution path.",
       "stage": "Stage {{stage}}"
-    }
+    },
+    "ownedBadge": "Already in your collection"
   },
   "image": {
     "loading": "Loading image...",
     "fallback": "No artwork available for {{name}}"
+  },
+  "selection": {
+    "add": "Add to collection",
+    "adding": "Adding...",
+    "owned": "Already owned",
+    "failed": "Could not add this creature.",
+    "reasons": {
+      "unauthenticated": "Sign in to add creatures.",
+      "owned": "You already own this creature.",
+      "starter_required": "Choose a starter first.",
+      "no_allowance": "No selection slots left for this stage.",
+      "stage_locked": "This evolution stage is locked.",
+      "unavailable": "This creature cannot be selected."
+    }
   }
 }

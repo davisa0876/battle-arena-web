@@ -1,0 +1,91 @@
+{
+  "eyebrow": "Rulebook",
+  "title": "Game Rules",
+  "subtitle": "Rules published by the server for trainer levels, creature selection and battles.",
+  "version": "Rules version {{version}}",
+  "loading": "Loading the rules...",
+  "retry": "Try again",
+  "sections": {
+    "a": {
+      "title": "Trainer levels",
+      "intro": "Trainer level is your account progression. Every trainer starts at level {{startingLevel}} with {{startingXp}} XP, and the XP needed to advance grows by a fixed amount at each level — values come from the server.",
+      "incrementLabel": "XP increment per level: {{xp}}",
+      "formulaLabel": "Formula",
+      "maxLevel": "Maximum level: {{level}}",
+      "tableCaption": "XP needed to advance (from the server)",
+      "level": "Level",
+      "xpToNext": "XP to next level",
+      "totalXp": "Total XP to reach",
+      "empty": "No XP curve samples were provided by the server.",
+      "note": "XP is awarded only by trusted game systems."
+    },
+    "b": {
+      "title": "Creature selection",
+      "intro": "Selecting a creature adds a species from the catalog to your collection. How many you can select depends on your trainer level and on the creature's evolution stage.",
+      "stage1": "Stage 1 creatures: unlocked at trainer level {{unlock}}. Your allowance equals your trainer level, up to a maximum of {{cap}}.",
+      "stage2": "Stage 2 creatures: unlocked at trainer level {{unlock}} with {{atUnlock}} allowed at unlock, plus {{increment}} more for each level after that.",
+      "stage2Through": "These rules are defined through trainer level {{through}}.",
+      "stageUnlock": "Stage {{stage}} creatures: unlocked at trainer level {{unlock}}.",
+      "stageUndefined": "Stage {{stage}} creatures: selection rules are not defined yet.",
+      "samplesCaption": "Selection allowance by trainer level (from the server)",
+      "trainerLevel": "Trainer level",
+      "stage1Column": "Stage 1",
+      "stage2Column": "Stage 2",
+      "samplesEmpty": "No selection samples were provided by the server.",
+      "startersLabel": "Available starters",
+      "noStarters": "The server did not list any starters.",
+      "note": "Allowances are counted by a creature's original evolution stage at selection time, not its current stage."
+    },
+    "c": {
+      "title": "Battle eligibility",
+      "intro": "Battle modes open at different trainer levels.",
+      "pve": "PvE (solo battles) opens at trainer level {{level}}.",
+      "pvp": "PvP (battles against other trainers) opens at trainer level {{level}}.",
+      "unknown": "The server did not publish this requirement.",
+      "notPlayable": "Battles are not playable yet. These levels describe future eligibility.",
+      "playable": "Battles are playable."
+    },
+    "d": {
+      "title": "Battle XP rewards",
+      "intro": "Trainer XP awarded for each battle result, as published by the server.",
+      "tableCaption": "Trainer XP per battle result",
+      "mode": "Mode",
+      "win": "Win",
+      "loss": "Loss",
+      "pve": "PvE",
+      "pvp": "PvP",
+      "xp": "{{xp}} XP",
+      "comingSoon": "Coming Soon",
+      "notEarnable": "These rewards cannot be earned yet because battles are not playable.",
+      "empty": "The server did not publish battle rewards."
+    },
+    "e": {
+      "title": "Evolution and trainer level",
+      "intro": "Three different numbers exist in Battle Arena and they are never mixed up.",
+      "point1": "Trainer level is your account progression. It decides how many creatures you can select and which battle modes you can enter.",
+      "point2": "Evolution stage is a property of a catalog creature (stage 1, 2 or 3). It never changes your trainer level.",
+      "point3": "Owned creature level belongs to one creature in your collection and progresses independently of your trainer level.",
+      "locked": "Evolving is not available yet.",
+      "enabled": "Evolution is enabled on the server."
+    },
+    "f": {
+      "title": "Development status",
+      "intro": "Battle Arena is an evolving technical portfolio project. Feature availability comes from the live API.",
+      "enabled": "Available",
+      "comingSoon": "Coming soon"
+    }
+  },
+  "features": {
+    "auth": "Accounts and login",
+    "profiles": "Trainer profiles",
+    "collection": "Creature collection",
+    "starter_selection": "Starter selection",
+    "creature_selection": "Creature selection",
+    "pve": "PvE battles",
+    "pvp": "PvP battles",
+    "evolution_execution": "Evolution",
+    "multiplayer": "Multiplayer",
+    "rankings": "Rankings",
+    "achievements": "Achievements"
+  }
+}

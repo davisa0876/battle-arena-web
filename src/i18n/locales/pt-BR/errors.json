@@ -5,5 +5,18 @@
   "missingSlug": "Slug da criatura ausente.",
   "requestFailed": "A requisição à API falhou com o status {{status}}",
   "timeout": "A requisição à API excedeu o tempo limite após {{ms}} ms",
-  "offline": "Não foi possível conectar à API"
+  "offline": "Não foi possível conectar à API",
+  "unauthenticated": "Entre na sua conta para continuar.",
+  "forbidden": "Você não tem permissão para fazer isso.",
+  "sessionExpired": "Sua sessão expirou. Tente novamente.",
+  "tooManyRequests": "Muitas tentativas. Aguarde um momento e tente novamente.",
+  "validationFailed": "Verifique os campos destacados.",
+  "generic": "Algo deu errado. Tente novamente.",
+  "profileLoad": "Não foi possível carregar seu perfil.",
+  "playerNotFound": "Treinador não encontrado.",
+  "playerLoad": "Não foi possível carregar este treinador.",
+  "missingHandle": "Identificador do treinador ausente.",
+  "collectionLoad": "Não foi possível carregar sua coleção.",
+  "starterLoad": "Não foi possível carregar as criaturas iniciais.",
+  "rulesLoad": "Não foi possível carregar as regras do jogo."
 }

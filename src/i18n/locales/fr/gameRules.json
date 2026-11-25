@@ -1,0 +1,91 @@
+{
+  "eyebrow": "Règlement",
+  "title": "Règles du jeu",
+  "subtitle": "Règles publiées par le serveur pour les niveaux de dresseur, la sélection de créatures et les combats.",
+  "version": "Version des règles {{version}}",
+  "loading": "Chargement des règles...",
+  "retry": "Réessayer",
+  "sections": {
+    "a": {
+      "title": "Niveaux de dresseur",
+      "intro": "Le niveau de dresseur est la progression du compte. Chaque dresseur commence au niveau {{startingLevel}} avec {{startingXp}} XP, et l XP necessaire pour avancer augmente d un montant fixe a chaque niveau — les valeurs viennent du serveur.",
+      "incrementLabel": "Incrément d'XP par niveau : {{xp}}",
+      "formulaLabel": "Formule",
+      "maxLevel": "Niveau maximum : {{level}}",
+      "tableCaption": "XP nécessaire pour avancer (serveur)",
+      "level": "Niveau",
+      "xpToNext": "XP vers le niveau suivant",
+      "totalXp": "XP total pour atteindre",
+      "empty": "Aucun échantillon de courbe d'XP fourni par le serveur.",
+      "note": "L'XP est attribuée uniquement par des systèmes de jeu de confiance."
+    },
+    "b": {
+      "title": "Sélection de créatures",
+      "intro": "Sélectionner une créature ajoute une espèce du catalogue à votre collection. Le nombre de sélections dépend de votre niveau de dresseur et du stade d'évolution de la créature.",
+      "stage1": "Créatures de stade 1 : débloquées au niveau de dresseur {{unlock}}. Votre quota égale votre niveau de dresseur, avec un maximum de {{cap}}.",
+      "stage2": "Créatures de stade 2 : débloquées au niveau de dresseur {{unlock}} avec {{atUnlock}} autorisée au déblocage, puis {{increment}} de plus à chaque niveau suivant.",
+      "stage2Through": "Ces règles sont définies jusqu'au niveau de dresseur {{through}}.",
+      "stageUnlock": "Créatures de stade {{stage}} : débloquées au niveau de dresseur {{unlock}}.",
+      "stageUndefined": "Créatures de stade {{stage}} : les règles de sélection ne sont pas encore définies.",
+      "samplesCaption": "Quota de sélection par niveau de dresseur (serveur)",
+      "trainerLevel": "Niveau de dresseur",
+      "stage1Column": "Stade 1",
+      "stage2Column": "Stade 2",
+      "samplesEmpty": "Aucun échantillon de sélection fourni par le serveur.",
+      "startersLabel": "Starters disponibles",
+      "noStarters": "Le serveur n'a listé aucun starter.",
+      "note": "Les quotas sont comptés selon le stade d'évolution d'origine de la créature lors de la sélection, pas son stade actuel."
+    },
+    "c": {
+      "title": "Accès aux combats",
+      "intro": "Les modes de combat s'ouvrent à des niveaux de dresseur différents.",
+      "pve": "Le PvE (combats solo) s'ouvre au niveau de dresseur {{level}}.",
+      "pvp": "Le PvP (combats contre d'autres dresseurs) s'ouvre au niveau de dresseur {{level}}.",
+      "unknown": "Le serveur n'a pas publié cette condition.",
+      "notPlayable": "Les combats ne sont pas encore jouables. Ces niveaux décrivent l'accès futur.",
+      "playable": "Les combats sont jouables."
+    },
+    "d": {
+      "title": "Récompenses d'XP de combat",
+      "intro": "XP de dresseur accordée pour chaque résultat de combat, telle que publiée par le serveur.",
+      "tableCaption": "XP de dresseur par résultat de combat",
+      "mode": "Mode",
+      "win": "Victoire",
+      "loss": "Défaite",
+      "pve": "PvE",
+      "pvp": "PvP",
+      "xp": "{{xp}} XP",
+      "comingSoon": "Bientôt disponible",
+      "notEarnable": "Ces récompenses ne peuvent pas encore être gagnées car les combats ne sont pas jouables.",
+      "empty": "Le serveur n'a pas publié de récompenses de combat."
+    },
+    "e": {
+      "title": "Évolution et niveau de dresseur",
+      "intro": "Trois nombres différents existent dans Battle Arena et ils ne sont jamais confondus.",
+      "point1": "Le niveau de dresseur est la progression de votre compte. Il détermine combien de créatures vous pouvez sélectionner et quels modes de combat sont accessibles.",
+      "point2": "Le stade d'évolution est une propriété d'une créature du catalogue (stade 1, 2 ou 3). Il ne change jamais votre niveau de dresseur.",
+      "point3": "Le niveau d'une créature possédée appartient à cette créature de votre collection et progresse indépendamment de votre niveau de dresseur.",
+      "locked": "L'évolution n'est pas encore disponible.",
+      "enabled": "L'évolution est activée sur le serveur."
+    },
+    "f": {
+      "title": "État du développement",
+      "intro": "Battle Arena est un projet de portfolio technique en évolution. La disponibilité des fonctionnalités vient de l'API en direct.",
+      "enabled": "Disponible",
+      "comingSoon": "Bientôt"
+    }
+  },
+  "features": {
+    "auth": "Comptes et connexion",
+    "profiles": "Profils de dresseur",
+    "collection": "Collection de créatures",
+    "starter_selection": "Choix du starter",
+    "creature_selection": "Sélection de créatures",
+    "pve": "Combats PvE",
+    "pvp": "Combats PvP",
+    "evolution_execution": "Évolution",
+    "multiplayer": "Multijoueur",
+    "rankings": "Classements",
+    "achievements": "Succès"
+  }
+}

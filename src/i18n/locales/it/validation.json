@@ -1,0 +1,9 @@
+{
+  "required": "Questo campo è obbligatorio.",
+  "invalidEmail": "Inserisci un indirizzo e-mail valido.",
+  "passwordTooShort": "La password deve contenere almeno {{min}} caratteri.",
+  "passwordMismatch": "Le password non coincidono.",
+  "avatarRequired": "Scegli prima un’immagine.",
+  "avatarType": "Usa un’immagine JPG, PNG o WebP.",
+  "avatarSize": "L’immagine non può superare {{maxMb}} MB."
+}

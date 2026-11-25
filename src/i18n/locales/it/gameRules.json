@@ -1,0 +1,91 @@
+{
+  "eyebrow": "Regolamento",
+  "title": "Regole del gioco",
+  "subtitle": "Regole pubblicate dal server per i livelli allenatore, la selezione delle creature e le battaglie.",
+  "version": "Versione delle regole {{version}}",
+  "loading": "Caricamento delle regole...",
+  "retry": "Riprova",
+  "sections": {
+    "a": {
+      "title": "Livelli allenatore",
+      "intro": "Il livello allenatore e la progressione dell account. Ogni allenatore inizia al livello {{startingLevel}} con {{startingXp}} XP, e l XP necessario per avanzare cresce di un importo fisso a ogni livello — i valori arrivano dal server.",
+      "incrementLabel": "Incremento di XP per livello: {{xp}}",
+      "formulaLabel": "Formula",
+      "maxLevel": "Livello massimo: {{level}}",
+      "tableCaption": "XP necessari per avanzare (server)",
+      "level": "Livello",
+      "xpToNext": "XP al livello successivo",
+      "totalXp": "XP totali per raggiungerlo",
+      "empty": "Il server non ha fornito campioni della curva XP.",
+      "note": "Gli XP vengono assegnati solo da sistemi di gioco affidabili."
+    },
+    "b": {
+      "title": "Selezione delle creature",
+      "intro": "Selezionare una creatura aggiunge una specie del catalogo alla tua collezione. Quante ne puoi selezionare dipende dal tuo livello allenatore e dallo stadio evolutivo della creatura.",
+      "stage1": "Creature di stadio 1: sbloccate al livello allenatore {{unlock}}. La tua quota è pari al tuo livello allenatore, fino a un massimo di {{cap}}.",
+      "stage2": "Creature di stadio 2: sbloccate al livello allenatore {{unlock}} con {{atUnlock}} consentita allo sblocco, più {{increment}} in più a ogni livello successivo.",
+      "stage2Through": "Queste regole sono definite fino al livello allenatore {{through}}.",
+      "stageUnlock": "Creature di stadio {{stage}}: sbloccate al livello allenatore {{unlock}}.",
+      "stageUndefined": "Creature di stadio {{stage}}: le regole di selezione non sono ancora definite.",
+      "samplesCaption": "Quota di selezione per livello allenatore (server)",
+      "trainerLevel": "Livello allenatore",
+      "stage1Column": "Stadio 1",
+      "stage2Column": "Stadio 2",
+      "samplesEmpty": "Il server non ha fornito campioni di selezione.",
+      "startersLabel": "Starter disponibili",
+      "noStarters": "Il server non ha elencato alcuno starter.",
+      "note": "Le quote sono contate in base allo stadio evolutivo originale della creatura al momento della selezione, non a quello attuale."
+    },
+    "c": {
+      "title": "Accesso alle battaglie",
+      "intro": "Le modalità di battaglia si aprono a livelli allenatore diversi.",
+      "pve": "Il PvE (battaglie in solitaria) si apre al livello allenatore {{level}}.",
+      "pvp": "Il PvP (battaglie contro altri allenatori) si apre al livello allenatore {{level}}.",
+      "unknown": "Il server non ha pubblicato questo requisito.",
+      "notPlayable": "Le battaglie non sono ancora giocabili. Questi livelli descrivono l'accesso futuro.",
+      "playable": "Le battaglie sono giocabili."
+    },
+    "d": {
+      "title": "Ricompense XP delle battaglie",
+      "intro": "XP allenatore assegnati per ogni risultato di battaglia, come pubblicato dal server.",
+      "tableCaption": "XP allenatore per risultato di battaglia",
+      "mode": "Modalità",
+      "win": "Vittoria",
+      "loss": "Sconfitta",
+      "pve": "PvE",
+      "pvp": "PvP",
+      "xp": "{{xp}} XP",
+      "comingSoon": "In arrivo",
+      "notEarnable": "Queste ricompense non possono ancora essere ottenute perché le battaglie non sono giocabili.",
+      "empty": "Il server non ha pubblicato ricompense per le battaglie."
+    },
+    "e": {
+      "title": "Evoluzione e livello allenatore",
+      "intro": "In Battle Arena esistono tre numeri diversi e non vengono mai confusi.",
+      "point1": "Il livello allenatore è la progressione del tuo account. Decide quante creature puoi selezionare e a quali modalità di battaglia puoi accedere.",
+      "point2": "Lo stadio evolutivo è una proprietà di una creatura del catalogo (stadio 1, 2 o 3). Non modifica mai il tuo livello allenatore.",
+      "point3": "Il livello di una creatura posseduta appartiene a quella creatura della tua collezione e progredisce indipendentemente dal tuo livello allenatore.",
+      "locked": "L'evoluzione non è ancora disponibile.",
+      "enabled": "L'evoluzione è attiva sul server."
+    },
+    "f": {
+      "title": "Stato dello sviluppo",
+      "intro": "Battle Arena è un progetto tecnico di portfolio in evoluzione. La disponibilità delle funzioni arriva dall'API in tempo reale.",
+      "enabled": "Disponibile",
+      "comingSoon": "In arrivo"
+    }
+  },
+  "features": {
+    "auth": "Account e accesso",
+    "profiles": "Profili allenatore",
+    "collection": "Collezione di creature",
+    "starter_selection": "Scelta dello starter",
+    "creature_selection": "Selezione delle creature",
+    "pve": "Battaglie PvE",
+    "pvp": "Battaglie PvP",
+    "evolution_execution": "Evoluzione",
+    "multiplayer": "Multigiocatore",
+    "rankings": "Classifiche",
+    "achievements": "Obiettivi"
+  }
+}

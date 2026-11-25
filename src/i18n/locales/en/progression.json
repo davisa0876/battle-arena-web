@@ -1,0 +1,9 @@
+{
+  "level": "Level {{level}}",
+  "levelShort": "Lv. {{level}}",
+  "xpProgress": "{{current}} / {{required}} XP",
+  "totalXp": "{{xp}} total XP",
+  "maxLevel": "Max level reached",
+  "progressLabel": "Progress to the next level",
+  "toNext": "{{xp}} XP to level {{level}}"
+}

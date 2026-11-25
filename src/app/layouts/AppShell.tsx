@@ -1,9 +1,11 @@
-import { Link, NavLink, Outlet } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import logoHorizontal from '../../assets/brand/logo_horizontal.svg'
 import logoIcon from '../../assets/brand/logo_icon.svg'
 import { LanguageSelector } from '../../shared/components/layout/LanguageSelector'
 import { SystemStatus } from '../../shared/components/feedback/SystemStatus'
+import { DesktopAccountNav, DesktopPrimaryLinks } from './components/DesktopNav'
+import { MobileMenu } from './components/MobileMenu'
 
 export function AppShell() {
   const { t } = useTranslation('navigation')
@@ -16,7 +18,7 @@ export function AppShell() {
       />
       <div className="relative z-10 flex min-h-svh flex-col">
         <nav
-          className="mx-auto flex w-[min(1180px,calc(100%-2rem))] items-center justify-between gap-4 py-5 max-sm:w-[min(1180px,calc(100%-1.25rem))]"
+          className="relative mx-auto flex w-[min(1180px,calc(100%-2rem))] items-center justify-between gap-4 py-5 max-sm:w-[min(1180px,calc(100%-1.25rem))]"
           aria-label={t('mainNavigation')}
         >
           <div className="flex min-w-0 items-center gap-5">
@@ -24,20 +26,13 @@ export function AppShell() {
               <img src={logoIcon} alt="" className="size-10 sm:hidden" aria-hidden="true" />
               <img src={logoHorizontal} alt="" className="hidden h-10 w-auto sm:block" aria-hidden="true" />
             </Link>
-            <NavLink
-              to="/creatures"
-              className={({ isActive }) =>
-                `rounded-full px-3 py-2 text-sm font-semibold no-underline transition hover:text-white ${
-                  isActive ? 'bg-surface text-white shadow-card' : 'text-arena-300/80'
-                }`
-              }
-            >
-              {t('creatures')}
-            </NavLink>
+            <DesktopPrimaryLinks />
           </div>
           <div className="flex items-center gap-2">
             <SystemStatus />
             <LanguageSelector />
+            <DesktopAccountNav />
+            <MobileMenu />
           </div>
         </nav>
 

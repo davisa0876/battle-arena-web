@@ -5,5 +5,18 @@
   "missingSlug": "Identifiant de créature manquant.",
   "requestFailed": "La requête API a échoué avec le statut {{status}}",
   "timeout": "La requête API a expiré après {{ms}} ms",
-  "offline": "Impossible de se connecter à l’API"
+  "offline": "Impossible de se connecter à l’API",
+  "unauthenticated": "Connectez-vous pour continuer.",
+  "forbidden": "Vous n’avez pas la permission de faire cela.",
+  "sessionExpired": "Votre session a expiré. Veuillez réessayer.",
+  "tooManyRequests": "Trop de tentatives. Patientez un instant puis réessayez.",
+  "validationFailed": "Veuillez vérifier les champs signalés.",
+  "generic": "Une erreur est survenue. Veuillez réessayer.",
+  "profileLoad": "Impossible de charger votre profil.",
+  "playerNotFound": "Dresseur introuvable.",
+  "playerLoad": "Impossible de charger ce dresseur.",
+  "missingHandle": "Identifiant du dresseur manquant.",
+  "collectionLoad": "Impossible de charger votre collection.",
+  "starterLoad": "Impossible de charger les créatures de départ.",
+  "rulesLoad": "Impossible de charger les règles du jeu."
 }

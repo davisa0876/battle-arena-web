@@ -2,7 +2,7 @@
   "catalog": {
     "eyebrow": "Colección de criaturas",
     "title": "Catálogo",
-    "description": "Explora las criaturas guardadas en Battle Arena. La búsqueda y los filtros usan la API Laravel, nunca el proveedor externo.",
+    "description": "Estudia cada criatura conocida de la Arena. Busca por nombre, filtra por tipo y conoce sus fortalezas antes de armar tu equipo.",
     "loading": "Cargando criaturas...",
     "errorTitle": "No se pudo cargar el catálogo",
     "retry": "Reintentar",
@@ -24,7 +24,9 @@
       "previous": "Anterior",
       "next": "Siguiente",
       "page": "Página {{page}} / {{lastPage}}"
-    }
+    },
+    "ownedBadge": "En tu equipo",
+    "viewDetails": "Ver detalles"
   },
   "detail": {
     "backToCatalog": "← Volver al catálogo",
@@ -47,10 +49,25 @@
       "title": "Evoluciones",
       "description": "Próximas formas posibles de esta criatura. Abre una forma para ver el resto de la cadena.",
       "stage": "Nivel {{stage}}"
-    }
+    },
+    "ownedBadge": "Ya esta en tu coleccion"
   },
   "image": {
     "loading": "Cargando imagen...",
     "fallback": "No hay ilustración disponible para {{name}}"
+  },
+  "selection": {
+    "add": "Anadir a la coleccion",
+    "adding": "Anadiendo...",
+    "owned": "Ya poseida",
+    "failed": "No se pudo anadir esta criatura.",
+    "reasons": {
+      "unauthenticated": "Inicia sesion para anadir criaturas.",
+      "owned": "Ya posees esta criatura.",
+      "starter_required": "Elige un inicial primero.",
+      "no_allowance": "No quedan plazas para este estadio.",
+      "stage_locked": "Este estadio de evolucion esta bloqueado.",
+      "unavailable": "Esta criatura no se puede seleccionar."
+    }
   }
 }

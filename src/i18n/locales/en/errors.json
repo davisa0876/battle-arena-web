@@ -5,5 +5,18 @@
   "missingSlug": "Missing creature slug.",
   "requestFailed": "API request failed with status {{status}}",
   "timeout": "API request timed out after {{ms}}ms",
-  "offline": "Unable to connect to the API"
+  "offline": "Unable to connect to the API",
+  "unauthenticated": "Please log in to continue.",
+  "forbidden": "You do not have permission to do that.",
+  "sessionExpired": "Your session expired. Please try again.",
+  "tooManyRequests": "Too many attempts. Please wait a moment and try again.",
+  "validationFailed": "Please check the highlighted fields.",
+  "generic": "Something went wrong. Please try again.",
+  "profileLoad": "Unable to load your profile.",
+  "playerNotFound": "Trainer not found.",
+  "playerLoad": "Unable to load this trainer.",
+  "missingHandle": "Missing trainer handle.",
+  "collectionLoad": "Unable to load your collection.",
+  "starterLoad": "Unable to load the starter creatures.",
+  "rulesLoad": "Unable to load the game rules."
 }

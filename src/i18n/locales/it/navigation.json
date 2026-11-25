@@ -3,6 +3,21 @@
   "brandAlt": "Logo Battle Arena",
   "homeAria": "Home Battle Arena",
   "creatures": "Creature",
+  "gameRules": "Regole del gioco",
+  "login": "Accedi",
+  "register": "Registrati",
+  "profile": "Profilo",
+  "myCollection": "La mia collezione",
+  "settings": "Impostazioni",
+  "logout": "Esci",
+  "menu": {
+    "open": "Apri il menu",
+    "close": "Chiudi il menu"
+  },
+  "userMenu": {
+    "label": "Menu dell’account",
+    "level": "Livello {{level}}"
+  },
   "language": {
     "label": "Seleziona lingua",
     "shortLabel": "Lingua"

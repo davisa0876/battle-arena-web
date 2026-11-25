@@ -1,6 +1,7 @@
 import { type ReactNode, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { AuthProvider } from '../../features/auth/context/AuthProvider'
 import { normalizeLanguage } from '../../i18n'
 
 interface AppProvidersProps {
@@ -20,8 +21,10 @@ function LanguageDocumentSync() {
 export function AppProviders({ children }: AppProvidersProps) {
   return (
     <BrowserRouter>
-      <LanguageDocumentSync />
-      {children}
+      <AuthProvider>
+        <LanguageDocumentSync />
+        {children}
+      </AuthProvider>
     </BrowserRouter>
   )
 }

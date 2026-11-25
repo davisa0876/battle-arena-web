@@ -2,7 +2,7 @@
   "catalog": {
     "eyebrow": "Collection de créatures",
     "title": "Catalogue",
-    "description": "Parcourez les créatures enregistrées dans Battle Arena. La recherche et les filtres utilisent l’API Laravel, jamais le fournisseur externe.",
+    "description": "Etudiez chaque creature connue de l Arena. Cherchez par nom, filtrez par type et decouvez leurs forces avant de composer votre equipe.",
     "loading": "Chargement des créatures...",
     "errorTitle": "Impossible de charger le catalogue",
     "retry": "Réessayer",
@@ -24,7 +24,9 @@
       "previous": "Précédent",
       "next": "Suivant",
       "page": "Page {{page}} / {{lastPage}}"
-    }
+    },
+    "ownedBadge": "Dans ton equipe",
+    "viewDetails": "Voir les détails"
   },
   "detail": {
     "backToCatalog": "← Retour au catalogue",
@@ -47,10 +49,25 @@
       "title": "Évolutions",
       "description": "Formes suivantes possibles pour cette créature. Ouvrez une forme pour voir la suite de la chaîne.",
       "stage": "Niveau {{stage}}"
-    }
+    },
+    "ownedBadge": "Deja dans ta collection"
   },
   "image": {
     "loading": "Chargement de l’image...",
     "fallback": "Aucune illustration disponible pour {{name}}"
+  },
+  "selection": {
+    "add": "Ajouter a la collection",
+    "adding": "Ajout...",
+    "owned": "Deja possede",
+    "failed": "Impossible d ajouter cette creature.",
+    "reasons": {
+      "unauthenticated": "Connecte-toi pour ajouter des creatures.",
+      "owned": "Tu possedes deja cette creature.",
+      "starter_required": "Choisis d abord un starter.",
+      "no_allowance": "Plus de places pour ce stade.",
+      "stage_locked": "Ce stade d evolution est verrouille.",
+      "unavailable": "Cette creature ne peut pas etre selectionnee."
+    }
   }
 }

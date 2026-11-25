@@ -1,0 +1,81 @@
+{
+  "page": {
+    "eyebrow": "Trainer profile",
+    "title": "My profile",
+    "editAction": "Edit profile",
+    "publicAction": "View public page",
+    "collectionAction": "Open my collection"
+  },
+  "identity": {
+    "avatarAlt": "Avatar of {{name}}",
+    "handle": "@{{handle}}",
+    "noBio": "No bio yet.",
+    "emailVerified": "Email verified",
+    "emailUnverified": "Email not verified"
+  },
+  "stats": {
+    "title": "Trainer stats",
+    "level": "Trainer level",
+    "totalXp": "Total XP",
+    "creatures": "Creatures owned",
+    "activeCreature": "Active creature",
+    "noActiveCreature": "None selected",
+    "collection": "Collection visibility",
+    "collectionPublic": "Public",
+    "collectionPrivate": "Private",
+    "unavailable": "Unavailable"
+  },
+  "edit": {
+    "eyebrow": "Settings",
+    "title": "Edit profile",
+    "subtitle": "Update your public identity, password and avatar.",
+    "back": "Back to profile",
+    "profileSection": "Profile details",
+    "displayName": "Display name",
+    "handle": "Handle",
+    "bio": "Bio",
+    "collectionPublic": "Make my collection public",
+    "collectionPublicHint": "Other trainers can see your creatures on your public page.",
+    "save": "Save changes",
+    "saving": "Saving...",
+    "saved": "Profile updated.",
+    "passwordSection": "Change password",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "changePassword": "Update password",
+    "changingPassword": "Updating...",
+    "passwordChanged": "Password updated.",
+    "avatarSection": "Avatar",
+    "avatarHint": "JPG, PNG or WebP up to {{maxMb}} MB.",
+    "chooseFile": "Choose image",
+    "selectedFile": "Selected: {{name}}",
+    "upload": "Upload avatar",
+    "uploading": "Uploading...",
+    "remove": "Remove avatar",
+    "removing": "Removing...",
+    "avatarUploaded": "Avatar updated.",
+    "avatarRemoved": "Avatar removed."
+  },
+  "public": {
+    "eyebrow": "Trainer",
+    "title": "Public profile",
+    "loading": "Loading trainer...",
+    "retry": "Try again",
+    "home": "Back home",
+    "collectionTitle": "Collection",
+    "collectionPrivate": "This trainer keeps their collection private.",
+    "collectionEmpty": "This trainer has no creatures yet.",
+    "backToCreatures": "Browse creatures"
+  },
+  "allowances": {
+    "title": "Creature selections",
+    "hint": "How many creatures you can still select, by evolution stage. Quotas come from the server.",
+    "stage": "Stage {{stage}}",
+    "remaining": "{{remaining}} of {{total}} left",
+    "used": "{{used}} used",
+    "pvp": "PvP",
+    "pvpUnlocked": "Unlocked",
+    "pvpLocked": "Locked"
+  }
+}
