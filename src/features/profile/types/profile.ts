@@ -35,12 +35,20 @@ export interface PlayerProfile {
   collection_is_public: boolean
 }
 
+export interface PveRecord {
+  wins: number
+  losses: number
+  give_ups: number
+}
+
 export interface AuthUser {
   id: number
   email: string
   email_verified_at: string | null
   profile: PlayerProfile
   progress: TrainerProgress
+  /** Career PvE totals; present on /api/me for the signed-in trainer. */
+  pve_record?: PveRecord
 }
 
 /** What anyone can see about another trainer. */

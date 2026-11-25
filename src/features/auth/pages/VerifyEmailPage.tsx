@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useSearchParams } from 'react-router-dom'
+import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { Alert } from '../../../shared/components/ui/Alert'
 import { buttonClassName } from '../../../shared/components/ui/Button'
 import { AuthCard } from '../components/AuthCard'
@@ -47,7 +48,7 @@ export function VerifyEmailPage() {
   if (outcome === 'invalid') {
     content = <Alert variant="error">{t('verify.invalid')}</Alert>
   } else if (status === 'loading') {
-    content = <Alert variant="info">{t('verify.checking')}</Alert>
+    content = <PageLoading label={t('verify.checking')} fullPage={false} />
   } else if (outcome === 'already_verified') {
     content = <Alert variant="success">{t('verify.alreadyVerified')}</Alert>
   } else if (outcome === 'verified' || isVerified) {

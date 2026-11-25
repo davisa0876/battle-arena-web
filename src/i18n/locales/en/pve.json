@@ -1,0 +1,125 @@
+{
+  "eyebrow": "Solo Battle",
+  "title": "PvE Arena",
+  "pickDescription": "Choose one owned creature to enter a 1v1 fight. You attack first; the AI reacts.",
+  "emptyCollection": "Your collection is empty.",
+  "goCollection": "Open My Collection",
+  "start": "Start battle",
+  "loading": "Preparing the arena...",
+  "retry": "Try again",
+  "leave": "Leave arena",
+  "resolving": "Resolving turn...",
+  "level": "Lv. {{level}}",
+  "meta": "Round {{round}} · {{phase}}",
+  "badge": {
+    "round": "Round {{round}}"
+  },
+  "intent": "Incoming {{type}} attack",
+  "sides": {
+    "player": "Your creature",
+    "opponent": "Opponent"
+  },
+  "resources": {
+    "hp": "HP",
+    "stamina": "Stamina"
+  },
+  "phases": {
+    "awaiting_player_attack": "Your turn",
+    "awaiting_player_defense": "Defend",
+    "finished": "Finished"
+  },
+  "actions": {
+    "attackPanel": "Attack actions",
+    "defensePanel": "Defense actions",
+    "attackTab": "Attack",
+    "defenseTab": "Defense",
+    "chooseAttack": "Choose an attack",
+    "chooseDefense": "Choose a defense",
+    "basicStrike": "Basic Strike",
+    "basicStrikeHelp": "A free basic attack with 20 power. Costs no stamina and no PP — useful when every move is spent.",
+    "recoverSkip": "Recover stamina",
+    "recoverSkipHelp": "Skip this attack to restore 15 stamina. Your opponent still gets to strike next.",
+    "moveHelp": "{{name}} deals {{power}} power {{type}} ({{class}}) damage. Costs {{stamina}} stamina and 1 PP. Accuracy {{accuracy}}%.",
+    "useMove": "Use {{move}}",
+    "useBasicStrike": "Use Basic Strike",
+    "useRecoverSkip": "Recover & skip attack",
+    "useDefense": "Use {{defense}}"
+  },
+  "moveMeta": "Pow {{power}} · Stam {{stamina}} · PP {{pp}}/{{ppMax}}",
+  "movePp": "PP {{pp}}/{{ppMax}}",
+  "moveStaminaCost": "{{stamina}} stam",
+  "defense": {
+    "endure": {
+      "label": "Endure",
+      "hint": "0 stamina · full damage",
+      "description": "Take the hit at full damage and spend no stamina. Best when you need to save stamina for later turns."
+    },
+    "block": {
+      "label": "Block",
+      "hint": "10 stamina · half damage",
+      "description": "Spend 10 stamina to cut incoming damage roughly in half. Reliable mitigation when you expect a solid hit."
+    },
+    "dodge": {
+      "label": "Dodge",
+      "hint": "20 stamina · 60% avoid",
+      "description": "Spend 20 stamina for a 60% chance to avoid the attack completely. High risk, high reward."
+    },
+    "recover": {
+      "label": "Recover",
+      "hint": "0 stamina · +15 stamina",
+      "description": "Restore 15 stamina instead of defending. You take the hit normally, but refill stamina for stronger replies."
+    }
+  },
+  "log": {
+    "title": "Battle log",
+    "empty": "No combat yet.",
+    "started": "Battle started.",
+    "round": "Round {{round}}",
+    "attacker": "ATTACKER:",
+    "defender": "DEFENDER:",
+    "usedAttack": "{{name}} used {{attack}}.",
+    "attackCost": "Cost: -{{stamina}} stamina, -{{pp}} PP",
+    "recoverSkip": "{{name}} skipped the attack and recovered {{stamina}} stamina.",
+    "usedDefense": "{{name}} used {{defense}}.",
+    "damageReduced": "Damage reduced by {{percent}}%.",
+    "missed": "The attack missed.",
+    "dodged": "The attack was dodged.",
+    "damage": "{{damage}} HP damage.",
+    "hpRemaining": "{{name}}: {{before}} → {{after}} HP",
+    "fainted": "{{name}} fainted!"
+  },
+  "intro": {
+    "started": "Battle started! Your turn!",
+    "preparing": "Combatants are entering the arena..."
+  },
+  "audio": {
+    "enable": "Enable battle sounds",
+    "sound": "Sound",
+    "music": "Music",
+    "volume": "Volume",
+    "replayPlayer": "Replay your cry",
+    "replayOpponent": "Replay opponent cry"
+  },
+  "record": {
+    "wins": "{{count}} wins",
+    "losses": "{{count}} losses",
+    "giveUps": "{{count}} give-ups"
+  },
+  "arenaBanner": {
+    "victory": "Victory",
+    "youLose": "You Lose"
+  },
+  "result": {
+    "win": "Victory!",
+    "loss": "Defeat",
+    "gaveUp": "Gave up",
+    "xp": "+{{xp}} trainer XP",
+    "again": "New battle"
+  },
+  "errors": {
+    "loadCollection": "Could not load your collection.",
+    "loadBattle": "Could not restore the battle.",
+    "start": "Could not start the battle.",
+    "action": "Could not resolve that action."
+  }
+}

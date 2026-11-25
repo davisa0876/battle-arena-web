@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { PageHeading, PageSection } from '../../../shared/components/layout/PageSection'
 import { Alert } from '../../../shared/components/ui/Alert'
 import { Button } from '../../../shared/components/ui/Button'
@@ -63,7 +64,7 @@ export function MyCollectionPage() {
       )}
 
       <div aria-live="polite">
-        {state.status === 'loading' && <p className="text-arena-300/80">{t('loading')}</p>}
+        {state.status === 'loading' && <PageLoading label={t('loading')} fullPage={false} />}
 
         {state.status === 'error' && (
           <div className="rounded-2xl border border-signal-bad/40 bg-signal-bad/10 p-6">
@@ -81,7 +82,7 @@ export function MyCollectionPage() {
             <p className="m-0 font-display text-xl text-white">{t('empty.title')}</p>
             <p className="mb-0 mt-2 text-arena-300/80">{t('empty.description')}</p>
           </div>
-          {rules.status === 'loading' && <p className="text-arena-300/80">{t('starter.loading')}</p>}
+          {rules.status === 'loading' && <PageLoading label={t('starter.loading')} fullPage={false} />}
           {rules.status === 'error' && (
             <div className="rounded-2xl border border-signal-bad/40 bg-signal-bad/10 p-6">
               <p className="m-0 font-semibold text-signal-bad">{rules.message}</p>

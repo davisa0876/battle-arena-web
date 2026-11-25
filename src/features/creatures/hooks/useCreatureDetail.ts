@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiError } from '../../../shared/lib/api/client'
+import { toUserFacingMessage } from '../../../shared/lib/api/userFacingError'
 import { fetchCreatureBySlug } from '../api/creatures'
 import type { Creature } from '../types'
 
@@ -38,7 +39,7 @@ export function useCreatureDetail(slug: string, retryToken: number): DetailState
           return
         }
 
-        const message = error instanceof ApiError ? error.message : t('detailLoad')
+        const message = toUserFacingMessage(error, t('detailLoad'))
         setState({ status: 'error', message })
       })
 

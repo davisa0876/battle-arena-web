@@ -99,7 +99,7 @@ describe('CreatureCatalogPage', () => {
 
     renderCatalog()
 
-    expect(screen.getByText('Loading creatures...')).toBeInTheDocument()
+    expect(screen.getByRole('status', { name: 'Loading creatures...' })).toBeInTheDocument()
 
     expect(await screen.findByRole('heading', { name: 'Charmander' })).toBeInTheDocument()
     expect(mockedApi.fetchCreatures).toHaveBeenCalledWith({ page: 1, per_page: 12 }, expect.any(AbortSignal))

@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { PageHeading, PageSection } from '../../../shared/components/layout/PageSection'
 import { Button } from '../../../shared/components/ui/Button'
 import { formatNumber } from '../../../shared/lib/formatters/numbers'
@@ -24,7 +25,7 @@ export function GameRulesPage() {
       />
 
       <div aria-live="polite">
-        {state.status === 'loading' && <p className="text-arena-300/80">{t('loading')}</p>}
+        {state.status === 'loading' && <PageLoading label={t('loading')} fullPage={false} />}
 
         {state.status === 'error' && (
           <div className="rounded-2xl border border-signal-bad/40 bg-signal-bad/10 p-6">

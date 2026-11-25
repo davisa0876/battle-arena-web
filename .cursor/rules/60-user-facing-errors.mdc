@@ -1,0 +1,37 @@
+---
+description: Never show technical API errors to players (Horus-aligned)
+globs: src/**/*.{ts,tsx}
+alwaysApply: true
+---
+
+# User-facing errors (Horus pattern)
+
+Players must never see raw transport/debug text.
+
+## Do not show in UI
+- Timeout ms (`timed out after 8000ms`)
+- HTTP status phrases (`failed with status 500`)
+- Env var names, stack traces, `AbortError`, Axios codes
+- Internal exception class names
+
+## Do instead
+- Log the full error with `console.error` / future Sentry (`debugMessage`, `cause`, `status`)
+- Render only localized product copy via `toUserFacingMessage(error, fallback)` from `shared/lib/api/userFacingError`
+- Prefer API `message` when the server intentionally sent domain/validation copy
+- Map transport failures to `errors.timeout` / `errors.offline` / `errors.server` / `errors.generic`
+
+```ts
+// ❌ BAD — leaks transport details
+setError(error instanceof ApiError ? error.message : 'Failed')
+
+// ✅ GOOD
+setError(toUserFacingMessage(error, t('errors:catalogLoad')))
+```
+
+## API client contract
+- `ApiError.message` is always safe for UI
+- Put technical detail in `ApiError.debugMessage` / `cause` only
+- `kind: 'aborted'` must not flash an error toast/banner
+
+## Reference
+Horus: `useErrorHandler` + Global toast + API envelope allowlist `{message,code,errors}`.

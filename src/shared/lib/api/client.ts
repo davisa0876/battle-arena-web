@@ -7,17 +7,31 @@ const XSRF_HEADER_NAME = 'X-XSRF-TOKEN'
 
 export type ValidationErrors = Record<string, string[]>
 
+export type ApiErrorKind = 'timeout' | 'network' | 'validation' | 'http' | 'aborted' | 'unknown'
+
 export class ApiError extends Error {
   readonly status: number | undefined
   readonly errors: ValidationErrors
+  readonly kind: ApiErrorKind
+  /** Technical detail for logs only — never render in the UI. */
+  readonly debugMessage: string | undefined
   override readonly cause: unknown
 
-  constructor(message: string, status?: number, cause?: unknown, errors: ValidationErrors = {}) {
+  constructor(
+    message: string,
+    status?: number,
+    cause?: unknown,
+    errors: ValidationErrors = {},
+    kind: ApiErrorKind = 'unknown',
+    debugMessage?: string,
+  ) {
     super(message, { cause })
     this.name = 'ApiError'
     this.status = status
     this.cause = cause
     this.errors = errors
+    this.kind = kind
+    this.debugMessage = debugMessage
   }
 
   get isValidation(): boolean {
@@ -100,12 +114,14 @@ function statusMessage(status: number): string {
       return i18n.t('errors:unauthenticated')
     case 403:
       return i18n.t('errors:forbidden')
+    case 404:
+      return i18n.t('errors:notFound')
     case 419:
       return i18n.t('errors:sessionExpired')
     case 429:
       return i18n.t('errors:tooManyRequests')
     default:
-      return i18n.t('errors:requestFailed', { status })
+      return status >= 500 ? i18n.t('errors:server') : i18n.t('errors:generic')
   }
 }
 
@@ -234,10 +250,20 @@ export class ApiClient {
         }
         throw error
       }
-      if (timeoutController.signal.aborted) {
-        throw new ApiError(i18n.t('errors:timeout', { ms: this.timeoutMs }), undefined, error)
+      if (options.signal?.aborted) {
+        throw new ApiError(i18n.t('errors:generic'), undefined, error, {}, 'aborted', 'Request aborted by caller')
       }
-      throw new ApiError(i18n.t('errors:offline'), undefined, error)
+      if (timeoutController.signal.aborted) {
+        throw new ApiError(
+          i18n.t('errors:timeout'),
+          undefined,
+          error,
+          {},
+          'timeout',
+          `Request timed out after ${this.timeoutMs}ms`,
+        )
+      }
+      throw new ApiError(i18n.t('errors:offline'), undefined, error, {}, 'network', 'Network request failed')
     } finally {
       window.clearTimeout(timeoutId)
     }
@@ -259,10 +285,44 @@ export class ApiClient {
         422,
         undefined,
         parsed.errors,
+        'validation',
       )
     }
 
-    return new ApiError(statusMessage(response.status), response.status, undefined, parsed.errors)
+    // Auth / session / rate-limit: always use our localized copy (never Laravel English defaults).
+    if ([401, 403, 419, 429].includes(response.status)) {
+      return new ApiError(
+        statusMessage(response.status),
+        response.status,
+        undefined,
+        parsed.errors,
+        'http',
+        `HTTP ${response.status}`,
+      )
+    }
+
+    // 5xx: never surface internal server text to players.
+    if (response.status >= 500) {
+      return new ApiError(
+        i18n.t('errors:server'),
+        response.status,
+        undefined,
+        parsed.errors,
+        'http',
+        `HTTP ${response.status}${parsed.message ? `: ${parsed.message}` : ''}`,
+      )
+    }
+
+    // Other 4xx: prefer deliberate API product copy when present.
+    const safeMessage = parsed.message?.trim() || statusMessage(response.status)
+    return new ApiError(
+      safeMessage,
+      response.status,
+      undefined,
+      parsed.errors,
+      'http',
+      `HTTP ${response.status}`,
+    )
   }
 }
 

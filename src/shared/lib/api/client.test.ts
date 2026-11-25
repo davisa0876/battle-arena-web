@@ -128,8 +128,9 @@ describe('ApiClient', () => {
     const error = await client.get('/api/boom').catch((caught: unknown) => caught)
 
     expect(error).toBeInstanceOf(ApiError)
-    expect((error as ApiError).message).toBe('API request failed with status 500')
+    expect((error as ApiError).message).toBe('Something went wrong on our end. Please try again.')
     expect((error as ApiError).status).toBe(500)
+    expect((error as ApiError).debugMessage).toBe('HTTP 500: nope')
   })
 
   it('localizes status, timeout and offline messages using the errors namespace', async () => {
@@ -138,24 +139,30 @@ describe('ApiClient', () => {
 
     fetchMock.mockImplementationOnce(async () => jsonResponse({}, { status: 503 }))
     await expect(client.get('/api/x')).rejects.toMatchObject({
-      message: resources.fr.errors.requestFailed.replace('{{status}}', '503'),
+      message: resources.fr.errors.server,
       status: 503,
+      kind: 'http',
     })
 
     fetchMock.mockImplementationOnce(hangingFetch())
     await expect(client.get('/api/x')).rejects.toMatchObject({
-      message: resources.fr.errors.timeout.replace('{{ms}}', '20'),
+      message: resources.fr.errors.timeout,
+      kind: 'timeout',
     })
 
     fetchMock.mockRejectedValueOnce(new TypeError('Failed to fetch'))
-    await expect(client.get('/api/x')).rejects.toMatchObject({ message: resources.fr.errors.offline })
+    await expect(client.get('/api/x')).rejects.toMatchObject({
+      message: resources.fr.errors.offline,
+      kind: 'network',
+    })
   })
 
   it('uses the English resource strings by default', async () => {
     fetchMock.mockImplementationOnce(async () => jsonResponse({}, { status: 500 }))
 
     await expect(new ApiClient({ baseUrl: 'http://api.test' }).get('/api/x')).rejects.toMatchObject({
-      message: resources.en.errors.requestFailed.replace('{{status}}', '500'),
+      message: resources.en.errors.server,
+      kind: 'http',
     })
   })
 
@@ -166,7 +173,9 @@ describe('ApiClient', () => {
     await expect(client.get('/api/creatures/ghost')).rejects.toMatchObject({
       name: 'ApiError',
       status: 404,
-      message: 'API request failed with status 404',
+      message: 'missing',
+      kind: 'http',
+      debugMessage: 'HTTP 404',
     })
   })
 
@@ -177,7 +186,9 @@ describe('ApiClient', () => {
     const error = await client.get('/api/slow').catch((caught: unknown) => caught)
 
     expect(error).toBeInstanceOf(ApiError)
-    expect((error as ApiError).message).toBe('API request timed out after 20ms')
+    expect((error as ApiError).kind).toBe('timeout')
+    expect((error as ApiError).message).toBe('The server took too long to respond. Please try again.')
+    expect((error as ApiError).debugMessage).toBe('Request timed out after 20ms')
     expect((error as ApiError).status).toBeUndefined()
     expect((error as ApiError).cause).toBeInstanceOf(DOMException)
   })
@@ -195,10 +206,12 @@ describe('ApiClient', () => {
     const error = await pending
 
     expect(error).toBeInstanceOf(ApiError)
-    expect((error as ApiError).message).toBe('API request timed out after 5000ms')
+    expect((error as ApiError).kind).toBe('timeout')
+    expect((error as ApiError).message).toBe('The server took too long to respond. Please try again.')
+    expect((error as ApiError).debugMessage).toBe('Request timed out after 5000ms')
   })
 
-  it('throws "Unable to connect" when fetch rejects with a network error', async () => {
+  it('throws a friendly offline message when fetch rejects with a network error', async () => {
     const networkError = new TypeError('Failed to fetch')
     fetchMock.mockRejectedValue(networkError)
     const client = new ApiClient({ baseUrl: 'http://api.test' })
@@ -206,18 +219,20 @@ describe('ApiClient', () => {
     const error = await client.get('/api/down').catch((caught: unknown) => caught)
 
     expect(error).toBeInstanceOf(ApiError)
-    expect((error as ApiError).message).toBe('Unable to connect to the API')
+    expect((error as ApiError).kind).toBe('network')
+    expect((error as ApiError).message).toBe('Unable to connect. Check your connection and try again.')
     expect((error as ApiError).status).toBeUndefined()
     expect((error as ApiError).cause).toBe(networkError)
   })
 
-  it('throws "Unable to connect" when the body is not valid JSON', async () => {
+  it('throws a friendly offline message when the body is not valid JSON', async () => {
     fetchMock.mockResolvedValue(new Response('<html>not json</html>', { status: 200 }))
     const client = new ApiClient({ baseUrl: 'http://api.test' })
 
     await expect(client.get('/api/html')).rejects.toMatchObject({
       name: 'ApiError',
-      message: 'Unable to connect to the API',
+      kind: 'network',
+      message: 'Unable to connect. Check your connection and try again.',
     })
   })
 
@@ -232,9 +247,7 @@ describe('ApiClient', () => {
     expect((error as ApiError).status).toBe(418)
   })
 
-  it('reports "Unable to connect" (not timeout) when the caller aborts before the timeout fires', async () => {
-    // Actual behavior: only the internal timeout controller is inspected, so a caller-initiated
-    // abort is surfaced as a connection failure whose cause is the AbortError from fetch.
+  it('marks caller abort as aborted (not timeout) when the caller aborts before the timeout fires', async () => {
     fetchMock.mockImplementation(hangingFetch())
     const client = new ApiClient({ baseUrl: 'http://api.test', timeoutMs: 10_000 })
     const callerController = new AbortController()
@@ -244,16 +257,16 @@ describe('ApiClient', () => {
     const error = await pending
 
     expect(error).toBeInstanceOf(ApiError)
-    expect((error as ApiError).message).toBe('Unable to connect to the API')
+    expect((error as ApiError).kind).toBe('aborted')
     expect(((error as ApiError).cause as DOMException).name).toBe('AbortError')
   })
 
-  it('reports "Unable to connect" when the caller signal is already aborted', async () => {
+  it('marks already-aborted caller signals as aborted', async () => {
     fetchMock.mockImplementation(hangingFetch())
     const client = new ApiClient({ baseUrl: 'http://api.test', timeoutMs: 10_000 })
 
     await expect(client.get('/api/slow', AbortSignal.abort())).rejects.toMatchObject({
-      message: 'Unable to connect to the API',
+      kind: 'aborted',
     })
   })
 
@@ -263,7 +276,9 @@ describe('ApiClient', () => {
     const callerController = new AbortController()
 
     await expect(client.get('/api/slow', callerController.signal)).rejects.toMatchObject({
-      message: 'API request timed out after 20ms',
+      kind: 'timeout',
+      message: 'The server took too long to respond. Please try again.',
+      debugMessage: 'Request timed out after 20ms',
     })
     expect(callerController.signal.aborted).toBe(false)
   })

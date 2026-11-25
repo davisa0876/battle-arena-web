@@ -1,7 +1,7 @@
 import { useContext, useState, type MouseEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { acquireCreature, selectStarter } from '../../collection/api/collection'
-import { ApiError } from '../../../shared/lib/api/client'
+import { toUserFacingMessage } from '../../../shared/lib/api/userFacingError'
 import { buttonClassName } from '../../../shared/components/ui/Button'
 import { AuthContext } from '../../auth/context/AuthContext'
 import type { Creature } from '../types'
@@ -59,7 +59,7 @@ export function AddToCollectionButton({
       await auth?.refreshMe().catch(() => undefined)
       onSelected?.()
     } catch (caught) {
-      setError(caught instanceof ApiError ? caught.message : t('selection.failed'))
+      setError(toUserFacingMessage(caught, t('selection.failed')))
     } finally {
       setBusy(false)
     }

@@ -1,0 +1,125 @@
+{
+  "eyebrow": "Battaglia in solitaria",
+  "title": "Arena PvE",
+  "pickDescription": "Scegli una creatura posseduta per un duello 1v1. Attacchi per primo; l'IA reagisce.",
+  "emptyCollection": "La tua collezione è vuota.",
+  "goCollection": "Apri La mia collezione",
+  "start": "Inizia battaglia",
+  "loading": "Preparazione dell'arena...",
+  "retry": "Riprova",
+  "leave": "Lascia l'arena",
+  "resolving": "Risoluzione del turno...",
+  "level": "Liv. {{level}}",
+  "meta": "Round {{round}} · {{phase}}",
+  "badge": {
+    "round": "Round {{round}}"
+  },
+  "intent": "Attacco {{type}} in arrivo",
+  "sides": {
+    "player": "La tua creatura",
+    "opponent": "Avversario"
+  },
+  "resources": {
+    "hp": "PS",
+    "stamina": "Stamina"
+  },
+  "phases": {
+    "awaiting_player_attack": "Il tuo turno",
+    "awaiting_player_defense": "Difesa",
+    "finished": "Terminata"
+  },
+  "actions": {
+    "attackPanel": "Azioni di attacco",
+    "defensePanel": "Azioni di difesa",
+    "attackTab": "Attacco",
+    "defenseTab": "Difesa",
+    "chooseAttack": "Scegli un attacco",
+    "chooseDefense": "Scegli una difesa",
+    "basicStrike": "Colpo base",
+    "basicStrikeHelp": "Attacco base gratuito con potenza 20. Non costa stamina né PP — utile quando le mosse sono esaurite.",
+    "recoverSkip": "Recupera stamina",
+    "recoverSkipHelp": "Salta questo attacco per recuperare 15 di stamina. L’avversario attacca comunque dopo.",
+    "moveHelp": "{{name}} infligge {{power}} di potenza {{type}} ({{class}}). Costa {{stamina}} stamina e 1 PP. Precisione {{accuracy}}%.",
+    "useMove": "Usa {{move}}",
+    "useBasicStrike": "Usa Colpo base",
+    "useRecoverSkip": "Recupera e salta attacco",
+    "useDefense": "Usa {{defense}}"
+  },
+  "moveMeta": "Pot {{power}} · Stam {{stamina}} · PP {{pp}}/{{ppMax}}",
+  "movePp": "PP {{pp}}/{{ppMax}}",
+  "defense": {
+    "endure": {
+      "label": "Resistere",
+      "hint": "0 stam · danno pieno",
+      "description": "Subisci il colpo a danno pieno senza spendere stamina. Ideale per risparmiare nei turni successivi."
+    },
+    "block": {
+      "label": "Bloccare",
+      "hint": "10 stam · metà danno",
+      "description": "Spendi 10 stamina per ridurre circa a metà il danno ricevuto. Mitigazione affidabile."
+    },
+    "dodge": {
+      "label": "Schivare",
+      "hint": "20 stam · 60% di schivata",
+      "description": "Spendi 20 stamina per il 60% di probabilità di evitare completamente l'attacco. Alto rischio, alto premio."
+    },
+    "recover": {
+      "label": "Recuperare",
+      "hint": "0 stam · +15 stamina",
+      "description": "Recupera 15 stamina invece di difenderti. Subisci il colpo, ma ricarichi per rispondere meglio."
+    }
+  },
+  "log": {
+    "title": "Registro di combattimento",
+    "empty": "Nessun combattimento ancora.",
+    "started": "La battaglia è iniziata.",
+    "round": "Round {{round}}",
+    "attacker": "ATTACCANTE:",
+    "defender": "DIFENSORE:",
+    "usedAttack": "{{name}} ha usato {{attack}}.",
+    "attackCost": "Costo: -{{stamina}} stam, -{{pp}} PP",
+    "recoverSkip": "{{name}} ha saltato l’attacco e recuperato {{stamina}} di stamina.",
+    "usedDefense": "{{name}} ha usato {{defense}}.",
+    "damageReduced": "Danno ridotto del {{percent}}%.",
+    "missed": "L'attacco ha mancato.",
+    "dodged": "L'attacco è stato schivato.",
+    "damage": "{{damage}} danni PS.",
+    "hpRemaining": "{{name}}: {{before}} → {{after}} PS",
+    "fainted": "{{name}} è esausto!"
+  },
+  "intro": {
+    "started": "La battaglia è iniziata! Tocca a te!",
+    "preparing": "I combattenti stanno entrando nell'arena..."
+  },
+  "audio": {
+    "enable": "Attiva i suoni di battaglia",
+    "sound": "Suono",
+    "music": "Musica",
+    "volume": "Volume",
+    "replayPlayer": "Riascolta il tuo verso",
+    "replayOpponent": "Riascolta il verso avversario"
+  },
+  "record": {
+    "wins": "{{count}} vittorie",
+    "losses": "{{count}} sconfitte",
+    "giveUps": "{{count}} abbandoni"
+  },
+  "arenaBanner": {
+    "victory": "Vittoria",
+    "youLose": "Hai perso"
+  },
+  "result": {
+    "win": "Vittoria!",
+    "loss": "Sconfitta",
+    "gaveUp": "Hai abbandonato",
+    "xp": "+{{xp}} XP allenatore",
+    "again": "Nuova battaglia"
+  },
+  "errors": {
+    "loadCollection": "Impossibile caricare la collezione.",
+    "loadBattle": "Impossibile ripristinare la battaglia.",
+    "start": "Impossibile avviare la battaglia.",
+    "action": "Impossibile risolvere l'azione."
+  },
+  "moveStaminaCost": "{{stamina}} stam"
+}

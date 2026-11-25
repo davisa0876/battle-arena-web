@@ -11,3 +11,4 @@ alwaysApply: true
 - TypeScript strict. Do not use `any` for API payloads.
 - Do not commit copyrighted artwork. Remote demo sprites stay URL-only.
 - Do not claim lint/typecheck/tests passed without running them.
+- Never show technical API errors to players (timeouts with ms, HTTP status text, stacks). Use `toUserFacingMessage` — see `60-user-facing-errors.mdc`.

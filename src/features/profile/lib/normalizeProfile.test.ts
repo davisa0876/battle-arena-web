@@ -24,6 +24,7 @@ describe('normalizeAuthUser', () => {
           progress_percent: 20,
           is_max_level: false,
         },
+        pve_record: { wins: 3, losses: 1, give_ups: 2 },
       },
     })
 
@@ -47,6 +48,7 @@ describe('normalizeAuthUser', () => {
         progress_percent: 20,
         is_max_level: false,
       },
+      pve_record: { wins: 3, losses: 1, give_ups: 2 },
     })
   })
 

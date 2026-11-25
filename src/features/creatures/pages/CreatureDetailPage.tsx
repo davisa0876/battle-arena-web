@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
+import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { CreatureEvolutions } from '../components/CreatureEvolutions'
 import { CreatureHero } from '../components/CreatureHero'
 import { CreatureStats } from '../components/CreatureStats'
@@ -18,11 +19,7 @@ export function CreatureDetailPage() {
         {t('detail.backToCatalog')}
       </Link>
 
-      {viewState.status === 'loading' && (
-        <p className="mt-10 text-arena-300/80" aria-live="polite">
-          {t('detail.loading')}
-        </p>
-      )}
+      {viewState.status === 'loading' && <PageLoading label={t('detail.loading')} />}
 
       {viewState.status === 'error' && (
         <div className="mt-10 rounded-2xl border border-signal-bad/40 bg-signal-bad/10 p-6">

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ApiError } from '../../../shared/lib/api/client'
+import { toUserFacingMessage } from '../../../shared/lib/api/userFacingError'
 import { fetchPublicPlayer } from '../api/profile'
 import type { PublicPlayer } from '../types'
 
@@ -42,7 +43,7 @@ export function usePublicPlayer(handle: string, retryToken: number): PublicPlaye
           setState({ status: 'error', message: t('playerNotFound'), notFound: true })
           return
         }
-        setState({ status: 'error', message: error instanceof ApiError ? error.message : t('playerLoad') })
+        setState({ status: 'error', message: toUserFacingMessage(error, t('playerLoad')) })
       })
 
     return () => controller.abort()

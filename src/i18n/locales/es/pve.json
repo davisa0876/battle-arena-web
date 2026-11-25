@@ -1,0 +1,125 @@
+{
+  "eyebrow": "Batalla en solitario",
+  "title": "Arena PvE",
+  "pickDescription": "Elige una criatura de tu colección para un duelo 1v1. Atacas primero; la IA responde.",
+  "emptyCollection": "Tu colección está vacía.",
+  "goCollection": "Abrir Mi colección",
+  "start": "Empezar batalla",
+  "loading": "Preparando la arena...",
+  "retry": "Reintentar",
+  "leave": "Salir de la arena",
+  "resolving": "Resolviendo turno...",
+  "level": "Nv. {{level}}",
+  "meta": "Ronda {{round}} · {{phase}}",
+  "badge": {
+    "round": "Ronda {{round}}"
+  },
+  "intent": "Ataque {{type}} entrante",
+  "sides": {
+    "player": "Tu criatura",
+    "opponent": "Rival"
+  },
+  "resources": {
+    "hp": "PS",
+    "stamina": "Resistencia"
+  },
+  "phases": {
+    "awaiting_player_attack": "Tu turno",
+    "awaiting_player_defense": "Defensa",
+    "finished": "Finalizada"
+  },
+  "actions": {
+    "attackPanel": "Acciones de ataque",
+    "defensePanel": "Acciones de defensa",
+    "attackTab": "Ataque",
+    "defenseTab": "Defensa",
+    "chooseAttack": "Elige un ataque",
+    "chooseDefense": "Elige una defensa",
+    "basicStrike": "Golpe básico",
+    "basicStrikeHelp": "Ataque básico gratis con potencia 20. No gasta resistencia ni PP: útil cuando se agotaron los movimientos.",
+    "recoverSkip": "Recuperar resistencia",
+    "recoverSkipHelp": "Omite este ataque para recuperar 15 de resistencia. El rival igual ataca después.",
+    "moveHelp": "{{name}} causa {{power}} de potencia {{type}} ({{class}}). Cuesta {{stamina}} de resistencia y 1 PP. Precisión {{accuracy}} %.",
+    "useMove": "Usar {{move}}",
+    "useBasicStrike": "Usar golpe básico",
+    "useRecoverSkip": "Recuperar y omitir ataque",
+    "useDefense": "Usar {{defense}}"
+  },
+  "moveMeta": "Pot {{power}} · Res {{stamina}} · PP {{pp}}/{{ppMax}}",
+  "movePp": "PP {{pp}}/{{ppMax}}",
+  "defense": {
+    "endure": {
+      "label": "Aguantar",
+      "hint": "0 res. · daño completo",
+      "description": "Recibe el golpe a daño completo sin gastar resistencia. Ideal para ahorrar en turnos siguientes."
+    },
+    "block": {
+      "label": "Bloquear",
+      "hint": "10 res. · mitad de daño",
+      "description": "Gasta 10 de resistencia para reducir el daño a la mitad. Mitigación fiable ante un golpe fuerte."
+    },
+    "dodge": {
+      "label": "Esquivar",
+      "hint": "20 res. · 60 % de evasión",
+      "description": "Gasta 20 de resistencia por un 60 % de probabilidad de evitar el ataque por completo. Alto riesgo, alta recompensa."
+    },
+    "recover": {
+      "label": "Recuperar",
+      "hint": "0 res. · +15 resistencia",
+      "description": "Recupera 15 de resistencia en lugar de defenderte. Tomas el golpe, pero recargas para responder mejor."
+    }
+  },
+  "log": {
+    "title": "Registro de combate",
+    "empty": "Aún no hay combate.",
+    "started": "La batalla ha empezado.",
+    "round": "Ronda {{round}}",
+    "attacker": "ATACANTE:",
+    "defender": "DEFENSOR:",
+    "usedAttack": "{{name}} usó {{attack}}.",
+    "attackCost": "Coste: -{{stamina}} res., -{{pp}} PP",
+    "recoverSkip": "{{name}} omitió el ataque y recuperó {{stamina}} de resistencia.",
+    "usedDefense": "{{name}} usó {{defense}}.",
+    "damageReduced": "Daño reducido un {{percent}}%.",
+    "missed": "El ataque falló.",
+    "dodged": "El ataque fue esquivado.",
+    "damage": "{{damage}} de daño de PS.",
+    "hpRemaining": "{{name}}: {{before}} → {{after}} PS",
+    "fainted": "¡{{name}} se debilitó!"
+  },
+  "intro": {
+    "started": "¡La batalla ha empezado! ¡Tu turno!",
+    "preparing": "Los combatientes entran en la arena..."
+  },
+  "audio": {
+    "enable": "Activar sonidos de batalla",
+    "sound": "Sonido",
+    "music": "Música",
+    "volume": "Volumen",
+    "replayPlayer": "Repetir tu grito",
+    "replayOpponent": "Repetir grito rival"
+  },
+  "record": {
+    "wins": "{{count}} victorias",
+    "losses": "{{count}} derrotas",
+    "giveUps": "{{count}} abandonos"
+  },
+  "arenaBanner": {
+    "victory": "Victoria",
+    "youLose": "Perdiste"
+  },
+  "result": {
+    "win": "¡Victoria!",
+    "loss": "Derrota",
+    "gaveUp": "Abandonaste",
+    "xp": "+{{xp}} XP de entrenador",
+    "again": "Nueva batalla"
+  },
+  "errors": {
+    "loadCollection": "No se pudo cargar tu colección.",
+    "loadBattle": "No se pudo restaurar la batalla.",
+    "start": "No se pudo empezar la batalla.",
+    "action": "No se pudo resolver esa acción."
+  },
+  "moveStaminaCost": "{{stamina}} res"
+}

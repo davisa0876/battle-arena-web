@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ApiError } from '../../../shared/lib/api/client'
+import { toUserFacingMessage } from '../../../shared/lib/api/userFacingError'
 import { fetchGameRules } from '../api/gameRules'
 import type { GameRules } from '../types'
 
@@ -28,7 +28,7 @@ export function useGameRules(): GameRulesState & { reload: () => void } {
         if (controller.signal.aborted) {
           return
         }
-        setState({ status: 'error', message: error instanceof ApiError ? error.message : t('rulesLoad') })
+        setState({ status: 'error', message: toUserFacingMessage(error, t('rulesLoad')) })
       })
 
     return () => controller.abort()

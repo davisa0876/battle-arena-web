@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSearchParams } from 'react-router-dom'
+import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { CatalogPagination } from '../components/CatalogPagination'
 import { CreatureFilters } from '../components/CreatureFilters'
 import { CreatureGrid } from '../components/CreatureGrid'
@@ -70,7 +71,7 @@ export function CreatureCatalogPage() {
       />
 
       <div className="mt-10" aria-live="polite">
-        {loadState.status === 'loading' && <p className="text-arena-300/80">{t('catalog.loading')}</p>}
+        {loadState.status === 'loading' && <PageLoading label={t('catalog.loading')} fullPage={false} />}
 
         {loadState.status === 'error' && (
           <div className="rounded-2xl border border-signal-bad/40 bg-signal-bad/10 p-6">

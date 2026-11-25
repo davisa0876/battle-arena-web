@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { Alert } from '../../../shared/components/ui/Alert'
 import { Button } from '../../../shared/components/ui/Button'
 import { ApiError } from '../../../shared/lib/api/client'
@@ -75,9 +76,7 @@ export function StarterSelector({ slugs, enabled, busySlug, onSelect }: StarterS
       <p className="mb-6 mt-2 text-arena-300/80">{t('collection:starter.subtitle')}</p>
 
       {state.status === 'loading' && (
-        <p className="text-arena-300/80" aria-live="polite">
-          {t('collection:starter.loading')}
-        </p>
+        <PageLoading label={t('collection:starter.loading')} fullPage={false} />
       )}
 
       {state.status === 'error' && (

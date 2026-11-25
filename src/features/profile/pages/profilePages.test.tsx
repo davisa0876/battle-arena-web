@@ -244,7 +244,7 @@ describe('PublicPlayerProfilePage', () => {
 
     renderPublic()
 
-    expect(screen.getByText('Loading trainer...')).toBeInTheDocument()
+    expect(screen.getByRole('status', { name: 'Loading trainer...' })).toBeInTheDocument()
     expect(await screen.findByRole('heading', { level: 2, name: 'Misty' })).toBeInTheDocument()
     expect(profile.fetchPublicPlayer).toHaveBeenCalledWith('misty', expect.any(AbortSignal))
     expect(screen.getByText('Level 12', { selector: 'span' })).toBeInTheDocument()

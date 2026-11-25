@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ApiError } from '../../../shared/lib/api/client'
+import { toUserFacingMessage } from '../../../shared/lib/api/userFacingError'
 import { fetchMyCreatures } from '../api/collection'
 import type { OwnedCreature } from '../types'
 
@@ -37,7 +37,7 @@ export function useMyCollection(): MyCollection {
         if (controller.signal.aborted) {
           return
         }
-        setState({ status: 'error', message: error instanceof ApiError ? error.message : t('collectionLoad') })
+        setState({ status: 'error', message: toUserFacingMessage(error, t('collectionLoad')) })
       })
 
     return () => controller.abort()

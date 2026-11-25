@@ -5,6 +5,8 @@ interface CreatureImageProps {
   src?: string | null
   alt: string
   className?: string
+  /** When false, renders a transparent sprite (no card chrome) for arena overlays. */
+  framed?: boolean
 }
 
 type ImageStatus = 'loading' | 'loaded' | 'error'
@@ -20,7 +22,7 @@ function initialsFromAlt(alt: string): string {
   return initials || 'BA'
 }
 
-export function CreatureImage({ src, alt, className = '' }: CreatureImageProps) {
+export function CreatureImage({ src, alt, className = '', framed = true }: CreatureImageProps) {
   const { t } = useTranslation('creatures')
   const [imageState, setImageState] = useState<{ src?: string | null; status: ImageStatus }>({
     src,
@@ -28,11 +30,12 @@ export function CreatureImage({ src, alt, className = '' }: CreatureImageProps) 
   })
   const initials = useMemo(() => initialsFromAlt(alt), [alt])
   const status: ImageStatus = imageState.src === src ? imageState.status : src ? 'loading' : 'error'
+  const shell = framed
+    ? 'relative grid overflow-hidden rounded-[22px] border border-border bg-[radial-gradient(circle_at_35%_22%,rgba(39,201,236,0.18),transparent_48%),linear-gradient(145deg,#151C2B,#0B0F1B)]'
+    : 'relative grid overflow-visible bg-transparent'
 
   return (
-    <div
-      className={`relative grid overflow-hidden rounded-[22px] border border-border bg-[radial-gradient(circle_at_35%_22%,rgba(39,201,236,0.18),transparent_48%),linear-gradient(145deg,#151C2B,#0B0F1B)] ${className}`}
-    >
+    <div className={`${shell} ${className}`}>
       {src && status !== 'error' && (
         <img
           src={src}
@@ -41,9 +44,9 @@ export function CreatureImage({ src, alt, className = '' }: CreatureImageProps) 
           decoding="async"
           onLoad={() => setImageState({ src, status: 'loaded' })}
           onError={() => setImageState({ src, status: 'error' })}
-          className={`absolute inset-0 size-full object-contain p-4 transition-opacity motion-reduce:transition-none ${
-            status === 'loaded' ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`absolute inset-0 size-full object-contain transition-opacity motion-reduce:transition-none ${
+            framed ? 'p-4' : 'p-0 drop-shadow-[0_10px_18px_rgba(0,0,0,0.55)]'
+          } ${status === 'loaded' ? 'opacity-100' : 'opacity-0'}`}
         />
       )}
       {status === 'loading' && (

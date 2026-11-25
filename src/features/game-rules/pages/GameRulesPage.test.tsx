@@ -68,7 +68,7 @@ describe('GameRulesPage', () => {
 
     renderPage()
 
-    expect(screen.getByText('Loading the rules...')).toBeInTheDocument()
+    expect(screen.getByRole('status', { name: 'Loading the rules...' })).toBeInTheDocument()
     expect(await screen.findByText('Rules version 9.9.9')).toBeInTheDocument()
     expect(mockedApi.fetchGameRules).toHaveBeenCalledTimes(1)
   })

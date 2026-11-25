@@ -47,7 +47,7 @@ describe('MyCollectionPage', () => {
 
     renderPage()
 
-    expect(screen.getByText('Loading your collection...')).toBeInTheDocument()
+    expect(screen.getByRole('status', { name: 'Loading your collection...' })).toBeInTheDocument()
     expect(await screen.findByText('Unable to connect to the API')).toBeInTheDocument()
 
     await userEvent.click(screen.getByRole('button', { name: 'Try again' }))

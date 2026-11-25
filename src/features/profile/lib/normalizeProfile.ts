@@ -7,7 +7,17 @@ import {
   unwrapData,
 } from '../../../shared/lib/api/parse'
 import { normalizeOwnedCreatureList } from '../../collection/lib/normalizeCollection'
-import type { AuthUser, PlayerProfile, PublicPlayer, SelectionAllowance, TrainerProgress } from '../types'
+import type { AuthUser, PlayerProfile, PublicPlayer, PveRecord, SelectionAllowance, TrainerProgress } from '../types'
+
+function normalizePveRecord(raw: unknown): PveRecord | undefined {
+  const source = asRecord(raw)
+  if (Object.keys(source).length === 0) return undefined
+  return {
+    wins: Math.max(0, readNumber(source.wins, 0)),
+    losses: Math.max(0, readNumber(source.losses, 0)),
+    give_ups: Math.max(0, readNumber(source.give_ups, 0)),
+  }
+}
 
 /**
  * The API exposes progress either as a nested `progress` object or flat on the resource.
@@ -96,6 +106,8 @@ export function normalizeAuthUser(payload: unknown): AuthUser | null {
   const profileSource = Object.keys(asRecord(maybeUser.profile)).length > 0 ? asRecord(maybeUser.profile) : maybeUser
   const email = readString(maybeUser.email)
 
+  const pveRecord = normalizePveRecord(maybeUser.pve_record)
+
   return {
     id: readNumber(maybeUser.id),
     email,
@@ -107,6 +119,7 @@ export function normalizeAuthUser(payload: unknown): AuthUser | null {
       maybeUser.progress ?? maybeUser.trainer ?? maybeUser.trainer_progress,
       maybeUser,
     ),
+    ...(pveRecord ? { pve_record: pveRecord } : {}),
   }
 }
 

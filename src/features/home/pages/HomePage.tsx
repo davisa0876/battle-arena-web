@@ -9,7 +9,8 @@ export function HomePage() {
       code: 'SB',
       title: t('home.modes.solo.title'),
       description: t('home.modes.solo.description'),
-      status: t('home.status.comingSoon'),
+      status: t('home.status.available'),
+      to: '/pve',
     },
     {
       code: 'OB',

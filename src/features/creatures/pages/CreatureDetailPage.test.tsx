@@ -59,7 +59,7 @@ describe('CreatureDetailPage', () => {
 
     renderDetail()
 
-    expect(screen.getByText('Loading creature...')).toBeInTheDocument()
+    expect(screen.getByRole('status', { name: 'Loading creature...' })).toBeInTheDocument()
     expect(await screen.findByRole('heading', { level: 1, name: 'Charmander' })).toBeInTheDocument()
     expect(screen.queryByText('Loading creature...')).not.toBeInTheDocument()
     expect(mockedApi.fetchCreatureBySlug).toHaveBeenCalledWith('charmander', expect.any(AbortSignal))
