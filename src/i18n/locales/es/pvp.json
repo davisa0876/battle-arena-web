@@ -2,7 +2,7 @@
   "eyebrow": "Multijugador privado",
   "title": "Lobby JcJ",
   "subtitle": "Invita a un entrenador por handle exacto a un lobby privado.",
-  "phaseNote": "Lobby privado listo — el combate llega en una fase posterior.",
+  "phaseNote": "Elige una criatura, confirma Listo y entra al combate autoritativo.",
   "loading": "Cargando lobbies privados…",
   "form": {
     "handleLabel": "Handle del entrenador",
@@ -17,7 +17,45 @@
   },
   "lobby": {
     "title": "Lobby actual",
-    "status": "Estado: {{status}}"
+    "status": "Estado: {{status}}",
+    "selectCreature": "Elige tu criatura",
+    "locked": "Seleccion bloqueada",
+    "waitingReady": "Esperando al otro entrenador…",
+    "ready": "Listo",
+    "enterBattle": "Entrar al combate",
+    "opponentReady": "El oponente esta listo",
+    "myReady": "Estas listo"
+  },
+  "battle": {
+    "title": "Arena JcJ privada",
+    "loading": "Cargando combate…",
+    "phase": "Fase: {{phase}}",
+    "turn": "Turno {{turn}}",
+    "waitingOpponent": "Esperando al otro entrenador…",
+    "pendingAttack": "Ataque entrante: {{move}} — elige una defensa",
+    "basicStrike": "Golpe basico",
+    "backLobby": "Volver al lobby"
+  },
+  "log": {
+    "title": "Registro de combate",
+    "empty": "Esperando el primer intercambio…",
+    "started": "Combate iniciado.",
+    "attackStarted": "{{actor}} compromete {{move}}.",
+    "recoverSkip": "{{actor}} recupera {{stamina}} de stamina y salta el ataque.",
+    "defense": "Defensa: {{defense}}",
+    "miss": "El ataque fallo.",
+    "dodged": "Ataque esquivado.",
+    "blocked": "Bloqueado — {{damage}} de dano paso.",
+    "damage": "Dano {{damage}} (PS {{hpBefore}} → {{hpAfter}}).",
+    "fainted": "{{target}} se debilito.",
+    "finished": "Combate terminado.",
+    "resources": "Gasto PP {{pp}} / stamina {{stamina}}."
+  },
+  "result": {
+    "win": "Victoria!",
+    "loss": "Derrota",
+    "finished": "Combate completo",
+    "xp": "+{{xp}} XP"
   },
   "realtime": {
     "status": "Tiempo real: {{status}}"
@@ -32,6 +70,8 @@
   "errors": {
     "loadFailed": "No se pudieron cargar los lobbies privados.",
     "createFailed": "No se pudo crear la invitacion.",
-    "actionFailed": "No se pudo completar esa accion."
+    "actionFailed": "No se pudo completar esa accion.",
+    "loadBattle": "No se pudo cargar este combate JcJ.",
+    "stale": "El estado del combate cambio — actualizado."
   }
 }

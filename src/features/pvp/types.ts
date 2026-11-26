@@ -31,4 +31,7 @@ export type PvpRoom = {
   invitation: PvpInvitation | null
   allowed_actions: string[]
   phase_note: string
+  my_selection?: { owned_creature_id: number; locked: boolean } | null
+  selections_revealed?: Array<{ user_id: number; owned_creature_id: number; locked: boolean }> | null
+  battle_id?: string | null
 }

@@ -1,8 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { toUserFacingMessage } from '../../../shared/lib/api/userFacingError'
+import { fetchMyCreatures } from '../../collection/api/collection'
+import type { OwnedCreature } from '../../collection/types'
+import { CreatureImage } from '../../creatures/components/CreatureImage'
+import { readyPvpRoom, selectPvpCreature } from '../api/pvpBattles'
 import {
   acceptPvpInvitation,
   cancelPvpInvitation,
@@ -19,16 +24,20 @@ import type { PvpInvitation, PvpRoom } from '../types'
 
 export function PvpLobbyPage() {
   const { t } = useTranslation('pvp')
+  const navigate = useNavigate()
   const [handle, setHandle] = useState('')
   const [received, setReceived] = useState<PvpInvitation[]>([])
   const [sent, setSent] = useState<PvpInvitation[]>([])
   const [room, setRoom] = useState<PvpRoom | null>(null)
+  const [creatures, setCreatures] = useState<OwnedCreature[]>([])
+  const [selectedOwnedId, setSelectedOwnedId] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [realtimeStatus, setRealtimeStatus] = useState<'connecting' | 'ready' | 'closed' | 'error'>('connecting')
   const roomRef = useRef<PvpRoom | null>(null)
   const sessionRef = useRef<PvpRealtimeSession | null>(null)
+  const readyKeyRef = useRef<string | null>(null)
 
   useEffect(() => {
     roomRef.current = room
@@ -60,7 +69,11 @@ export function PvpLobbyPage() {
     let cancelled = false
     void (async () => {
       try {
-        await refresh()
+        const [owned] = await Promise.all([fetchMyCreatures(), refresh()])
+        if (!cancelled) {
+          setCreatures(owned)
+          setSelectedOwnedId(owned.find((c) => c.is_active)?.id ?? owned[0]?.id ?? null)
+        }
       } catch (err) {
         if (!cancelled) {
           setError(toUserFacingMessage(err, t('errors.loadFailed')))
@@ -93,9 +106,14 @@ export function PvpLobbyPage() {
               await refresh()
               return
             }
-            if (hint.type === 'pvp.room.changed' && hint.roomId) {
+            if ((hint.type === 'pvp.room.changed' || hint.type === 'pvp.battle.changed') && hint.roomId) {
               const current = roomRef.current
-              if (current && hint.version !== undefined && hint.version <= current.version) {
+              if (
+                hint.type === 'pvp.room.changed' &&
+                current &&
+                hint.version !== undefined &&
+                hint.version <= current.version
+              ) {
                 return
               }
               await rehydrateRoom(hint.roomId)
@@ -211,6 +229,47 @@ export function PvpLobbyPage() {
     }
   }
 
+  async function onSelectCreature(ownedId: number) {
+    if (!room || busy) return
+    setBusy(true)
+    setError('')
+    setSelectedOwnedId(ownedId)
+    try {
+      const next = await selectPvpCreature(room.id, {
+        owned_creature_id: ownedId,
+        expected_room_version: room.version,
+      })
+      await rehydrateRoom(next.id)
+    } catch (err) {
+      setError(toUserFacingMessage(err, t('errors.actionFailed')))
+      await rehydrateRoom(room.id)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function onReady() {
+    if (!room || busy) return
+    setBusy(true)
+    setError('')
+    const key = readyKeyRef.current ?? `pvp-ready-${room.id}`
+    readyKeyRef.current = key
+    try {
+      const next = await readyPvpRoom(room.id, { expected_room_version: room.version }, key)
+      readyKeyRef.current = null
+      await rehydrateRoom(next.id)
+      const battleId = next.battle_id ?? next.battle?.id
+      if (battleId) {
+        navigate(`/pvp/battles/${encodeURIComponent(battleId)}`)
+      }
+    } catch (err) {
+      setError(toUserFacingMessage(err, t('errors.actionFailed')))
+      await rehydrateRoom(room.id)
+    } finally {
+      setBusy(false)
+    }
+  }
+
   if (loading) {
     return <PageLoading label={t('loading')} />
   }
@@ -286,6 +345,7 @@ export function PvpLobbyPage() {
           <p className="mt-2 text-sm text-arena-300">
             {t('lobby.status', { status: room.status })} · v{room.version}
           </p>
+          <p className="mt-1 text-xs text-arena-400">{room.phase_note}</p>
           <ul className="mt-4 space-y-2">
             {room.members.map((member) => (
               <li key={`${member.user_id}-${member.role}`} className="text-arena-100">
@@ -294,12 +354,73 @@ export function PvpLobbyPage() {
               </li>
             ))}
           </ul>
+
+          {room.status === 'ready' || room.status === 'in_battle' ? (
+            <div className="mt-6">
+              <h3 className="text-sm font-semibold uppercase tracking-wide text-arena-200">{t('lobby.selectCreature')}</h3>
+              {room.my_selection?.locked ? (
+                <p className="mt-2 text-sm text-signal-ok">{t('lobby.locked')}</p>
+              ) : (
+                <ul className="mt-3 grid list-none gap-2 p-0">
+                  {creatures.map((owned) => (
+                    <li key={owned.id}>
+                      <button
+                        type="button"
+                        disabled={busy || Boolean(room.my_selection?.locked)}
+                        onClick={() => void onSelectCreature(owned.id)}
+                        className={`flex w-full items-center gap-3 rounded-xl border px-3 py-2 text-left ${
+                          (selectedOwnedId ?? room.my_selection?.owned_creature_id) === owned.id
+                            ? 'border-ember bg-ember/10'
+                            : 'border-border bg-surface/40'
+                        }`}
+                      >
+                        <CreatureImage
+                          src={owned.creature.image_url ?? owned.creature.image_ref}
+                          alt={owned.creature.name}
+                          className="aspect-square w-14 shrink-0"
+                        />
+                        <span className="text-white">{owned.creature.name}</span>
+                        <span className="text-xs text-arena-400">Lv {owned.level}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <div className="mt-3 flex flex-wrap gap-2 text-xs text-arena-300">
+                {room.my_selection?.locked ? <span>{t('lobby.myReady')}</span> : null}
+                {room.selections_revealed && room.selections_revealed.length >= 2 ? (
+                  <span>{t('lobby.opponentReady')}</span>
+                ) : room.my_selection?.locked ? (
+                  <span>{t('lobby.waitingReady')}</span>
+                ) : null}
+              </div>
+            </div>
+          ) : null}
+
           <div className="mt-4 flex flex-wrap gap-3">
             <button type="button" className="rounded border border-border px-3 py-2 text-sm" onClick={() => void onRefreshRoom()} disabled={busy}>
               {t('actions.refresh')}
             </button>
+            {room.allowed_actions.includes('ready') ? (
+              <button
+                type="button"
+                className="rounded bg-ember px-3 py-2 text-sm font-semibold text-black disabled:opacity-50"
+                onClick={() => void onReady()}
+                disabled={busy || !room.my_selection}
+              >
+                {t('lobby.ready')}
+              </button>
+            ) : null}
+            {(room.battle_id || room.status === 'in_battle') && room.battle_id ? (
+              <Link
+                to={`/pvp/battles/${encodeURIComponent(room.battle_id)}`}
+                className="rounded bg-ember px-3 py-2 text-sm font-semibold text-black"
+              >
+                {t('lobby.enterBattle')}
+              </Link>
+            ) : null}
             {room.allowed_actions.includes('leave') ? (
-              <button type="button" className="rounded bg-ember px-3 py-2 text-sm font-semibold text-black" onClick={() => void onLeave()} disabled={busy}>
+              <button type="button" className="rounded border border-border px-3 py-2 text-sm" onClick={() => void onLeave()} disabled={busy}>
                 {t('actions.leave')}
               </button>
             ) : null}

@@ -1,13 +1,13 @@
 {
   "eyebrow": "Multijoueur prive",
   "title": "Salon JcJ",
-  "subtitle": "Invitez un dresseur par pseudo exact dans un salon prive.",
-  "phaseNote": "Salon prive pret — le combat arrive dans une phase ulterieure.",
+  "subtitle": "Invitez un dresseur par handle exact dans un salon prive.",
+  "phaseNote": "Choisissez une creature, verrouillez Pret, puis entrez dans le combat autoritatif.",
   "loading": "Chargement des salons prives…",
   "form": {
-    "handleLabel": "Pseudo du dresseur",
+    "handleLabel": "Handle du dresseur",
     "handlePlaceholder": "autredresseur",
-    "submit": "Envoyer une invitation"
+    "submit": "Envoyer l'invitation"
   },
   "inbox": {
     "received": "Invitations recues",
@@ -17,10 +17,48 @@
   },
   "lobby": {
     "title": "Salon actuel",
-    "status": "Statut : {{status}}"
+    "status": "Statut : {{status}}",
+    "selectCreature": "Choisissez votre creature",
+    "locked": "Selection verrouillee",
+    "waitingReady": "En attente de l'autre dresseur…",
+    "ready": "Pret",
+    "enterBattle": "Entrer dans le combat",
+    "opponentReady": "L'adversaire est pret",
+    "myReady": "Vous etes pret"
+  },
+  "battle": {
+    "title": "Arene JcJ privee",
+    "loading": "Chargement du combat…",
+    "phase": "Phase : {{phase}}",
+    "turn": "Tour {{turn}}",
+    "waitingOpponent": "En attente de l'autre dresseur…",
+    "pendingAttack": "Attaque entrante : {{move}} — choisissez une defense",
+    "basicStrike": "Frappe de base",
+    "backLobby": "Retour au salon"
+  },
+  "log": {
+    "title": "Journal de combat",
+    "empty": "En attente du premier echange…",
+    "started": "Combat commence.",
+    "attackStarted": "{{actor}} engage {{move}}.",
+    "recoverSkip": "{{actor}} recupere {{stamina}} d'endurance et passe l'attaque.",
+    "defense": "Defense : {{defense}}",
+    "miss": "L'attaque a rate.",
+    "dodged": "Attaque esquivee.",
+    "blocked": "Bloque — {{damage}} degats passes.",
+    "damage": "Degats {{damage}} (PV {{hpBefore}} → {{hpAfter}}).",
+    "fainted": "{{target}} est K.O.",
+    "finished": "Combat termine.",
+    "resources": "PP {{pp}} / endurance {{stamina}} depenses."
+  },
+  "result": {
+    "win": "Victoire !",
+    "loss": "Defaite",
+    "finished": "Combat termine",
+    "xp": "+{{xp}} XP"
   },
   "realtime": {
-    "status": "Temps réel : {{status}}"
+    "status": "Temps reel : {{status}}"
   },
   "actions": {
     "accept": "Accepter",
@@ -32,6 +70,8 @@
   "errors": {
     "loadFailed": "Impossible de charger les salons prives.",
     "createFailed": "Impossible de creer l'invitation.",
-    "actionFailed": "Impossible de terminer cette action."
+    "actionFailed": "Impossible de terminer cette action.",
+    "loadBattle": "Impossible de charger ce combat JcJ.",
+    "stale": "L'etat du combat a change — actualise."
   }
 }

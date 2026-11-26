@@ -82,6 +82,28 @@ describe('PvpRealtimeSession', () => {
     expect(hints).toHaveLength(1)
     expect(hints[0].type).toBe('pvp.room.changed')
 
+    const battleHint = {
+      v: 1,
+      type: 'pvp.battle.changed',
+      event_id: 'evt-battle-1',
+      sent_at: new Date().toISOString(),
+      payload: {
+        room_id: '11111111-1111-4111-8111-111111111111',
+        battle_id: '22222222-2222-4222-8222-222222222222',
+        version: 4,
+        last_event_sequence: 12,
+      },
+    }
+    sockets[0].emit(battleHint)
+    sockets[0].emit(battleHint)
+    expect(hints).toHaveLength(2)
+    expect(hints[1]).toMatchObject({
+      type: 'pvp.battle.changed',
+      battleId: '22222222-2222-4222-8222-222222222222',
+      version: 4,
+      lastEventSequence: 12,
+    })
+
     session.close()
   })
 })

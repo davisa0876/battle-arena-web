@@ -153,6 +153,10 @@ export class ApiClient {
     return this.request<TResponse>('POST', path, { body, signal })
   }
 
+  async put<TResponse>(path: string, body?: unknown, signal?: AbortSignal): Promise<TResponse> {
+    return this.request<TResponse>('PUT', path, { body, signal })
+  }
+
   async patch<TResponse>(path: string, body?: unknown, signal?: AbortSignal): Promise<TResponse> {
     return this.request<TResponse>('PATCH', path, { body, signal })
   }

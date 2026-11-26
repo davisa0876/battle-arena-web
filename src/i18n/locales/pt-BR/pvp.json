@@ -1,9 +1,9 @@
 {
   "eyebrow": "Multijogador privado",
   "title": "Lobby PvP",
-  "subtitle": "Convide um treinador pelo handle exato para uma lobby privada.",
-  "phaseNote": "Lobby privada pronta — o combate chega em uma fase posterior.",
-  "loading": "Carregando lobbies privadas…",
+  "subtitle": "Convide um treinador pelo handle exato para um lobby privado.",
+  "phaseNote": "Escolha uma criatura, confirme Pronto e entre na batalha autoritativa.",
+  "loading": "Carregando lobbies privados…",
   "form": {
     "handleLabel": "Handle do treinador",
     "handlePlaceholder": "outrotreinador",
@@ -17,7 +17,45 @@
   },
   "lobby": {
     "title": "Lobby atual",
-    "status": "Status: {{status}}"
+    "status": "Status: {{status}}",
+    "selectCreature": "Escolha sua criatura",
+    "locked": "Selecao bloqueada",
+    "waitingReady": "Aguardando o outro treinador…",
+    "ready": "Pronto",
+    "enterBattle": "Entrar na batalha",
+    "opponentReady": "Oponente esta pronto",
+    "myReady": "Voce esta pronto"
+  },
+  "battle": {
+    "title": "Arena PvP privada",
+    "loading": "Carregando batalha…",
+    "phase": "Fase: {{phase}}",
+    "turn": "Turno {{turn}}",
+    "waitingOpponent": "Aguardando o outro treinador…",
+    "pendingAttack": "Ataque recebido: {{move}} — escolha uma defesa",
+    "basicStrike": "Golpe basico",
+    "backLobby": "Voltar ao lobby"
+  },
+  "log": {
+    "title": "Log de combate",
+    "empty": "Aguardando a primeira troca…",
+    "started": "Batalha iniciada.",
+    "attackStarted": "{{actor}} compromete {{move}}.",
+    "recoverSkip": "{{actor}} recupera {{stamina}} de stamina e pula o ataque.",
+    "defense": "Defesa: {{defense}}",
+    "miss": "O ataque errou.",
+    "dodged": "Ataque esquivado.",
+    "blocked": "Bloqueado — {{damage}} de dano passou.",
+    "damage": "Dano {{damage}} (HP {{hpBefore}} → {{hpAfter}}).",
+    "fainted": "{{target}} desmaiou.",
+    "finished": "Batalha encerrada.",
+    "resources": "Gastou PP {{pp}} / stamina {{stamina}}."
+  },
+  "result": {
+    "win": "Vitoria!",
+    "loss": "Derrota",
+    "finished": "Batalha completa",
+    "xp": "+{{xp}} XP"
   },
   "realtime": {
     "status": "Tempo real: {{status}}"
@@ -26,12 +64,14 @@
     "accept": "Aceitar",
     "decline": "Recusar",
     "cancel": "Cancelar",
-    "leave": "Sair da lobby",
+    "leave": "Sair do lobby",
     "refresh": "Atualizar"
   },
   "errors": {
-    "loadFailed": "Nao foi possivel carregar as lobbies privadas.",
+    "loadFailed": "Nao foi possivel carregar os lobbies privados.",
     "createFailed": "Nao foi possivel criar o convite.",
-    "actionFailed": "Nao foi possivel concluir essa acao."
+    "actionFailed": "Nao foi possivel concluir essa acao.",
+    "loadBattle": "Nao foi possivel carregar esta batalha PvP.",
+    "stale": "O estado da batalha mudou — atualizado."
   }
 }

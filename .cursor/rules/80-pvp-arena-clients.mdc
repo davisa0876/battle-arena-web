@@ -1,0 +1,15 @@
+---
+description: Phase 5B.3 private PvP arena client rules (Web)
+globs: "{src/features/pvp/**/*.{ts,tsx}}"
+alwaysApply: false
+---
+
+# PvP Arena Clients (Web)
+
+- Laravel REST is the only combat authority. `pvp.battle.changed` is a versioned hint — always rehydrate via GET battle/events.
+- Drive attack/defense docks from `allowed_actions` + server `can_use`; never invent recover-skip/basic-strike eligibility.
+- Reuse one `PvpRealtimeSession` for lobby + battle; fresh ticket/grant on reconnect. No combat commands over WebSockets.
+- Mutations need `expected_version` and a stable Idempotency-Key for the same logical retry. On 409, rehydrate; do not auto-resubmit.
+- Refresh, tab hide, and navigation must never abandon/forfeit an active PvP battle (5B.4 owns forfeit/timeout).
+- Outcome/XP come from server `outcome` + `rewards` only. Do not hardcode +20/+10 in UI math beyond display of server values.
+- Keep `features.pvp` release gating on the backend; clients may preview under auth without bypassing ACL.

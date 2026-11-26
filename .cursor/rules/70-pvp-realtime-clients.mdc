@@ -4,10 +4,11 @@ globs: "{src/features/pvp/**/*.{ts,tsx}}"
 alwaysApply: false
 ---
 
-# PvP Lobby Clients (Web)
+# PvP Lobby + Realtime Clients (Web)
 
 - Treat REST as the source of truth. Websocket frames are versioned hints only; always rehydrate.
 - Authenticate sockets with Laravel tickets only. Never put Sanctum cookies/tokens in WS URLs beyond the one-time ticket query.
 - Subscribe to rooms only after redeeming a Laravel subscription grant. Do not send client-chosen `player_id` as authority.
 - Deduplicate by `event_id` and ignore stale `version` payloads.
-- No fake combat UI, XP banners, or simulated attacks in Phase 5B.1.
+- Also handle `pvp.battle.changed` as a hint (room/battle IDs + version/sequence only).
+- Combat UI belongs to Phase 5B.3 REST-driven arena screens — never invent damage/XP locally.

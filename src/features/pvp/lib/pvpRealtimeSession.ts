@@ -1,4 +1,12 @@
-type HintHandler = (hint: { type: string; eventId: string; roomId?: string; invitationId?: string; version?: number }) => void
+type HintHandler = (hint: {
+  type: string
+  eventId: string
+  roomId?: string
+  invitationId?: string
+  battleId?: string
+  version?: number
+  lastEventSequence?: number
+}) => void
 
 type SessionOptions = {
   onHint: HintHandler
@@ -160,6 +168,19 @@ export class PvpRealtimeSession {
         type,
         eventId,
         invitationId: typeof payload.invitation_id === 'string' ? payload.invitation_id : undefined,
+      })
+      return
+    }
+
+    if (type === 'pvp.battle.changed') {
+      this.options.onHint({
+        type,
+        eventId,
+        roomId: typeof payload.room_id === 'string' ? payload.room_id : undefined,
+        battleId: typeof payload.battle_id === 'string' ? payload.battle_id : undefined,
+        version: typeof payload.version === 'number' ? payload.version : undefined,
+        lastEventSequence:
+          typeof payload.last_event_sequence === 'number' ? payload.last_event_sequence : undefined,
       })
     }
   }

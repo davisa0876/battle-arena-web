@@ -12,8 +12,15 @@ React frontend for Battle Arena. The redesign keeps the existing React Router ro
 
 ## Requirements
 
-- Node.js 22+
+- Node.js 22+ (Compose `web` service preferred for tests/typecheck)
 - Battle Arena API with migrated + imported catalog data
+
+## Phase 5B.3 — Private PvP arena
+
+- Lobby (`/pvp`): owned-creature selection, Ready lock, Enter Battle when `battle_id` exists
+- Arena (`/pvp/battles/:battleId`): REST attack/defend, viewer-relative HUD/log, WS `pvp.battle.changed` hints only
+- Smoke: `../battle-arena-api/docs/PHASE5B3_TWO_CLIENT_UI_SMOKE.md`
+- `features.pvp` stays false until Phase 5B.4
 
 ## Local setup
 

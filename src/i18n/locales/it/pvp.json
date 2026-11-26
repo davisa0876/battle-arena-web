@@ -2,11 +2,11 @@
   "eyebrow": "Multigiocatore privato",
   "title": "Lobby PvP",
   "subtitle": "Invita un allenatore con handle esatto in una lobby privata.",
-  "phaseNote": "Lobby privata pronta — la battaglia arriva in una fase successiva.",
+  "phaseNote": "Scegli una creatura, blocca Pronto, poi entra nella battaglia autorevole.",
   "loading": "Caricamento lobby private…",
   "form": {
     "handleLabel": "Handle allenatore",
-    "handlePlaceholder": "altrolallenatore",
+    "handlePlaceholder": "altrodallenatore",
     "submit": "Invia invito"
   },
   "inbox": {
@@ -17,7 +17,45 @@
   },
   "lobby": {
     "title": "Lobby attuale",
-    "status": "Stato: {{status}}"
+    "status": "Stato: {{status}}",
+    "selectCreature": "Scegli la tua creatura",
+    "locked": "Selezione bloccata",
+    "waitingReady": "In attesa dell'altro allenatore…",
+    "ready": "Pronto",
+    "enterBattle": "Entra in battaglia",
+    "opponentReady": "L'avversario e pronto",
+    "myReady": "Sei pronto"
+  },
+  "battle": {
+    "title": "Arena PvP privata",
+    "loading": "Caricamento battaglia…",
+    "phase": "Fase: {{phase}}",
+    "turn": "Turno {{turn}}",
+    "waitingOpponent": "In attesa dell'altro allenatore…",
+    "pendingAttack": "Attacco in arrivo: {{move}} — scegli una difesa",
+    "basicStrike": "Colpo base",
+    "backLobby": "Torna alla lobby"
+  },
+  "log": {
+    "title": "Diario di combattimento",
+    "empty": "In attesa del primo scambio…",
+    "started": "Battaglia iniziata.",
+    "attackStarted": "{{actor}} impegna {{move}}.",
+    "recoverSkip": "{{actor}} recupera {{stamina}} stamina e salta l'attacco.",
+    "defense": "Difesa: {{defense}}",
+    "miss": "L'attacco ha mancato.",
+    "dodged": "Attacco schivato.",
+    "blocked": "Bloccato — {{damage}} danni passati.",
+    "damage": "Danno {{damage}} (PS {{hpBefore}} → {{hpAfter}}).",
+    "fainted": "{{target}} e KO.",
+    "finished": "Battaglia terminata.",
+    "resources": "Spesi PP {{pp}} / stamina {{stamina}}."
+  },
+  "result": {
+    "win": "Vittoria!",
+    "loss": "Sconfitta",
+    "finished": "Battaglia completa",
+    "xp": "+{{xp}} XP"
   },
   "realtime": {
     "status": "Realtime: {{status}}"
@@ -32,6 +70,8 @@
   "errors": {
     "loadFailed": "Impossibile caricare le lobby private.",
     "createFailed": "Impossibile creare l'invito.",
-    "actionFailed": "Impossibile completare l'azione."
+    "actionFailed": "Impossibile completare l'azione.",
+    "loadBattle": "Impossibile caricare questa battaglia PvP.",
+    "stale": "Lo stato della battaglia e cambiato — aggiornato."
   }
 }
