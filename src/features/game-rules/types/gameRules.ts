@@ -34,9 +34,17 @@ export interface BattleReward {
   loss: number
 }
 
+export interface PvpOnlinePresenceRules {
+  while_authenticated: boolean
+  requires_pvp_min_level: boolean
+  /** When false, trainers appear online on any screen — not only `/pvp`. */
+  requires_pvp_screen: boolean
+}
+
 export interface BattleRules {
   pve_min_trainer_level: number | null
   pvp_min_trainer_level: number | null
+  pvp_online_presence: PvpOnlinePresenceRules | null
   /** Trainer XP rewards per mode. Null when the API did not publish the mode. */
   rewards: {
     pve: BattleReward | null

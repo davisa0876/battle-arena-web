@@ -1,12 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '../../auth'
 import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { toUserFacingMessage } from '../../../shared/lib/api/userFacingError'
 import { fetchMyCreatures } from '../../collection/api/collection'
 import type { OwnedCreature } from '../../collection/types'
 import { CreatureImage } from '../../creatures/components/CreatureImage'
+import { XpProgressBar } from '../../profile/components/XpProgressBar'
+import { PvpRecordSummary } from '../components/PvpRecordSummary'
 import { readyPvpRoom, selectPvpCreature } from '../api/pvpBattles'
 import {
   acceptPvpInvitation,
@@ -18,14 +21,23 @@ import {
   issueRealtimeTicket,
   leavePvpRoom,
   listPvpInvitations,
+  listPvpOnlineOpponents,
 } from '../api/pvpLobbies'
+import { findReadyLobbyRoomId } from '../lib/findReadyLobbyRoomId'
 import { PvpRealtimeSession } from '../lib/pvpRealtimeSession'
-import type { PvpInvitation, PvpRoom } from '../types'
+import type { PvpInvitation, PvpOnlineOpponent, PvpRoom } from '../types'
+
+type InviteMode = 'handle' | 'online'
 
 export function PvpLobbyPage() {
   const { t } = useTranslation('pvp')
+  const { user, refreshMe } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const [handle, setHandle] = useState('')
+  const [inviteMode, setInviteMode] = useState<InviteMode>('handle')
+  const [online, setOnline] = useState<PvpOnlineOpponent[]>([])
+  const [onlineLoading, setOnlineLoading] = useState(false)
   const [received, setReceived] = useState<PvpInvitation[]>([])
   const [sent, setSent] = useState<PvpInvitation[]>([])
   const [room, setRoom] = useState<PvpRoom | null>(null)
@@ -53,6 +65,28 @@ export function PvpLobbyPage() {
     setSent(outbox)
   }, [])
 
+  const refreshOnline = useCallback(async () => {
+    setOnlineLoading(true)
+    try {
+      setOnline(await listPvpOnlineOpponents())
+    } catch (err) {
+      setError(toUserFacingMessage(err, t('errors.loadFailed')))
+    } finally {
+      setOnlineLoading(false)
+    }
+  }, [t])
+
+  useEffect(() => {
+    if (inviteMode !== 'online') {
+      return
+    }
+    void refreshOnline()
+    const timer = window.setInterval(() => {
+      void refreshOnline()
+    }, 15_000)
+    return () => window.clearInterval(timer)
+  }, [inviteMode, refreshOnline])
+
   const rehydrateRoom = useCallback(async (roomId: string) => {
     try {
       const next = await fetchPvpRoom(roomId)
@@ -69,7 +103,7 @@ export function PvpLobbyPage() {
     let cancelled = false
     void (async () => {
       try {
-        const [owned] = await Promise.all([fetchMyCreatures(), refresh()])
+        const [owned] = await Promise.all([fetchMyCreatures(), refresh(), refreshMe().catch(() => null)])
         if (!cancelled) {
           setCreatures(owned)
           setSelectedOwnedId(owned.find((c) => c.is_active)?.id ?? owned[0]?.id ?? null)
@@ -87,7 +121,7 @@ export function PvpLobbyPage() {
     return () => {
       cancelled = true
     }
-  }, [refresh, t])
+  }, [refresh, refreshMe, t])
 
   useEffect(() => {
     const session = new PvpRealtimeSession({
@@ -98,7 +132,16 @@ export function PvpLobbyPage() {
         void (async () => {
           try {
             if (hint.type === 'pvp.invitation.changed') {
-              await refresh()
+              const [inbox, outbox] = await Promise.all([
+                listPvpInvitations('received'),
+                listPvpInvitations('sent'),
+              ])
+              setReceived(inbox)
+              setSent(outbox)
+              const accepted = outbox.find((item) => item.status === 'accepted' && item.room_id)
+              if (accepted?.room_id) {
+                await rehydrateRoom(accepted.room_id)
+              }
               return
             }
             if (hint.type === 'room.subscription.revoked') {
@@ -144,20 +187,57 @@ export function PvpLobbyPage() {
     })
   }, [room, realtimeStatus])
 
-  async function onCreate(event: FormEvent) {
-    event.preventDefault()
+  // Banner / accept flow can land here with a ready room to pick creatures.
+  useEffect(() => {
+    const state = location.state as { focusRoomId?: string; fromInviteAccept?: boolean } | null
+    const focusRoomId = state?.focusRoomId
+    if (!focusRoomId) {
+      return
+    }
+    void (async () => {
+      await rehydrateRoom(focusRoomId)
+      if (state?.fromInviteAccept) {
+        window.requestAnimationFrame(() => {
+          document.getElementById('pvp-creature-select')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        })
+      }
+    })()
+  }, [location.state, rehydrateRoom])
+
+  // Fallback: if we arrived on /pvp without navigation state (e.g. Open lobby),
+  // still surface an accepted ready room for creature select.
+  useEffect(() => {
+    if (loading || room) {
+      return
+    }
+    const readyRoomId = findReadyLobbyRoomId(received, sent)
+    if (!readyRoomId) {
+      return
+    }
+    void rehydrateRoom(readyRoomId)
+  }, [loading, room, received, sent, rehydrateRoom])
+
+  async function inviteByHandle(rawHandle: string) {
     setBusy(true)
     setError('')
     try {
-      const result = await createPvpRoom(handle.trim())
+      const result = await createPvpRoom(rawHandle.trim())
       setRoom(result.room)
       setHandle('')
       await refresh()
+      if (inviteMode === 'online') {
+        await refreshOnline()
+      }
     } catch (err) {
       setError(toUserFacingMessage(err, t('errors.createFailed')))
     } finally {
       setBusy(false)
     }
+  }
+
+  async function onCreate(event: FormEvent) {
+    event.preventDefault()
+    await inviteByHandle(handle)
   }
 
   async function onAccept(id: string) {
@@ -286,35 +366,123 @@ export function PvpLobbyPage() {
         {t('realtime.status', { status: realtimeStatus })}
       </p>
 
+      {user?.progress ? (
+        <div className="mt-6 rounded-[20px] border border-border bg-surface/70 p-4">
+          <XpProgressBar progress={user.progress} />
+        </div>
+      ) : null}
+      <div className="mt-4">
+        <PvpRecordSummary record={user?.pvp_record ?? null} />
+      </div>
+
       {error ? (
         <p className="mt-6 rounded border border-ember/40 bg-ember/10 px-4 py-3 text-sm text-ember" role="alert">
           {error}
         </p>
       ) : null}
 
-      <form onSubmit={onCreate} className="mt-8 space-y-3">
-        <label className="block text-sm text-arena-200" htmlFor="invitee-handle">
-          {t('form.handleLabel')}
-        </label>
-        <input
-          id="invitee-handle"
-          value={handle}
-          onChange={(e) => setHandle(e.target.value)}
-          className="w-full rounded border border-border bg-surface px-3 py-2 text-white"
-          placeholder={t('form.handlePlaceholder')}
-          minLength={3}
-          maxLength={24}
-          required
-          disabled={busy}
-        />
-        <button
-          type="submit"
-          disabled={busy || handle.trim().length < 3}
-          className="rounded bg-ember px-4 py-2 font-semibold text-black disabled:opacity-50"
-        >
-          {t('form.submit')}
-        </button>
-      </form>
+      <div className="mt-8 space-y-3">
+        <div className="flex flex-wrap gap-2" role="tablist" aria-label="Invite mode">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={inviteMode === 'handle'}
+            disabled={busy}
+            onClick={() => setInviteMode('handle')}
+            className={`rounded px-4 py-2 font-semibold ${
+              inviteMode === 'handle'
+                ? 'bg-ember text-black'
+                : 'border border-border text-arena-200'
+            }`}
+          >
+            {t('matchmaking.inviteByHandle')}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={inviteMode === 'online'}
+            disabled={busy}
+            onClick={() => setInviteMode('online')}
+            className={`rounded px-4 py-2 font-semibold ${
+              inviteMode === 'online'
+                ? 'bg-ember text-black'
+                : 'border border-border text-arena-200'
+            }`}
+          >
+            {t('matchmaking.findOnline')}
+          </button>
+        </div>
+
+        {inviteMode === 'handle' ? (
+          <form onSubmit={onCreate} className="space-y-3">
+            <label className="block text-sm text-arena-200" htmlFor="invitee-handle">
+              {t('form.handleLabel')}
+            </label>
+            <input
+              id="invitee-handle"
+              value={handle}
+              onChange={(e) => setHandle(e.target.value)}
+              className="w-full rounded border border-border bg-surface px-3 py-2 text-white"
+              placeholder={t('form.handlePlaceholder')}
+              minLength={3}
+              maxLength={24}
+              required
+              disabled={busy}
+            />
+            <button
+              type="submit"
+              disabled={busy || handle.trim().length < 3}
+              className="rounded bg-ember px-4 py-2 font-semibold text-black disabled:opacity-50"
+            >
+              {t('form.submit')}
+            </button>
+          </form>
+        ) : (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-display text-lg text-white">{t('matchmaking.onlineTitle')}</h2>
+              <button
+                type="button"
+                disabled={busy || onlineLoading}
+                onClick={() => void refreshOnline()}
+                className="rounded border border-border px-3 py-1.5 text-sm font-semibold text-arena-200 disabled:opacity-50"
+              >
+                {t('matchmaking.refreshOnline')}
+              </button>
+            </div>
+            <p className="text-xs text-arena-400">{t('matchmaking.onlineHint')}</p>
+            {onlineLoading && online.length === 0 ? (
+              <p className="text-sm text-arena-400">{t('loading')}</p>
+            ) : null}
+            {online.length === 0 && !onlineLoading ? (
+              <p className="text-sm text-arena-400">{t('matchmaking.onlineEmpty')}</p>
+            ) : (
+              <ul className="grid list-none gap-2 p-0">
+                {online.map((opponent) => (
+                  <li key={opponent.id}>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => void inviteByHandle(opponent.handle)}
+                      className="flex w-full items-center justify-between rounded-2xl border border-border bg-surface/70 px-4 py-3 text-left disabled:opacity-50"
+                    >
+                      <span className="min-w-0">
+                        <span className="block font-semibold text-white">@{opponent.handle}</span>
+                        <span className="mt-0.5 block text-sm text-arena-300">
+                          {opponent.display_name ?? opponent.handle}
+                        </span>
+                      </span>
+                      <span className="shrink-0 text-sm font-bold text-ember">
+                        {t('matchmaking.onlineLevel', { level: opponent.level })}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
 
       <section className="mt-10">
         <h2 className="font-display text-xl text-white">{t('inbox.received')}</h2>
@@ -356,7 +524,7 @@ export function PvpLobbyPage() {
           </ul>
 
           {room.status === 'ready' || room.status === 'in_battle' ? (
-            <div className="mt-6">
+            <div className="mt-6" id="pvp-creature-select">
               <h3 className="text-sm font-semibold uppercase tracking-wide text-arena-200">{t('lobby.selectCreature')}</h3>
               {room.my_selection?.locked ? (
                 <p className="mt-2 text-sm text-signal-ok">{t('lobby.locked')}</p>

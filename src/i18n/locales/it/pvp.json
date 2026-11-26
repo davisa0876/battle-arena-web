@@ -85,5 +85,35 @@
     "actionFailed": "Impossibile completare l'azione.",
     "loadBattle": "Impossibile caricare questa battaglia PvP.",
     "stale": "Lo stato della battaglia e cambiato — aggiornato."
+  },
+  "record": {
+    "wins": "{{count}} vittorie",
+    "losses": "{{count}} sconfitte",
+    "forfeits": "{{count}} rese"
+  },
+  "matchmaking": {
+    "inviteByHandle": "Invia invito",
+    "findOnline": "Cerca avversario online",
+    "onlineTitle": "Avversari online",
+    "onlineEmpty": "Nessun avversario online. Gli allenatori idonei risultano online mentre sono autenticati su qualsiasi schermata — oppure invita per handle.",
+    "onlineHint": "Tocca un allenatore per inviare un invito privato.",
+    "onlineLevel": "Liv. {{level}}",
+    "refreshOnline": "Aggiorna"
+  },
+  "alert": {
+    "region": "Inviti PvP in arrivo",
+    "eyebrow": "Invito PvP",
+    "body": "@{{handle}} ti ha invitato in una lobby privata.",
+    "openLobby": "Apri lobby",
+    "acceptedEyebrow": "Invito accettato",
+    "acceptedBody": "@{{handle}} ha accettato il tuo invito privato.",
+    "nextStepInvitee": "Accetta da qualsiasi schermata: andrai alla lobby PvP a scegliere la creatura e poi Pronto.",
+    "nextStepHost": "Apri la lobby, scegli la creatura, blocca Pronto e entra in battaglia.",
+    "chooseCreatures": "Scegli creature",
+    "declinedEyebrow": "Invito rifiutato",
+    "declinedBody": "@{{handle}} ha rifiutato il tuo invito privato.",
+    "declinedNext": "Puoi invitare un altro allenatore.",
+    "sendAnother": "Invia un altro invito",
+    "dismiss": "Chiudi"
   }
 }

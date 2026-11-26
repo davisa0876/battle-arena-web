@@ -4,6 +4,8 @@ import logoHorizontal from '../../assets/brand/logo_horizontal.svg'
 import logoIcon from '../../assets/brand/logo_icon.svg'
 import { LanguageSelector } from '../../shared/components/layout/LanguageSelector'
 import { SystemStatus } from '../../shared/components/feedback/SystemStatus'
+import { PvpIncomingInviteBanner } from '../../features/pvp/components/PvpIncomingInviteBanner'
+import { PvpPresenceKeeper } from '../../features/pvp/components/PvpPresenceKeeper'
 import { DesktopAccountNav, DesktopPrimaryLinks } from './components/DesktopNav'
 import { MobileMenu } from './components/MobileMenu'
 
@@ -16,6 +18,8 @@ export function AppShell() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(39,201,236,0.13),transparent_30rem),radial-gradient(circle_at_82%_18%,rgba(255,101,66,0.12),transparent_24rem),linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-size-[auto,auto,48px_48px,48px_48px]"
         aria-hidden="true"
       />
+      <PvpPresenceKeeper />
+      <PvpIncomingInviteBanner />
       <div className="relative z-10 flex min-h-svh flex-col">
         <nav
           className="relative mx-auto flex w-[min(1180px,calc(100%-2rem))] items-center justify-between gap-4 py-5 max-sm:w-[min(1180px,calc(100%-1.25rem))]"

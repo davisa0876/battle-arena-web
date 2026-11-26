@@ -41,6 +41,8 @@
       "intro": "Los modos de combate se abren en niveles de entrenador distintos.",
       "pve": "El PvE (combates en solitario) se abre en el nivel de entrenador {{level}}.",
       "pvp": "El PvP (combates contra otros entrenadores) se abre en el nivel de entrenador {{level}}.",
+      "pvpOnlineAuthenticated": "Presencia online en PvP: si estas conectado y cumples el nivel de PvP, apareces online en cualquier pantalla — no hace falta quedarse en el lobby de PvP.",
+      "pvpOnlineLobbyOnly": "Presencia online en PvP: solo apareces online mientras la pantalla del lobby de PvP este abierta.",
       "unknown": "El servidor no publicó este requisito.",
       "notPlayable": "Los combates aún no son jugables. Estos niveles describen el acceso futuro.",
       "playable": "Los combates son jugables."

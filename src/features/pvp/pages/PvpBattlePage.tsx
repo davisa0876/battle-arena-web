@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { PageLoading } from '../../../shared/components/feedback/PageLoading'
 import { ApiError } from '../../../shared/lib/api/client'
@@ -57,6 +57,7 @@ function toBattlefieldCombatant(c: NonNullable<PvpBattle['me']>, withMoves: bool
 export function PvpBattlePage() {
   const { battleId = '' } = useParams()
   const { t } = useTranslation('pvp')
+  const navigate = useNavigate()
   const [battle, setBattle] = useState<PvpBattle | null>(null)
   const [events, setEvents] = useState<PvpBattleEvent[]>([])
   const [loading, setLoading] = useState(true)
@@ -243,9 +244,13 @@ export function PvpBattlePage() {
         <p className="text-signal-bad" role="alert">
           {error || t('errors.loadBattle')}
         </p>
-        <Link to="/pvp" className="mt-4 inline-block text-ember">
+        <button
+          type="button"
+          className="mt-4 inline-block text-ember"
+          onClick={() => navigate('/pvp', { state: { checkInvitesAfterBattle: true } })}
+        >
           {t('battle.backLobby')}
-        </Link>
+        </button>
       </div>
     )
   }
@@ -301,9 +306,13 @@ export function PvpBattlePage() {
               {t('battle.forfeit')}
             </button>
           ) : null}
-          <Link to="/pvp" className="rounded border border-border px-3 py-2 text-sm text-white">
+          <button
+            type="button"
+            className="rounded border border-border px-3 py-2 text-sm text-white"
+            onClick={() => navigate('/pvp', { state: { checkInvitesAfterBattle: true } })}
+          >
             {t('battle.backLobby')}
-          </Link>
+          </button>
         </div>
       </header>
 
@@ -409,9 +418,13 @@ export function PvpBattlePage() {
             </p>
           ) : null}
           {typeof xp === 'number' ? <p className="mt-2 text-amber-300">{t('result.xp', { xp })}</p> : null}
-          <Link to="/pvp" className="mt-4 inline-block rounded bg-ember px-4 py-2 font-semibold text-black">
+          <button
+            type="button"
+            className="mt-4 inline-block rounded bg-ember px-4 py-2 font-semibold text-black"
+            onClick={() => navigate('/pvp', { state: { checkInvitesAfterBattle: true } })}
+          >
             {t('battle.backLobby')}
-          </Link>
+          </button>
         </section>
       ) : attacking ? (
         <MoveSelectionPanel

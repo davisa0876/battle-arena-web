@@ -41,6 +41,8 @@
       "intro": "Les modes de combat s'ouvrent à des niveaux de dresseur différents.",
       "pve": "Le PvE (combats solo) s'ouvre au niveau de dresseur {{level}}.",
       "pvp": "Le PvP (combats contre d'autres dresseurs) s'ouvre au niveau de dresseur {{level}}.",
+      "pvpOnlineAuthenticated": "Presence online PvP : connecte et au niveau PvP requis, vous apparaissez en ligne sur n'importe quel ecran — pas besoin de rester sur le lobby PvP.",
+      "pvpOnlineLobbyOnly": "Presence online PvP : vous n'apparaissez en ligne que lorsque l'ecran du lobby PvP est ouvert.",
       "unknown": "Le serveur n'a pas publié cette condition.",
       "notPlayable": "Les combats ne sont pas encore jouables. Ces niveaux décrivent l'accès futur.",
       "playable": "Les combats sont jouables."

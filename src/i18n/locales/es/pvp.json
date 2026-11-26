@@ -85,5 +85,35 @@
     "actionFailed": "No se pudo completar esa accion.",
     "loadBattle": "No se pudo cargar este combate JcJ.",
     "stale": "El estado del combate cambio — actualizado."
+  },
+  "record": {
+    "wins": "{{count}} victorias",
+    "losses": "{{count}} derrotas",
+    "forfeits": "{{count}} rendiciones"
+  },
+  "matchmaking": {
+    "inviteByHandle": "Enviar invitacion",
+    "findOnline": "Buscar oponente en linea",
+    "onlineTitle": "Oponentes en linea",
+    "onlineEmpty": "No hay oponentes en linea. Los entrenadores elegibles aparecen online mientras esten conectados en cualquier pantalla — o invita por handle.",
+    "onlineHint": "Toca un entrenador para enviar una invitacion privada.",
+    "onlineLevel": "Nv. {{level}}",
+    "refreshOnline": "Actualizar"
+  },
+  "alert": {
+    "region": "Invitaciones JcJ entrantes",
+    "eyebrow": "Invitacion JcJ",
+    "body": "@{{handle}} te invito a un lobby privado.",
+    "openLobby": "Abrir lobby",
+    "acceptedEyebrow": "Invitacion aceptada",
+    "acceptedBody": "@{{handle}} acepto tu invitacion privada.",
+    "nextStepInvitee": "Acepta desde cualquier pantalla: iras al lobby PvP a elegir criatura y luego bloquear Listo.",
+    "nextStepHost": "Abre el lobby, elige criatura, bloquea Listo y entra a la batalla.",
+    "chooseCreatures": "Elegir criaturas",
+    "declinedEyebrow": "Invitacion rechazada",
+    "declinedBody": "@{{handle}} rechazo tu invitacion privada.",
+    "declinedNext": "Puedes invitar a otro entrenador.",
+    "sendAnother": "Enviar otra invitacion",
+    "dismiss": "Cerrar"
   }
 }

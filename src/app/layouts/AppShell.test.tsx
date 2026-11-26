@@ -10,6 +10,14 @@ vi.mock('../../shared/components/feedback/SystemStatus', () => ({
   SystemStatus: () => <div data-testid="system-status" />,
 }))
 
+vi.mock('../../features/pvp/components/PvpIncomingInviteBanner', () => ({
+  PvpIncomingInviteBanner: () => null,
+}))
+
+vi.mock('../../features/pvp/components/PvpPresenceKeeper', () => ({
+  PvpPresenceKeeper: () => null,
+}))
+
 function renderShell(auth = makeAuthValue(), route = '/') {
   return renderWithAuth(
     <Routes>

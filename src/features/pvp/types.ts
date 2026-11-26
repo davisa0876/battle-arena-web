@@ -5,6 +5,14 @@ export type PublicPlayer = {
   avatar_url: string | null
 }
 
+export type PvpOnlineOpponent = {
+  id: number
+  handle: string
+  display_name: string | null
+  avatar_url: string | null
+  level: number
+}
+
 export type PvpInvitation = {
   id: string
   room_id: string

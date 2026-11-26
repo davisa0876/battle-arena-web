@@ -17,6 +17,8 @@ import {
   submitPveDefense,
 } from '../api/pveBattles'
 import { fetchMe } from '../../auth/api/auth'
+import { XpProgressBar } from '../../profile/components/XpProgressBar'
+import type { TrainerProgress } from '../../profile/types'
 import { BattleAudioControls } from '../components/BattleAudioControls'
 import { Battlefield } from '../components/Battlefield'
 import { CombatExchangeLog } from '../components/CombatExchangeLog'
@@ -27,7 +29,13 @@ import { initialIntroState, runBattleIntro, type BattleIntroState } from '../lib
 import type { PveBattle, PveRecord } from '../types/battle'
 
 type Screen =
-  | { status: 'pick'; creatures: OwnedCreature[]; selectedId: number | null; record: PveRecord | null }
+  | {
+      status: 'pick'
+      creatures: OwnedCreature[]
+      selectedId: number | null
+      record: PveRecord | null
+      progress: TrainerProgress | null
+    }
   | { status: 'loading' }
   | { status: 'ready'; battle: PveBattle; busy: boolean; error: string | null; playIntro: boolean }
   | { status: 'error'; message: string }
@@ -49,6 +57,7 @@ export function PveBattlePage() {
         creatures,
         selectedId: creatures.find((c) => c.is_active)?.id ?? creatures[0]?.id ?? null,
         record: me?.pve_record ?? null,
+        progress: me?.progress ?? null,
       })
     } catch (error) {
       setScreen({
@@ -242,6 +251,11 @@ export function PveBattlePage() {
         <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-ember">{t('eyebrow')}</p>
         <h1 className="mt-2 font-display text-4xl font-semibold text-white">{t('title')}</h1>
         <p className="mt-3 text-arena-300/80">{t('pickDescription')}</p>
+        {screen.progress ? (
+          <div className="mt-4 rounded-[20px] border border-border bg-surface/70 p-4">
+            <XpProgressBar progress={screen.progress} />
+          </div>
+        ) : null}
         <div className="mt-4">
           <PveRecordSummary record={screen.record} />
         </div>

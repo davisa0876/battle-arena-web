@@ -41,6 +41,12 @@ export interface PveRecord {
   give_ups: number
 }
 
+export interface PvpRecord {
+  wins: number
+  losses: number
+  forfeits: number
+}
+
 export interface AuthUser {
   id: number
   email: string
@@ -49,6 +55,8 @@ export interface AuthUser {
   progress: TrainerProgress
   /** Career PvE totals; present on /api/me for the signed-in trainer. */
   pve_record?: PveRecord
+  /** Career private PvP totals; present on /api/me for the signed-in trainer. */
+  pvp_record?: PvpRecord
 }
 
 /** What anyone can see about another trainer. */

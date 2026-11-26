@@ -54,6 +54,7 @@ export function makeRules(overrides: Partial<GameRules> = {}): GameRules {
     battle: {
       pve_min_trainer_level: null,
       pvp_min_trainer_level: null,
+      pvp_online_presence: null,
       rewards: { pve: null, pvp: null },
       playable: false,
     },

@@ -45,6 +45,11 @@ describe('normalizeGameRules', () => {
         battle: {
           pve_min_trainer_level: 1,
           pvp_min_trainer_level: 6,
+          pvp_online_presence: {
+            while_authenticated: true,
+            requires_pvp_min_level: true,
+            requires_pvp_screen: false,
+          },
           rewards: { pve: { win: 10, loss: 5 }, pvp: { win: 20, loss: 10 } },
           playable: false,
         },
@@ -83,6 +88,11 @@ describe('normalizeGameRules', () => {
       battle: {
         pve_min_trainer_level: 1,
         pvp_min_trainer_level: 6,
+        pvp_online_presence: {
+          while_authenticated: true,
+          requires_pvp_min_level: true,
+          requires_pvp_screen: false,
+        },
         rewards: { pve: { win: 10, loss: 5 }, pvp: { win: 20, loss: 10 } },
         playable: false,
       },
@@ -140,6 +150,7 @@ describe('normalizeGameRules', () => {
     expect(rules.battle).toEqual({
       pve_min_trainer_level: null,
       pvp_min_trainer_level: null,
+      pvp_online_presence: null,
       rewards: { pve: null, pvp: null },
       playable: false,
     })

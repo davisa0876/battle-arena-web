@@ -113,7 +113,17 @@ function RulesContent({ rules }: { rules: GameRules }) {
 
       <RuleSection letter="C" title={t('sections.c.title')} intro={t('sections.c.intro')}>
         <RuleList
-          items={[levelOrUnknown(battle.pve_min_trainer_level, 'pve'), levelOrUnknown(battle.pvp_min_trainer_level, 'pvp')]}
+          items={[
+            levelOrUnknown(battle.pve_min_trainer_level, 'pve'),
+            levelOrUnknown(battle.pvp_min_trainer_level, 'pvp'),
+            ...(battle.pvp_online_presence
+              ? [
+                  battle.pvp_online_presence.requires_pvp_screen
+                    ? t('sections.c.pvpOnlineLobbyOnly')
+                    : t('sections.c.pvpOnlineAuthenticated'),
+                ]
+              : []),
+          ]}
         />
         <p className="m-0 text-sm text-arena-300/70">
           {battlesPlayable ? t('sections.c.playable') : t('sections.c.notPlayable')}

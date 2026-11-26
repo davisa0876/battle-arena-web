@@ -122,12 +122,24 @@ function normalizeReward(raw: unknown): BattleReward | null {
   return { win: readNumber(record.win), loss: readNumber(record.loss) }
 }
 
+function normalizePvpOnlinePresence(raw: unknown): BattleRules['pvp_online_presence'] {
+  if (!isRecord(raw)) {
+    return null
+  }
+  return {
+    while_authenticated: readBoolean(raw.while_authenticated, true),
+    requires_pvp_min_level: readBoolean(raw.requires_pvp_min_level, true),
+    requires_pvp_screen: readBoolean(raw.requires_pvp_screen, false),
+  }
+}
+
 function normalizeBattle(raw: unknown): BattleRules {
   const record = asRecord(raw)
   const rewards = asRecord(record.rewards)
   return {
     pve_min_trainer_level: readNullableNumber(record.pve_min_trainer_level),
     pvp_min_trainer_level: readNullableNumber(record.pvp_min_trainer_level),
+    pvp_online_presence: normalizePvpOnlinePresence(record.pvp_online_presence),
     rewards: { pve: normalizeReward(rewards.pve), pvp: normalizeReward(rewards.pvp) },
     playable: readBoolean(record.playable),
   }

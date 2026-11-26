@@ -85,5 +85,35 @@
     "actionFailed": "Nao foi possivel concluir essa acao.",
     "loadBattle": "Nao foi possivel carregar esta batalha PvP.",
     "stale": "O estado da batalha mudou — atualizado."
+  },
+  "record": {
+    "wins": "{{count}} vitorias",
+    "losses": "{{count}} derrotas",
+    "forfeits": "{{count}} desistencias"
+  },
+  "matchmaking": {
+    "inviteByHandle": "Enviar convite",
+    "findOnline": "Procurar oponente online",
+    "onlineTitle": "Oponentes online",
+    "onlineEmpty": "Nenhum oponente online agora. Treinadores elegiveis aparecem online enquanto estiverem logados em qualquer tela — ou convide pelo handle.",
+    "onlineHint": "Toque em um treinador para enviar um convite privado.",
+    "onlineLevel": "Nv. {{level}}",
+    "refreshOnline": "Atualizar lista"
+  },
+  "alert": {
+    "region": "Convites PvP recebidos",
+    "eyebrow": "Convite PvP",
+    "body": "@{{handle}} convidou voce para uma lobby privada.",
+    "openLobby": "Abrir lobby",
+    "acceptedEyebrow": "Convite aceito",
+    "acceptedBody": "@{{handle}} aceitou seu convite privado.",
+    "nextStepInvitee": "Aceite de qualquer tela — voce vai ao lobby PvP escolher a criatura e depois travar Ready.",
+    "nextStepHost": "Abra a lobby, escolha a criatura, trave Ready e entre na batalha.",
+    "chooseCreatures": "Escolher criaturas",
+    "declinedEyebrow": "Convite recusado",
+    "declinedBody": "@{{handle}} recusou seu convite privado.",
+    "declinedNext": "Voce pode convidar outro treinador.",
+    "sendAnother": "Enviar outro convite",
+    "dismiss": "Fechar"
   }
 }

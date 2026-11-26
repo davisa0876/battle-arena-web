@@ -39,6 +39,11 @@ const rules: GameRules = makeRules({
   battle: {
     pve_min_trainer_level: 3,
     pvp_min_trainer_level: 29,
+    pvp_online_presence: {
+      while_authenticated: true,
+      requires_pvp_min_level: true,
+      requires_pvp_screen: false,
+    },
     rewards: { pve: { win: 111, loss: 222 }, pvp: { win: 333, loss: 444 } },
     playable: false,
   },

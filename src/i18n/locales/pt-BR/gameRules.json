@@ -41,6 +41,8 @@
       "intro": "Os modos de batalha abrem em níveis de treinador diferentes.",
       "pve": "O PvE (batalhas solo) abre no nível de treinador {{level}}.",
       "pvp": "O PvP (batalhas contra outros treinadores) abre no nível de treinador {{level}}.",
+      "pvpOnlineAuthenticated": "Presença online no PvP: se você estiver logado e no nível de PvP, aparece online em qualquer tela — não precisa ficar no lobby de PvP.",
+      "pvpOnlineLobbyOnly": "Presença online no PvP: você só aparece online enquanto a tela do lobby de PvP estiver aberta.",
       "unknown": "O servidor não publicou este requisito.",
       "notPlayable": "As batalhas ainda não são jogáveis. Estes níveis descrevem a elegibilidade futura.",
       "playable": "As batalhas são jogáveis."

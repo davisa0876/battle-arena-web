@@ -7,7 +7,15 @@ import {
   unwrapData,
 } from '../../../shared/lib/api/parse'
 import { normalizeOwnedCreatureList } from '../../collection/lib/normalizeCollection'
-import type { AuthUser, PlayerProfile, PublicPlayer, PveRecord, SelectionAllowance, TrainerProgress } from '../types'
+import type {
+  AuthUser,
+  PlayerProfile,
+  PublicPlayer,
+  PveRecord,
+  PvpRecord,
+  SelectionAllowance,
+  TrainerProgress,
+} from '../types'
 
 function normalizePveRecord(raw: unknown): PveRecord | undefined {
   const source = asRecord(raw)
@@ -16,6 +24,16 @@ function normalizePveRecord(raw: unknown): PveRecord | undefined {
     wins: Math.max(0, readNumber(source.wins, 0)),
     losses: Math.max(0, readNumber(source.losses, 0)),
     give_ups: Math.max(0, readNumber(source.give_ups, 0)),
+  }
+}
+
+function normalizePvpRecord(raw: unknown): PvpRecord | undefined {
+  const source = asRecord(raw)
+  if (Object.keys(source).length === 0) return undefined
+  return {
+    wins: Math.max(0, readNumber(source.wins, 0)),
+    losses: Math.max(0, readNumber(source.losses, 0)),
+    forfeits: Math.max(0, readNumber(source.forfeits, 0)),
   }
 }
 
@@ -107,6 +125,7 @@ export function normalizeAuthUser(payload: unknown): AuthUser | null {
   const email = readString(maybeUser.email)
 
   const pveRecord = normalizePveRecord(maybeUser.pve_record)
+  const pvpRecord = normalizePvpRecord(maybeUser.pvp_record)
 
   return {
     id: readNumber(maybeUser.id),
@@ -120,6 +139,7 @@ export function normalizeAuthUser(payload: unknown): AuthUser | null {
       maybeUser,
     ),
     ...(pveRecord ? { pve_record: pveRecord } : {}),
+    ...(pvpRecord ? { pvp_record: pvpRecord } : {}),
   }
 }
 

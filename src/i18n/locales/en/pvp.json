@@ -4,6 +4,20 @@
   "subtitle": "Invite one trainer by exact handle into a private lobby.",
   "phaseNote": "Select an owned creature, lock Ready, then enter the authoritative battle.",
   "loading": "Loading private lobbies…",
+  "record": {
+    "wins": "{{count}} wins",
+    "losses": "{{count}} losses",
+    "forfeits": "{{count}} forfeits"
+  },
+  "matchmaking": {
+    "inviteByHandle": "Send invitation",
+    "findOnline": "Find online opponent",
+    "onlineTitle": "Online opponents",
+    "onlineEmpty": "No online opponents right now. Eligible trainers appear online while logged in on any screen — or invite by handle.",
+    "onlineHint": "Tap a trainer to send a private invitation.",
+    "onlineLevel": "Lv. {{level}}",
+    "refreshOnline": "Refresh list"
+  },
   "form": {
     "handleLabel": "Trainer handle",
     "handlePlaceholder": "othertrainer",
@@ -85,5 +99,21 @@
     "actionFailed": "Could not complete that action.",
     "loadBattle": "Could not load this PvP battle.",
     "stale": "Battle state changed — refreshed."
+  },
+  "alert": {
+    "region": "Incoming PvP invitations",
+    "eyebrow": "PvP invitation",
+    "body": "@{{handle}} invited you to a private lobby.",
+    "openLobby": "Open lobby",
+    "acceptedEyebrow": "Invite accepted",
+    "acceptedBody": "@{{handle}} accepted your private invite.",
+    "nextStepInvitee": "Accept from any screen — you will go to the PvP lobby to choose your creature, then lock Ready for battle.",
+    "nextStepHost": "Open the lobby, pick your creature, lock Ready, then enter battle.",
+    "chooseCreatures": "Choose creatures",
+    "declinedEyebrow": "Invite declined",
+    "declinedBody": "@{{handle}} declined your private invite.",
+    "declinedNext": "You are free to invite another trainer.",
+    "sendAnother": "Send another invite",
+    "dismiss": "Dismiss"
   }
 }

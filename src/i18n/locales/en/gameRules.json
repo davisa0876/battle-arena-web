@@ -41,6 +41,8 @@
       "intro": "Battle modes open at different trainer levels.",
       "pve": "PvE (solo battles) opens at trainer level {{level}}.",
       "pvp": "PvP (battles against other trainers) opens at trainer level {{level}}.",
+      "pvpOnlineAuthenticated": "PvP online presence: while you are logged in and meet the PvP level, you appear online on any screen — you do not need to stay on the PvP lobby.",
+      "pvpOnlineLobbyOnly": "PvP online presence: you only appear online while the PvP lobby screen is open.",
       "unknown": "The server did not publish this requirement.",
       "notPlayable": "Battles are not playable yet. These levels describe future eligibility.",
       "playable": "Battles are playable."

@@ -41,6 +41,8 @@
       "intro": "Le modalità di battaglia si aprono a livelli allenatore diversi.",
       "pve": "Il PvE (battaglie in solitaria) si apre al livello allenatore {{level}}.",
       "pvp": "Il PvP (battaglie contro altri allenatori) si apre al livello allenatore {{level}}.",
+      "pvpOnlineAuthenticated": "Presenza online PvP: se sei autenticato e al livello PvP, risulti online su qualsiasi schermata — non serve restare nella lobby PvP.",
+      "pvpOnlineLobbyOnly": "Presenza online PvP: risulti online solo mentre la schermata della lobby PvP e aperta.",
       "unknown": "Il server non ha pubblicato questo requisito.",
       "notPlayable": "Le battaglie non sono ancora giocabili. Questi livelli descrivono l'accesso futuro.",
       "playable": "Le battaglie sono giocabili."

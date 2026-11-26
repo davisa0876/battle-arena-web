@@ -85,5 +85,35 @@
     "actionFailed": "Impossible de terminer cette action.",
     "loadBattle": "Impossible de charger ce combat JcJ.",
     "stale": "L'etat du combat a change — actualise."
+  },
+  "record": {
+    "wins": "{{count}} victoires",
+    "losses": "{{count}} defaites",
+    "forfeits": "{{count}} abandons"
+  },
+  "matchmaking": {
+    "inviteByHandle": "Envoyer une invitation",
+    "findOnline": "Trouver un adversaire en ligne",
+    "onlineTitle": "Adversaires en ligne",
+    "onlineEmpty": "Aucun adversaire en ligne. Les dresseurs eligibles apparaissent en ligne tant qu'ils sont connectes sur n'importe quel ecran — ou invitez par handle.",
+    "onlineHint": "Touchez un dresseur pour envoyer une invitation privee.",
+    "onlineLevel": "Niv. {{level}}",
+    "refreshOnline": "Actualiser"
+  },
+  "alert": {
+    "region": "Invitations JcJ entrantes",
+    "eyebrow": "Invitation JcJ",
+    "body": "@{{handle}} vous a invite dans un salon prive.",
+    "openLobby": "Ouvrir le salon",
+    "acceptedEyebrow": "Invitation acceptee",
+    "acceptedBody": "@{{handle}} a accepte votre invitation privee.",
+    "nextStepInvitee": "Acceptez depuis n'importe quel ecran: vous irez au lobby PvP choisir votre creature, puis Pret.",
+    "nextStepHost": "Ouvrez le salon, choisissez une creature, verrouillez Pret, puis combattez.",
+    "chooseCreatures": "Choisir les creatures",
+    "declinedEyebrow": "Invitation refusee",
+    "declinedBody": "@{{handle}} a refuse votre invitation privee.",
+    "declinedNext": "Vous pouvez inviter un autre dresseur.",
+    "sendAnother": "Envoyer une autre invitation",
+    "dismiss": "Fermer"
   }
 }

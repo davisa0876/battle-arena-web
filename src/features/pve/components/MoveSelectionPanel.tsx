@@ -47,17 +47,30 @@ export function MoveSelectionPanel({
   const { t } = useTranslation('pve')
   const [selectedId, setSelectedId] = useState<number | 'basic' | 'recover' | null>(null)
 
+  // Keep the player's choice across REST/realtime refreshes; only re-pick when invalid.
   useEffect(() => {
-    const firstUsable = moves.find((move) => move.can_use && move.id != null)
-    if (firstUsable?.id != null) {
-      setSelectedId(firstUsable.id)
-      return
-    }
-    if (canRecoverSkip) {
-      setSelectedId('recover')
-      return
-    }
-    setSelectedId(canBasicStrike ? 'basic' : null)
+    setSelectedId((current) => {
+      if (current === 'basic' && canBasicStrike) {
+        return current
+      }
+      if (current === 'recover' && canRecoverSkip) {
+        return current
+      }
+      if (typeof current === 'number') {
+        const still = moves.find((move) => move.id === current)
+        if (still?.can_use) {
+          return current
+        }
+      }
+      const firstUsable = moves.find((move) => move.can_use && move.id != null)
+      if (firstUsable?.id != null) {
+        return firstUsable.id
+      }
+      if (canRecoverSkip) {
+        return 'recover'
+      }
+      return canBasicStrike ? 'basic' : null
+    })
   }, [moves, canBasicStrike, canRecoverSkip])
 
   const selectedMove = typeof selectedId === 'number' ? moves.find((move) => move.id === selectedId) : null

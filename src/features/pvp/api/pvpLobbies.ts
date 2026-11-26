@@ -1,6 +1,6 @@
 import { apiClient } from '../../../shared/lib/api/client'
 import { unwrapData } from '../../../shared/lib/api/parse'
-import type { PvpInvitation, PvpRoom } from '../types'
+import type { PvpInvitation, PvpOnlineOpponent, PvpRoom } from '../types'
 
 function newKey(prefix: string): string {
   return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
@@ -12,6 +12,14 @@ export async function createPvpRoom(inviteeHandle: string): Promise<{ room: PvpR
     idempotency_key: newKey('pvp-create'),
   })
   return unwrapData(payload) as { room: PvpRoom; invitation: PvpInvitation }
+}
+
+export async function listPvpOnlineOpponents(): Promise<PvpOnlineOpponent[]> {
+  const payload = await apiClient.get<unknown>('/api/pvp/online')
+  if (payload && typeof payload === 'object' && 'data' in payload) {
+    return (payload as { data: PvpOnlineOpponent[] }).data
+  }
+  return []
 }
 
 export async function listPvpInvitations(box: 'received' | 'sent'): Promise<PvpInvitation[]> {

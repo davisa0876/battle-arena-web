@@ -3,6 +3,7 @@ export type {
   PlayerProfile,
   PublicPlayer,
   PveRecord,
+  PvpRecord,
   SelectionAllowance,
   TrainerProgress,
   UpdatePasswordPayload,
