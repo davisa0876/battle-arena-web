@@ -15,12 +15,13 @@ function pvpAuth() {
 }
 
 const listMock = vi.fn()
-const fetchRoomMock = vi.fn()
+const fetchLobbyMock = vi.fn()
 const acceptMock = vi.fn()
 
 vi.mock('../api/pvpLobbies', () => ({
   listPvpInvitations: (...args: unknown[]) => listMock(...args),
-  fetchPvpRoom: (...args: unknown[]) => fetchRoomMock(...args),
+  fetchCurrentPvpLobby: (...args: unknown[]) => fetchLobbyMock(...args),
+  fetchPvpRoom: vi.fn(),
   acceptPvpInvitation: (...args: unknown[]) => acceptMock(...args),
   declinePvpInvitation: vi.fn(),
   issueRealtimeTicket: vi.fn(async () => ({ ticket: 't', expires_in: 30, ws_url: 'ws://localhost/ws' })),
@@ -51,8 +52,9 @@ describe('PvpIncomingInviteBanner', () => {
   beforeEach(async () => {
     await i18n.changeLanguage('en')
     listMock.mockReset()
-    fetchRoomMock.mockReset()
+    fetchLobbyMock.mockReset()
     acceptMock.mockReset()
+    fetchLobbyMock.mockResolvedValue(null)
   })
 
   it('shows pending invites on non-battle pages', async () => {
@@ -94,29 +96,27 @@ describe('PvpIncomingInviteBanner', () => {
 
   it('notifies host when invitee accepted and dismisses after Choose creatures', async () => {
     const user = userEvent.setup()
-    listMock.mockImplementation(async (box: string) => {
-      if (box === 'sent') {
-        return [
-          {
-            id: 'inv-2',
-            room_id: 'room-2',
-            status: 'accepted',
-            expires_at: null,
-            inviter: { id: 2, handle: 'bombom', display_name: 'bombom', avatar_url: null },
-            invitee: { id: 9, handle: 'ahahahah', display_name: 'Ahahahah', avatar_url: null },
-            allowed_actions: [],
-          },
-        ]
-      }
-      return []
-    })
-    fetchRoomMock.mockResolvedValue({
+    listMock.mockResolvedValue([])
+    fetchLobbyMock.mockResolvedValue({
       id: 'room-2',
       status: 'ready',
       version: 2,
       closed_reason: null,
-      host: null,
-      members: [],
+      host: { id: 2, handle: 'bombom', display_name: 'bombom', avatar_url: null },
+      members: [
+        {
+          user_id: 2,
+          role: 'host',
+          joined_at: null,
+          player: { id: 2, handle: 'bombom', display_name: 'bombom', avatar_url: null },
+        },
+        {
+          user_id: 9,
+          role: 'guest',
+          joined_at: null,
+          player: { id: 9, handle: 'ahahahah', display_name: 'Ahahahah', avatar_url: null },
+        },
+      ],
       invitation: null,
       allowed_actions: ['select_creature', 'ready'],
       phase_note: 'ready',

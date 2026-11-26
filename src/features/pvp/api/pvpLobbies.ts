@@ -30,6 +30,15 @@ export async function listPvpInvitations(box: 'received' | 'sent'): Promise<PvpI
   return []
 }
 
+/** Open waiting/ready/in_battle lobby membership, or null. Inbox is pending-only. */
+export async function fetchCurrentPvpLobby(): Promise<PvpRoom | null> {
+  const payload = await apiClient.get<unknown>('/api/pvp/lobby')
+  if (payload && typeof payload === 'object' && 'data' in payload) {
+    return (payload as { data: PvpRoom | null }).data
+  }
+  return null
+}
+
 export async function acceptPvpInvitation(id: string): Promise<PvpRoom> {
   const payload = await apiClient.post<unknown>(`/api/pvp/invitations/${encodeURIComponent(id)}/accept`, {
     idempotency_key: newKey('pvp-accept'),

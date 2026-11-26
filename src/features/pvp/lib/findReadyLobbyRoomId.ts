@@ -1,14 +1,12 @@
-import type { PvpInvitation } from '../types'
+import type { PvpRoom } from '../types'
 
-/** Prefer an accepted invite's room so accept-from-anywhere can open creature select. */
-export function findReadyLobbyRoomId(
-  received: PvpInvitation[],
-  sent: PvpInvitation[],
-): string | null {
-  for (const invite of [...received, ...sent]) {
-    if (invite.status === 'accepted' && invite.room_id) {
-      return invite.room_id
-    }
+/** Prefer a ready/in_battle lobby for creature select after accept-from-anywhere. */
+export function findReadyLobbyRoomId(lobby: PvpRoom | null | undefined): string | null {
+  if (!lobby) {
+    return null
+  }
+  if (lobby.status === 'ready' || lobby.status === 'in_battle') {
+    return lobby.id
   }
   return null
 }

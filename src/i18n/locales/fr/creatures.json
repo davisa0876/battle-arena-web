@@ -45,6 +45,28 @@
       "speed": "Vitesse",
       "unavailable": "—"
     },
+    "combat": {
+      "aria": "Attaques et défenses d'arène",
+      "attacksTitle": "Attaques",
+      "attacksHint": "Capacités que cette créature peut utiliser en combats PvE et PvP.",
+      "attacksEmpty": "Aucune attaque d'arène n'est encore configurée pour cette créature.",
+      "attackMeta": "POW {{power}} · STAM {{stamina}} · PP {{pp}} · {{class}} · ACC {{accuracy}}%",
+      "defensesTitle": "Défenses",
+      "defensesHint": "Tous les combattants partagent ces options de défense.",
+      "staminaCost": "{{stamina}} stam",
+      "defenseNames": {
+        "endure": "Encaisser",
+        "block": "Bloquer",
+        "dodge": "Esquiver",
+        "recover": "Récupérer"
+      },
+      "defenseBlurb": {
+        "endure": "Subit le coup à plein (×{{multiplier}}). Aucun coût d'endurance.",
+        "block": "Réduit les dégâts reçus à ×{{multiplier}}. Coûte de l'endurance.",
+        "dodge": "{{chance}} % de chance d'éviter totalement le coup.",
+        "recover": "Récupère {{restore}} d'endurance en acceptant le coup."
+      }
+    },
     "evolutions": {
       "title": "Évolutions",
       "description": "Formes suivantes possibles pour cette créature. Ouvrez une forme pour voir la suite de la chaîne.",

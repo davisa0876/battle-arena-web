@@ -45,6 +45,28 @@
       "speed": "Velocidad",
       "unavailable": "—"
     },
+    "combat": {
+      "aria": "Ataques y defensas de la arena",
+      "attacksTitle": "Ataques",
+      "attacksHint": "Movimientos que esta criatura puede usar en combates PvE y PvP.",
+      "attacksEmpty": "Aún no hay ataques de arena configurados para esta criatura.",
+      "attackMeta": "POW {{power}} · STAM {{stamina}} · PP {{pp}} · {{class}} · ACC {{accuracy}}%",
+      "defensesTitle": "Defensas",
+      "defensesHint": "Todos los combatientes comparten estas opciones de defensa.",
+      "staminaCost": "{{stamina}} stam",
+      "defenseNames": {
+        "endure": "Resistir",
+        "block": "Bloquear",
+        "dodge": "Esquivar",
+        "recover": "Recuperar"
+      },
+      "defenseBlurb": {
+        "endure": "Recibe el golpe a daño completo (×{{multiplier}}). Sin coste de stamina.",
+        "block": "Reduce el daño recibido a ×{{multiplier}}. Gasta stamina.",
+        "dodge": "{{chance}}% de probabilidad de evitar el golpe por completo.",
+        "recover": "Recupera {{restore}} de stamina al aceptar el golpe."
+      }
+    },
     "evolutions": {
       "title": "Evoluciones",
       "description": "Próximas formas posibles de esta criatura. Abre una forma para ver el resto de la cadena.",

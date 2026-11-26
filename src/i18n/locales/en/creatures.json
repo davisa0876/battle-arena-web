@@ -45,6 +45,28 @@
       "speed": "Speed",
       "unavailable": "—"
     },
+    "combat": {
+      "aria": "Arena attacks and defenses",
+      "attacksTitle": "Attacks",
+      "attacksHint": "Moves this creature can use in PvE and PvP battles.",
+      "attacksEmpty": "No arena attacks are configured for this creature yet.",
+      "attackMeta": "POW {{power}} · STAM {{stamina}} · PP {{pp}} · {{class}} · ACC {{accuracy}}%",
+      "defensesTitle": "Defenses",
+      "defensesHint": "Every combatant shares these defense options.",
+      "staminaCost": "{{stamina}} stam",
+      "defenseNames": {
+        "endure": "Endure",
+        "block": "Block",
+        "dodge": "Dodge",
+        "recover": "Recover"
+      },
+      "defenseBlurb": {
+        "endure": "Take the hit at full damage (×{{multiplier}}). No stamina cost.",
+        "block": "Reduce incoming damage to ×{{multiplier}}. Costs stamina to brace.",
+        "dodge": "{{chance}}% chance to avoid the hit entirely.",
+        "recover": "Restore {{restore}} stamina while accepting the hit."
+      }
+    },
     "evolutions": {
       "title": "Evolutions",
       "description": "Possible next forms for this creature. Open a form to see its own evolution path.",

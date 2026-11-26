@@ -16,6 +16,7 @@ import {
   cancelPvpInvitation,
   createPvpRoom,
   declinePvpInvitation,
+  fetchCurrentPvpLobby,
   fetchPvpRoom,
   issuePvpRoomGrant,
   issueRealtimeTicket,
@@ -132,15 +133,20 @@ export function PvpLobbyPage() {
         void (async () => {
           try {
             if (hint.type === 'pvp.invitation.changed') {
-              const [inbox, outbox] = await Promise.all([
+              const [inbox, outbox, lobby] = await Promise.all([
                 listPvpInvitations('received'),
                 listPvpInvitations('sent'),
+                fetchCurrentPvpLobby(),
               ])
               setReceived(inbox)
               setSent(outbox)
-              const accepted = outbox.find((item) => item.status === 'accepted' && item.room_id)
-              if (accepted?.room_id) {
-                await rehydrateRoom(accepted.room_id)
+              const readyRoomId = findReadyLobbyRoomId(lobby)
+              if (readyRoomId) {
+                await rehydrateRoom(readyRoomId)
+              } else if (lobby?.status === 'waiting_for_guest') {
+                setRoom(lobby)
+              } else if (hint.invitationStatus && hint.invitationStatus !== 'pending' && hint.invitationStatus !== 'accepted') {
+                setRoom(null)
               }
               return
             }
@@ -205,17 +211,21 @@ export function PvpLobbyPage() {
   }, [location.state, rehydrateRoom])
 
   // Fallback: if we arrived on /pvp without navigation state (e.g. Open lobby),
-  // still surface an accepted ready room for creature select.
+  // still surface the current ready/in_battle lobby for creature select.
   useEffect(() => {
     if (loading || room) {
       return
     }
-    const readyRoomId = findReadyLobbyRoomId(received, sent)
-    if (!readyRoomId) {
-      return
-    }
-    void rehydrateRoom(readyRoomId)
-  }, [loading, room, received, sent, rehydrateRoom])
+    void (async () => {
+      const lobby = await fetchCurrentPvpLobby()
+      const readyRoomId = findReadyLobbyRoomId(lobby)
+      if (readyRoomId) {
+        await rehydrateRoom(readyRoomId)
+      } else if (lobby?.status === 'waiting_for_guest') {
+        setRoom(lobby)
+      }
+    })()
+  }, [loading, room, rehydrateRoom])
 
   async function inviteByHandle(rawHandle: string) {
     setBusy(true)

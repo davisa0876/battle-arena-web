@@ -13,6 +13,33 @@ export interface CreatureBaseStats {
   speed: number
 }
 
+export interface CreatureCombatAttack {
+  id: number
+  slug: string
+  name: string
+  power: number
+  accuracy: number
+  pp: number
+  stamina_cost: number
+  damage_class: string
+  type_slug: string
+}
+
+export interface CreatureCombatDefense {
+  slug: string
+  name: string
+  stamina_cost: number
+  damage_multiplier?: number | null
+  success_chance?: number | null
+  stamina_restore?: number | null
+}
+
+export interface CreatureCombatPreview {
+  attacks: CreatureCombatAttack[]
+  defenses: CreatureCombatDefense[]
+  note?: string
+}
+
 export interface Creature {
   id: number
   name: string
@@ -41,6 +68,8 @@ export interface Creature {
   base_stats: CreatureBaseStats
   evolves_from?: Creature | null
   evolutions?: Creature[]
+  /** Present on detail endpoint only. */
+  combat?: CreatureCombatPreview | null
 }
 
 export interface PaginationMeta {

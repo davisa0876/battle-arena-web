@@ -1,29 +1,34 @@
 import { describe, expect, it } from 'vitest'
-import { findReadyLobbyRoomId } from './findReadyLobbyRoomId'
-import type { PvpInvitation } from '../types'
 
-function invite(partial: Partial<PvpInvitation> & Pick<PvpInvitation, 'id' | 'status'>): PvpInvitation {
+import { findReadyLobbyRoomId } from './findReadyLobbyRoomId'
+import type { PvpRoom } from '../types'
+
+function room(partial: Partial<PvpRoom> & Pick<PvpRoom, 'id' | 'status'>): PvpRoom {
   return {
-    room_id: '',
-    expires_at: null,
-    inviter: { id: 1, handle: 'a', display_name: 'A', avatar_url: null },
-    invitee: { id: 2, handle: 'b', display_name: 'B', avatar_url: null },
+    version: 1,
+    closed_reason: null,
+    closed_at: null,
+    created_at: null,
+    host: null,
+    members: [],
+    invitation: null,
     allowed_actions: [],
+    my_selection: null,
+    selections_revealed: null,
+    battle_id: null,
+    phase_note: '',
     ...partial,
   }
 }
 
 describe('findReadyLobbyRoomId', () => {
-  it('returns the first accepted invitation room id', () => {
-    expect(
-      findReadyLobbyRoomId(
-        [invite({ id: '1', status: 'pending', room_id: 'r-pending' })],
-        [invite({ id: '2', status: 'accepted', room_id: 'r-ready' })],
-      ),
-    ).toBe('r-ready')
+  it('returns ready or in_battle lobby id', () => {
+    expect(findReadyLobbyRoomId(room({ id: 'r-ready', status: 'ready' }))).toBe('r-ready')
+    expect(findReadyLobbyRoomId(room({ id: 'r-battle', status: 'in_battle' }))).toBe('r-battle')
   })
 
-  it('returns null when nothing is accepted', () => {
-    expect(findReadyLobbyRoomId([invite({ id: '1', status: 'pending', room_id: 'r1' })], [])).toBeNull()
+  it('ignores waiting lobbies and null', () => {
+    expect(findReadyLobbyRoomId(room({ id: 'r-wait', status: 'waiting_for_guest' }))).toBeNull()
+    expect(findReadyLobbyRoomId(null)).toBeNull()
   })
 })

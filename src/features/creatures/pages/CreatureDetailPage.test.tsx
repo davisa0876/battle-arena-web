@@ -43,6 +43,27 @@ const charmander: Creature = {
     special_defense: 50,
     speed: 65,
   },
+  combat: {
+    attacks: [
+      {
+        id: 1,
+        slug: 'ember',
+        name: 'Ember',
+        power: 40,
+        accuracy: 100,
+        pp: 25,
+        stamina_cost: 15,
+        damage_class: 'special',
+        type_slug: 'fire',
+      },
+    ],
+    defenses: [
+      { slug: 'endure', name: 'Endure', stamina_cost: 0, damage_multiplier: 1 },
+      { slug: 'block', name: 'Block', stamina_cost: 10, damage_multiplier: 0.5 },
+      { slug: 'dodge', name: 'Dodge', stamina_cost: 20, success_chance: 0.6 },
+      { slug: 'recover', name: 'Recover', stamina_cost: 0, stamina_restore: 15 },
+    ],
+  },
 }
 
 describe('CreatureDetailPage', () => {
@@ -77,7 +98,7 @@ describe('CreatureDetailPage', () => {
     expect(screen.getByAltText('Charmander')).toHaveAttribute('src', 'https://example.test/charmander.png')
   })
 
-  it('renders formatted height/weight and every base stat', async () => {
+  it('renders formatted height/weight, base stats, and combat loadout', async () => {
     mockedApi.fetchCreatureBySlug.mockResolvedValue({ data: charmander })
 
     renderDetail()
@@ -86,6 +107,10 @@ describe('CreatureDetailPage', () => {
     expect(screen.getByText('Height').nextElementSibling).toHaveTextContent('0.60 m')
     expect(screen.getByText('Weight').nextElementSibling).toHaveTextContent('8.5 kg')
     expect(screen.getByRole('heading', { level: 2, name: 'Base stats' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Attacks' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { level: 2, name: 'Defenses' })).toBeInTheDocument()
+    expect(screen.getByText('Ember')).toBeInTheDocument()
+    expect(screen.getByText('Block')).toBeInTheDocument()
     expect(screen.queryByRole('heading', { level: 2, name: 'Evolutions' })).not.toBeInTheDocument()
 
     const expected: Record<string, number> = {

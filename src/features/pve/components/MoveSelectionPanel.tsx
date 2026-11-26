@@ -86,7 +86,7 @@ export function MoveSelectionPanel({
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-[repeat(auto-fill,minmax(9.5rem,1fr))]">
         {moves.map((move, index) => {
           const selected = selectedId === move.id
           const tone = MOVE_TONES[index % MOVE_TONES.length]

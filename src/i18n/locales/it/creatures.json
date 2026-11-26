@@ -45,6 +45,28 @@
       "speed": "Velocità",
       "unavailable": "—"
     },
+    "combat": {
+      "aria": "Attacchi e difese dell'arena",
+      "attacksTitle": "Attacchi",
+      "attacksHint": "Mosse che questa creatura può usare nelle battaglie PvE e PvP.",
+      "attacksEmpty": "Non ci sono ancora attacchi arena per questa creatura.",
+      "attackMeta": "POW {{power}} · STAM {{stamina}} · PP {{pp}} · {{class}} · ACC {{accuracy}}%",
+      "defensesTitle": "Difese",
+      "defensesHint": "Tutti i combattenti condividono queste opzioni di difesa.",
+      "staminaCost": "{{stamina}} stam",
+      "defenseNames": {
+        "endure": "Resistere",
+        "block": "Bloccare",
+        "dodge": "Schivare",
+        "recover": "Recuperare"
+      },
+      "defenseBlurb": {
+        "endure": "Subisci il colpo a danno pieno (×{{multiplier}}). Nessun costo di stamina.",
+        "block": "Riduci il danno ricevuto a ×{{multiplier}}. Costa stamina.",
+        "dodge": "{{chance}}% di probabilità di evitare del tutto il colpo.",
+        "recover": "Recupera {{restore}} di stamina accettando il colpo."
+      }
+    },
     "evolutions": {
       "title": "Evoluzioni",
       "description": "Prossime forme possibili di questa creatura. Apri una forma per vedere il resto della catena.",

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useParams } from 'react-router-dom'
 import { PageLoading } from '../../../shared/components/feedback/PageLoading'
+import { CreatureCombatLoadout } from '../components/CreatureCombatLoadout'
 import { CreatureEvolutions } from '../components/CreatureEvolutions'
 import { CreatureHero } from '../components/CreatureHero'
 import { CreatureStats } from '../components/CreatureStats'
@@ -43,6 +44,7 @@ export function CreatureDetailPage() {
             onCollectionChanged={() => setRetryToken((value) => value + 1)}
           />
           <CreatureStats creature={viewState.creature} />
+          {viewState.creature.combat ? <CreatureCombatLoadout combat={viewState.creature.combat} /> : null}
           <CreatureEvolutions creature={viewState.creature} />
         </article>
       )}

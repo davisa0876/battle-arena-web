@@ -23,8 +23,15 @@ export function PvpIncomingInviteBanner() {
   const { pathname } = useLocation()
   const eligible = status === 'authenticated' && isPvpPresenceEligible(user)
   const showUi = eligible && !isImmersiveBattlePath(pathname)
-  const { alerts, busyId, error: actionError, accept, decline, dismissDeclined, dismissAccepted } =
-    usePvpLobbyAlerts(showUi)
+  const {
+    alerts,
+    busyId,
+    error: actionError,
+    accept,
+    decline,
+    dismissDeclined,
+    dismissAccepted,
+  } = usePvpLobbyAlerts(showUi, user?.id)
 
   if (!showUi || alerts.length === 0) {
     return null

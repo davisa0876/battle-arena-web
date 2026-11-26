@@ -3,6 +3,7 @@ type HintHandler = (hint: {
   eventId: string
   roomId?: string
   invitationId?: string
+  invitationStatus?: string
   battleId?: string
   version?: number
   lastEventSequence?: number
@@ -168,6 +169,7 @@ export class PvpRealtimeSession {
         type,
         eventId,
         invitationId: typeof payload.invitation_id === 'string' ? payload.invitation_id : undefined,
+        invitationStatus: typeof payload.status === 'string' ? payload.status : undefined,
       })
       return
     }
