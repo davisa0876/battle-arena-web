@@ -13,3 +13,6 @@ alwaysApply: false
 - Refresh, tab hide, and navigation must never abandon/forfeit an active PvP battle (5B.4 owns forfeit/timeout).
 - Outcome/XP come from server `outcome` + `rewards` only. Do not hardcode +20/+10 in UI math beyond display of server values.
 - Keep `features.pvp` release gating on the backend; clients may preview under auth without bypassing ACL.
+- Explicit forfeit requires a confirmation dialog; never POST forfeit from pagehide, unmount, beforeunload, or navigation.
+- `action_deadline_at` is display-only; never locally declare timeout/loss from the countdown.
+- Show “connection interrupted; reconnecting — turn timer may continue” when WS is down; never say the user forfeited.

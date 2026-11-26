@@ -34,7 +34,16 @@
     "waitingOpponent": "Waiting for the other trainer…",
     "pendingAttack": "Incoming attack: {{move}} — choose a defense",
     "basicStrike": "Basic Strike",
-    "backLobby": "Back to lobby"
+    "backLobby": "Back to lobby",
+    "deadline": "Action deadline: {{time}}",
+    "deadlineYours": "Your action deadline: {{time}}",
+    "forfeit": "Forfeit battle",
+    "forfeitConfirmTitle": "Forfeit this battle?",
+    "forfeitConfirmBody": "You will lose. Proposed private-MVP XP is 0 for both trainers. This cannot be undone.",
+    "forfeitConfirm": "Confirm forfeit",
+    "forfeitCancel": "Keep fighting",
+    "endReason": "Ended by: {{reason}}",
+    "connectionInterrupted": "Connection interrupted; reconnecting. Your turn timer may continue."
   },
   "log": {
     "title": "Combat log",
@@ -55,7 +64,10 @@
     "win": "Victory!",
     "loss": "Defeat",
     "finished": "Battle complete",
-    "xp": "+{{xp}} XP"
+    "xp": "+{{xp}} XP",
+    "reasonForfeit": "forfeit",
+    "reasonTimeout": "timeout",
+    "reasonCombat": "combat"
   },
   "realtime": {
     "status": "Realtime: {{status}}"

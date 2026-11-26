@@ -34,7 +34,16 @@
     "waitingOpponent": "En attente de l'autre dresseur…",
     "pendingAttack": "Attaque entrante : {{move}} — choisissez une defense",
     "basicStrike": "Frappe de base",
-    "backLobby": "Retour au salon"
+    "backLobby": "Retour au salon",
+    "deadline": "Delai d action : {{time}}",
+    "deadlineYours": "Votre delai d action : {{time}}",
+    "forfeit": "Abandonner le combat",
+    "forfeitConfirmTitle": "Abandonner ce combat ?",
+    "forfeitConfirmBody": "Vous perdrez. XP proposee MVP privee : 0 pour les deux. Irreversible.",
+    "forfeitConfirm": "Confirmer l abandon",
+    "forfeitCancel": "Continuer",
+    "endReason": "Fin : {{reason}}",
+    "connectionInterrupted": "Connexion interrompue ; reconnexion. Le minuteur peut continuer."
   },
   "log": {
     "title": "Journal de combat",
@@ -55,7 +64,10 @@
     "win": "Victoire !",
     "loss": "Defaite",
     "finished": "Combat termine",
-    "xp": "+{{xp}} XP"
+    "xp": "+{{xp}} XP",
+    "reasonForfeit": "abandon",
+    "reasonTimeout": "delai",
+    "reasonCombat": "combat"
   },
   "realtime": {
     "status": "Temps reel : {{status}}"

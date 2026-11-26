@@ -34,7 +34,16 @@
     "waitingOpponent": "Aguardando o outro treinador…",
     "pendingAttack": "Ataque recebido: {{move}} — escolha uma defesa",
     "basicStrike": "Golpe basico",
-    "backLobby": "Voltar ao lobby"
+    "backLobby": "Voltar ao lobby",
+    "deadline": "Prazo da acao: {{time}}",
+    "deadlineYours": "Seu prazo de acao: {{time}}",
+    "forfeit": "Desistir da batalha",
+    "forfeitConfirmTitle": "Desistir desta batalha?",
+    "forfeitConfirmBody": "Voce perde. XP MVP privada proposta: 0 para ambos. Nao pode ser desfeito.",
+    "forfeitConfirm": "Confirmar desistencia",
+    "forfeitCancel": "Continuar lutando",
+    "endReason": "Encerrado por: {{reason}}",
+    "connectionInterrupted": "Conexao interrompida; reconectando. O temporizador pode continuar."
   },
   "log": {
     "title": "Log de combate",
@@ -55,7 +64,10 @@
     "win": "Vitoria!",
     "loss": "Derrota",
     "finished": "Batalha completa",
-    "xp": "+{{xp}} XP"
+    "xp": "+{{xp}} XP",
+    "reasonForfeit": "desistencia",
+    "reasonTimeout": "tempo",
+    "reasonCombat": "combate"
   },
   "realtime": {
     "status": "Tempo real: {{status}}"

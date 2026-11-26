@@ -34,7 +34,16 @@
     "waitingOpponent": "In attesa dell'altro allenatore…",
     "pendingAttack": "Attacco in arrivo: {{move}} — scegli una difesa",
     "basicStrike": "Colpo base",
-    "backLobby": "Torna alla lobby"
+    "backLobby": "Torna alla lobby",
+    "deadline": "Scadenza azione: {{time}}",
+    "deadlineYours": "La tua scadenza: {{time}}",
+    "forfeit": "Resa",
+    "forfeitConfirmTitle": "Rese in questa battaglia?",
+    "forfeitConfirmBody": "Perderai. XP MVP privata proposta: 0 per entrambi. Irreversibile.",
+    "forfeitConfirm": "Conferma resa",
+    "forfeitCancel": "Continua a combattere",
+    "endReason": "Terminata per: {{reason}}",
+    "connectionInterrupted": "Connessione interrotta; riconnessione. Il timer puo continuare."
   },
   "log": {
     "title": "Diario di combattimento",
@@ -55,7 +64,10 @@
     "win": "Vittoria!",
     "loss": "Sconfitta",
     "finished": "Battaglia completa",
-    "xp": "+{{xp}} XP"
+    "xp": "+{{xp}} XP",
+    "reasonForfeit": "resa",
+    "reasonTimeout": "timeout",
+    "reasonCombat": "combattimento"
   },
   "realtime": {
     "status": "Realtime: {{status}}"

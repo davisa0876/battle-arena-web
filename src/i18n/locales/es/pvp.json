@@ -34,7 +34,16 @@
     "waitingOpponent": "Esperando al otro entrenador…",
     "pendingAttack": "Ataque entrante: {{move}} — elige una defensa",
     "basicStrike": "Golpe basico",
-    "backLobby": "Volver al lobby"
+    "backLobby": "Volver al lobby",
+    "deadline": "Limite de accion: {{time}}",
+    "deadlineYours": "Tu limite de accion: {{time}}",
+    "forfeit": "Rendirse",
+    "forfeitConfirmTitle": "¿Rendirse en este combate?",
+    "forfeitConfirmBody": "Perderas. XP MVP privada propuesta: 0 para ambos. No se puede deshacer.",
+    "forfeitConfirm": "Confirmar rendicion",
+    "forfeitCancel": "Seguir combatiendo",
+    "endReason": "Termino por: {{reason}}",
+    "connectionInterrupted": "Conexion interrumpida; reconectando. El temporizador puede continuar."
   },
   "log": {
     "title": "Registro de combate",
@@ -55,7 +64,10 @@
     "win": "Victoria!",
     "loss": "Derrota",
     "finished": "Combate completo",
-    "xp": "+{{xp}} XP"
+    "xp": "+{{xp}} XP",
+    "reasonForfeit": "rendicion",
+    "reasonTimeout": "tiempo",
+    "reasonCombat": "combate"
   },
   "realtime": {
     "status": "Tiempo real: {{status}}"

@@ -17,9 +17,11 @@ import {
   newIdempotencyKey,
   submitPvpAttack,
   submitPvpDefend,
+  submitPvpForfeit,
 } from '../api/pvpBattles'
 import { issuePvpRoomGrant, issueRealtimeTicket } from '../api/pvpLobbies'
 import { attackFallback, myXp, viewerOutcome } from '../lib/pvpActionPolicy'
+import { formatDeadlineCountdown } from '../lib/pvpDeadlineLabel'
 import { mergeEventsBySequence, narrativeFromEvents } from '../lib/pvpEventNarrative'
 import { PvpRealtimeSession } from '../lib/pvpRealtimeSession'
 import type { PvpBattle, PvpBattleEvent } from '../types/battle'
@@ -61,6 +63,8 @@ export function PvpBattlePage() {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const [realtimeStatus, setRealtimeStatus] = useState<'connecting' | 'ready' | 'closed' | 'error'>('connecting')
+  const [confirmForfeit, setConfirmForfeit] = useState(false)
+  const [nowMs, setNowMs] = useState(() => Date.now())
   const battleRef = useRef<PvpBattle | null>(null)
   const pendingKeyRef = useRef<string | null>(null)
   const sessionRef = useRef<PvpRealtimeSession | null>(null)
@@ -164,6 +168,12 @@ export function PvpBattlePage() {
   }, [battle, hydrate, realtimeStatus])
 
   useEffect(() => {
+    if (!battle?.action_deadline_at || battle.phase === 'finished') return
+    const timer = window.setInterval(() => setNowMs(Date.now()), 1000)
+    return () => window.clearInterval(timer)
+  }, [battle?.action_deadline_at, battle?.phase])
+
+  useEffect(() => {
     if (!battle) return
     if (introPlayedRef.current === battle.id) return
     introPlayedRef.current = battle.id
@@ -218,6 +228,10 @@ export function PvpBattlePage() {
   const narrative = useMemo(() => narrativeFromEvents(events), [events])
   const outcome = battle ? viewerOutcome(battle) : null
   const xp = battle ? myXp(battle) : null
+  const deadlineLabel = formatDeadlineCountdown(battle?.action_deadline_at, nowMs)
+  const deadlineIsMine =
+    !!battle?.deadline_actor_user_id && !!battle.me && battle.deadline_actor_user_id === battle.me.user_id
+  const canForfeit = !!battle && battle.phase !== 'finished' && battle.allowed_actions.includes('forfeit')
 
   if (loading && !battle) {
     return <PageLoading label={t('battle.loading')} />
@@ -251,6 +265,21 @@ export function PvpBattlePage() {
             {t('battle.phase', { phase: battle.phase })} · {t('battle.turn', { turn: battle.turn_number })} ·{' '}
             {t('realtime.status', { status: realtimeStatus })}
           </p>
+          {deadlineLabel && battle.phase !== 'finished' ? (
+            <p
+              className={`mt-1 text-sm ${deadlineIsMine ? 'font-semibold text-amber-300' : 'text-arena-300'}`}
+              aria-live="polite"
+            >
+              {deadlineIsMine
+                ? t('battle.deadlineYours', { time: deadlineLabel })
+                : t('battle.deadline', { time: deadlineLabel })}
+            </p>
+          ) : null}
+          {realtimeStatus === 'error' || realtimeStatus === 'closed' ? (
+            <p className="mt-1 text-sm text-arena-300" role="status">
+              {t('battle.connectionInterrupted')}
+            </p>
+          ) : null}
         </div>
         <div className="flex flex-wrap gap-2">
           {meView && oppView ? <BattleAudioControls player={meView} opponent={oppView} /> : null}
@@ -262,11 +291,66 @@ export function PvpBattlePage() {
           >
             {t('actions.refresh')}
           </button>
+          {canForfeit ? (
+            <button
+              type="button"
+              className="rounded border border-signal-bad/60 bg-signal-bad/10 px-3 py-2 text-sm font-semibold text-signal-bad"
+              onClick={() => setConfirmForfeit(true)}
+              disabled={busy}
+            >
+              {t('battle.forfeit')}
+            </button>
+          ) : null}
           <Link to="/pvp" className="rounded border border-border px-3 py-2 text-sm text-white">
             {t('battle.backLobby')}
           </Link>
         </div>
       </header>
+
+      {confirmForfeit ? (
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="pvp-forfeit-title"
+          className="rounded-[24px] border border-signal-bad/50 bg-[#1a0c0c] p-5"
+        >
+          <h2 id="pvp-forfeit-title" className="m-0 font-display text-xl text-white">
+            {t('battle.forfeitConfirmTitle')}
+          </h2>
+          <p className="mt-2 text-sm text-arena-200">{t('battle.forfeitConfirmBody')}</p>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="rounded bg-signal-bad px-4 py-2 font-semibold text-white"
+              disabled={busy}
+              onClick={() => {
+                setConfirmForfeit(false)
+                void runMutation(async (key) => {
+                  const result = await submitPvpForfeit(
+                    battle.id,
+                    { expected_version: battle.version },
+                    key,
+                  )
+                  if (result.rewards) {
+                    applyBattleIfNewer({ ...result.battle, rewards: result.rewards })
+                  }
+                  return result.battle
+                })
+              }}
+            >
+              {t('battle.forfeitConfirm')}
+            </button>
+            <button
+              type="button"
+              className="rounded border border-border px-4 py-2 text-white"
+              disabled={busy}
+              onClick={() => setConfirmForfeit(false)}
+            >
+              {t('battle.forfeitCancel')}
+            </button>
+          </div>
+        </div>
+      ) : null}
 
       {error ? (
         <p className="rounded border border-ember/40 bg-ember/10 px-4 py-3 text-sm text-ember" role="alert">
@@ -312,6 +396,18 @@ export function PvpBattlePage() {
           <h2 className="font-display text-2xl text-white">
             {outcome === 'win' ? t('result.win') : outcome === 'loss' ? t('result.loss') : t('result.finished')}
           </h2>
+          {battle.outcome?.end_reason ? (
+            <p className="mt-2 text-sm text-arena-300">
+              {t('battle.endReason', {
+                reason:
+                  battle.outcome.end_reason === 'forfeit'
+                    ? t('result.reasonForfeit')
+                    : battle.outcome.end_reason === 'timeout'
+                      ? t('result.reasonTimeout')
+                      : t('result.reasonCombat'),
+              })}
+            </p>
+          ) : null}
           {typeof xp === 'number' ? <p className="mt-2 text-amber-300">{t('result.xp', { xp })}</p> : null}
           <Link to="/pvp" className="mt-4 inline-block rounded bg-ember px-4 py-2 font-semibold text-black">
             {t('battle.backLobby')}

@@ -39,6 +39,8 @@ export type PvpBattleOutcome = {
   winner_user_id: number | null
   loser_user_id: number | null
   end_reason: string | null
+  forfeiting_user_id?: number | null
+  timed_out_user_id?: number | null
 } | null
 
 export type PvpRewardRow = {
@@ -59,6 +61,8 @@ export type PvpBattle = {
   current_attacker_user_id: number
   current_defender_user_id: number
   pending_attack: PvpPendingAttack
+  action_deadline_at?: string | null
+  deadline_actor_user_id?: number | null
   me: PvpCombatant | null
   opponent: PvpCombatant | null
   allowed_actions: string[]
