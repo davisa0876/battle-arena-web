@@ -12,6 +12,7 @@ import { CreatureDetailPage } from '../../features/creatures/pages/CreatureDetai
 import { GameRulesPage } from '../../features/game-rules/pages/GameRulesPage'
 import { HomePage } from '../../features/home/pages/HomePage'
 import { PveBattlePage } from '../../features/pve/pages/PveBattlePage'
+import { PvpLobbyPage } from '../../features/pvp/pages/PvpLobbyPage'
 import { EditProfilePage } from '../../features/profile/pages/EditProfilePage'
 import { ProfilePage } from '../../features/profile/pages/ProfilePage'
 import { PublicPlayerProfilePage } from '../../features/profile/pages/PublicPlayerProfilePage'
@@ -37,6 +38,7 @@ export function AppRouter() {
           <Route path="profile/edit" element={<EditProfilePage />} />
           <Route path="my-collection" element={<MyCollectionPage />} />
           <Route path="pve" element={<PveBattlePage />} />
+          <Route path="pvp" element={<PvpLobbyPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

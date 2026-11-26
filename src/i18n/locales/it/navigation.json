@@ -3,6 +3,8 @@
   "brandAlt": "Logo Battle Arena",
   "homeAria": "Home Battle Arena",
   "creatures": "Creature",
+  "pve": "PvE",
+  "pvp": "PvP",
   "gameRules": "Regole del gioco",
   "login": "Accedi",
   "register": "Registrati",

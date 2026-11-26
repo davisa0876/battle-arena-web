@@ -22,7 +22,12 @@ export function DesktopPrimaryLinks() {
       )}
       {status === 'authenticated' && (
         <NavLink to="/pve" className={navLinkClass}>
-          {t('pve', { defaultValue: 'PvE' })}
+          {t('pve')}
+        </NavLink>
+      )}
+      {status === 'authenticated' && (
+        <NavLink to="/pvp" className={navLinkClass}>
+          {t('pvp')}
         </NavLink>
       )}
       <NavLink to="/game-rules" className={navLinkClass}>

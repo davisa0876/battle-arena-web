@@ -81,6 +81,16 @@ export function MobileMenu() {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to="/pve" className={linkClass}>
+                    {t('pve')}
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/pvp" className={linkClass}>
+                    {t('pvp')}
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to="/game-rules" className={linkClass}>
                     {t('gameRules')}
                   </NavLink>

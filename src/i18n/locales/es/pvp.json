@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Multijugador privado",
+  "title": "Lobby JcJ",
+  "subtitle": "Invita a un entrenador por handle exacto a un lobby privado.",
+  "phaseNote": "Lobby privado listo — el combate llega en una fase posterior.",
+  "loading": "Cargando lobbies privados…",
+  "form": {
+    "handleLabel": "Handle del entrenador",
+    "handlePlaceholder": "otroentrenador",
+    "submit": "Enviar invitacion"
+  },
+  "inbox": {
+    "received": "Invitaciones recibidas",
+    "sent": "Invitaciones enviadas",
+    "emptyReceived": "No hay invitaciones recibidas.",
+    "emptySent": "No hay invitaciones enviadas."
+  },
+  "lobby": {
+    "title": "Lobby actual",
+    "status": "Estado: {{status}}"
+  },
+  "realtime": {
+    "status": "Tiempo real: {{status}}"
+  },
+  "actions": {
+    "accept": "Aceptar",
+    "decline": "Rechazar",
+    "cancel": "Cancelar",
+    "leave": "Salir del lobby",
+    "refresh": "Actualizar"
+  },
+  "errors": {
+    "loadFailed": "No se pudieron cargar los lobbies privados.",
+    "createFailed": "No se pudo crear la invitacion.",
+    "actionFailed": "No se pudo completar esa accion."
+  }
+}

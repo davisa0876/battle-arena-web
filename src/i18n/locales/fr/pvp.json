@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Multijoueur prive",
+  "title": "Salon JcJ",
+  "subtitle": "Invitez un dresseur par pseudo exact dans un salon prive.",
+  "phaseNote": "Salon prive pret — le combat arrive dans une phase ulterieure.",
+  "loading": "Chargement des salons prives…",
+  "form": {
+    "handleLabel": "Pseudo du dresseur",
+    "handlePlaceholder": "autredresseur",
+    "submit": "Envoyer une invitation"
+  },
+  "inbox": {
+    "received": "Invitations recues",
+    "sent": "Invitations envoyees",
+    "emptyReceived": "Aucune invitation recue.",
+    "emptySent": "Aucune invitation envoyee."
+  },
+  "lobby": {
+    "title": "Salon actuel",
+    "status": "Statut : {{status}}"
+  },
+  "realtime": {
+    "status": "Temps réel : {{status}}"
+  },
+  "actions": {
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "cancel": "Annuler",
+    "leave": "Quitter le salon",
+    "refresh": "Actualiser"
+  },
+  "errors": {
+    "loadFailed": "Impossible de charger les salons prives.",
+    "createFailed": "Impossible de creer l'invitation.",
+    "actionFailed": "Impossible de terminer cette action."
+  }
+}

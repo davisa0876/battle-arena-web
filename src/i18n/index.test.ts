@@ -14,6 +14,8 @@ const namespaces = [
   'progression',
   'collection',
   'gameRules',
+  'pve',
+  'pvp',
 ] as const
 
 function flatten(tree: Tree, prefix = ''): Record<string, string> {
@@ -158,7 +160,7 @@ describe('resources', () => {
     const required: Record<(typeof namespaces)[number], string[]> = {
       common: [],
       creatures: [],
-      navigation: ['login', 'register', 'gameRules', 'profile', 'myCollection', 'settings', 'logout', 'menu.open', 'menu.close'],
+      navigation: ['login', 'register', 'gameRules', 'profile', 'myCollection', 'settings', 'logout', 'menu.open', 'menu.close', 'pve', 'pvp'],
       errors: ['unauthenticated', 'sessionExpired', 'tooManyRequests', 'validationFailed', 'rulesLoad', 'collectionLoad'],
       validation: ['required', 'invalidEmail', 'passwordTooShort', 'passwordMismatch', 'avatarType', 'avatarSize'],
       auth: ['login.title', 'register.title', 'forgot.title', 'reset.title', 'verify.title', 'passwordToggle.show'],
@@ -179,6 +181,8 @@ describe('resources', () => {
         'features.pve',
         'features.pvp',
       ],
+      pve: ['title'],
+      pvp: ['title', 'form.submit', 'actions.accept', 'realtime.status'],
     }
 
     for (const namespace of namespaces) {

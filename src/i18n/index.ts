@@ -9,6 +9,7 @@ import enCreatures from './locales/en/creatures.json'
 import enErrors from './locales/en/errors.json'
 import enGameRules from './locales/en/gameRules.json'
 import enPve from './locales/en/pve.json'
+import enPvp from './locales/en/pvp.json'
 import enNavigation from './locales/en/navigation.json'
 import enProfile from './locales/en/profile.json'
 import enProgression from './locales/en/progression.json'
@@ -20,6 +21,7 @@ import esCreatures from './locales/es/creatures.json'
 import esErrors from './locales/es/errors.json'
 import esGameRules from './locales/es/gameRules.json'
 import esPve from './locales/es/pve.json'
+import esPvp from './locales/es/pvp.json'
 import esNavigation from './locales/es/navigation.json'
 import esProfile from './locales/es/profile.json'
 import esProgression from './locales/es/progression.json'
@@ -31,6 +33,7 @@ import frCreatures from './locales/fr/creatures.json'
 import frErrors from './locales/fr/errors.json'
 import frGameRules from './locales/fr/gameRules.json'
 import frPve from './locales/fr/pve.json'
+import frPvp from './locales/fr/pvp.json'
 import frNavigation from './locales/fr/navigation.json'
 import frProfile from './locales/fr/profile.json'
 import frProgression from './locales/fr/progression.json'
@@ -42,6 +45,7 @@ import itCreatures from './locales/it/creatures.json'
 import itErrors from './locales/it/errors.json'
 import itGameRules from './locales/it/gameRules.json'
 import itPve from './locales/it/pve.json'
+import itPvp from './locales/it/pvp.json'
 import itNavigation from './locales/it/navigation.json'
 import itProfile from './locales/it/profile.json'
 import itProgression from './locales/it/progression.json'
@@ -53,6 +57,7 @@ import ptBrCreatures from './locales/pt-BR/creatures.json'
 import ptBrErrors from './locales/pt-BR/errors.json'
 import ptBrGameRules from './locales/pt-BR/gameRules.json'
 import ptBrPve from './locales/pt-BR/pve.json'
+import ptBrPvp from './locales/pt-BR/pvp.json'
 import ptBrNavigation from './locales/pt-BR/navigation.json'
 import ptBrProfile from './locales/pt-BR/profile.json'
 import ptBrProgression from './locales/pt-BR/progression.json'
@@ -101,6 +106,7 @@ export const namespaces = [
   'collection',
   'gameRules',
   'pve',
+  'pvp',
 ] as const
 
 export const resources = {
@@ -116,6 +122,7 @@ export const resources = {
     collection: enCollection,
     gameRules: enGameRules,
     pve: enPve,
+    pvp: enPvp,
   },
   fr: {
     common: frCommon,
@@ -129,6 +136,7 @@ export const resources = {
     collection: frCollection,
     gameRules: frGameRules,
     pve: frPve,
+    pvp: frPvp,
   },
   'pt-BR': {
     common: ptBrCommon,
@@ -142,6 +150,7 @@ export const resources = {
     collection: ptBrCollection,
     gameRules: ptBrGameRules,
     pve: ptBrPve,
+    pvp: ptBrPvp,
   },
   it: {
     common: itCommon,
@@ -155,6 +164,7 @@ export const resources = {
     collection: itCollection,
     gameRules: itGameRules,
     pve: itPve,
+    pvp: itPvp,
   },
   es: {
     common: esCommon,
@@ -168,6 +178,7 @@ export const resources = {
     collection: esCollection,
     gameRules: esGameRules,
     pve: esPve,
+    pvp: esPvp,
   },
 } as const
 

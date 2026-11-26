@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Multijogador privado",
+  "title": "Lobby PvP",
+  "subtitle": "Convide um treinador pelo handle exato para uma lobby privada.",
+  "phaseNote": "Lobby privada pronta — o combate chega em uma fase posterior.",
+  "loading": "Carregando lobbies privadas…",
+  "form": {
+    "handleLabel": "Handle do treinador",
+    "handlePlaceholder": "outrotreinador",
+    "submit": "Enviar convite"
+  },
+  "inbox": {
+    "received": "Convites recebidos",
+    "sent": "Convites enviados",
+    "emptyReceived": "Nenhum convite recebido.",
+    "emptySent": "Nenhum convite enviado."
+  },
+  "lobby": {
+    "title": "Lobby atual",
+    "status": "Status: {{status}}"
+  },
+  "realtime": {
+    "status": "Tempo real: {{status}}"
+  },
+  "actions": {
+    "accept": "Aceitar",
+    "decline": "Recusar",
+    "cancel": "Cancelar",
+    "leave": "Sair da lobby",
+    "refresh": "Atualizar"
+  },
+  "errors": {
+    "loadFailed": "Nao foi possivel carregar as lobbies privadas.",
+    "createFailed": "Nao foi possivel criar o convite.",
+    "actionFailed": "Nao foi possivel concluir essa acao."
+  }
+}

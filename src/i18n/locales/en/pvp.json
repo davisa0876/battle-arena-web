@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Private multiplayer",
+  "title": "PvP Lobby",
+  "subtitle": "Invite one trainer by exact handle into a private lobby.",
+  "phaseNote": "Private lobby ready — battle mode comes in a later phase.",
+  "loading": "Loading private lobbies…",
+  "form": {
+    "handleLabel": "Trainer handle",
+    "handlePlaceholder": "othertrainer",
+    "submit": "Send invitation"
+  },
+  "inbox": {
+    "received": "Received invitations",
+    "sent": "Sent invitations",
+    "emptyReceived": "No received invitations.",
+    "emptySent": "No sent invitations."
+  },
+  "lobby": {
+    "title": "Current lobby",
+    "status": "Status: {{status}}"
+  },
+  "realtime": {
+    "status": "Realtime: {{status}}"
+  },
+  "actions": {
+    "accept": "Accept",
+    "decline": "Decline",
+    "cancel": "Cancel",
+    "leave": "Leave lobby",
+    "refresh": "Refresh"
+  },
+  "errors": {
+    "loadFailed": "Could not load private lobbies.",
+    "createFailed": "Could not create the invitation.",
+    "actionFailed": "Could not complete that action."
+  }
+}

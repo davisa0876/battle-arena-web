@@ -1,0 +1,37 @@
+{
+  "eyebrow": "Multigiocatore privato",
+  "title": "Lobby PvP",
+  "subtitle": "Invita un allenatore con handle esatto in una lobby privata.",
+  "phaseNote": "Lobby privata pronta — la battaglia arriva in una fase successiva.",
+  "loading": "Caricamento lobby private…",
+  "form": {
+    "handleLabel": "Handle allenatore",
+    "handlePlaceholder": "altrolallenatore",
+    "submit": "Invia invito"
+  },
+  "inbox": {
+    "received": "Inviti ricevuti",
+    "sent": "Inviti inviati",
+    "emptyReceived": "Nessun invito ricevuto.",
+    "emptySent": "Nessun invito inviato."
+  },
+  "lobby": {
+    "title": "Lobby attuale",
+    "status": "Stato: {{status}}"
+  },
+  "realtime": {
+    "status": "Realtime: {{status}}"
+  },
+  "actions": {
+    "accept": "Accetta",
+    "decline": "Rifiuta",
+    "cancel": "Annulla",
+    "leave": "Lascia lobby",
+    "refresh": "Aggiorna"
+  },
+  "errors": {
+    "loadFailed": "Impossibile caricare le lobby private.",
+    "createFailed": "Impossibile creare l'invito.",
+    "actionFailed": "Impossibile completare l'azione."
+  }
+}

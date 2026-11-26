@@ -16,7 +16,8 @@ export function HomePage() {
       code: 'OB',
       title: t('home.modes.online.title'),
       description: t('home.modes.online.description'),
-      status: t('home.status.comingSoon'),
+      status: t('home.status.available'),
+      to: '/pvp',
     },
     {
       code: 'CC',
@@ -53,34 +54,22 @@ export function HomePage() {
         </div>
 
         <div className="grid grid-cols-3 gap-4 max-md:grid-cols-1">
-          {modes.map((mode) => {
-            const content = (
-              <>
-                <div className="mb-10 grid size-12 place-items-center rounded-[14px] border border-border bg-background font-display text-sm font-bold text-electric" aria-hidden="true">
-                  {mode.code}
-                </div>
-                <span className="absolute right-7 top-8 text-[10px] font-extrabold uppercase tracking-[0.14em] text-arena-300/60">
-                  {mode.status}
-                </span>
-                <h3 className="mb-2.5 font-display text-[1.35rem] font-semibold text-white">{mode.title}</h3>
-                <p className="m-0 leading-relaxed text-arena-300/80">{mode.description}</p>
-              </>
-            )
-
-            if ('to' in mode) {
-              return (
-                <Link key={mode.title} to={mode.to} className="relative min-h-[250px] rounded-[24px] border border-ember/40 bg-linear-to-br from-surface/95 to-background/95 p-8 text-inherit no-underline shadow-card transition duration-200 hover:-translate-y-1 hover:border-ember max-md:min-h-[220px] motion-reduce:transform-none motion-reduce:transition-none">
-                  {content}
-                </Link>
-              )
-            }
-
-            return (
-              <article className="relative min-h-[250px] rounded-[24px] border border-border bg-linear-to-br from-surface/95 to-background/95 p-8 shadow-card transition duration-200 hover:border-electric/40 max-md:min-h-[220px] motion-reduce:transition-none" key={mode.title}>
-                {content}
-              </article>
-            )
-          })}
+          {modes.map((mode) => (
+            <Link
+              key={mode.code}
+              to={mode.to}
+              className="relative min-h-[250px] rounded-[24px] border border-ember/40 bg-linear-to-br from-surface/95 to-background/95 p-8 text-inherit no-underline shadow-card transition duration-200 hover:-translate-y-1 hover:border-ember max-md:min-h-[220px] motion-reduce:transform-none motion-reduce:transition-none"
+            >
+              <div className="mb-10 grid size-12 place-items-center rounded-[14px] border border-border bg-background font-display text-sm font-bold text-electric" aria-hidden="true">
+                {mode.code}
+              </div>
+              <span className="absolute right-7 top-8 text-[10px] font-extrabold uppercase tracking-[0.14em] text-arena-300/60">
+                {mode.status}
+              </span>
+              <h3 className="mb-2.5 font-display text-[1.35rem] font-semibold text-white">{mode.title}</h3>
+              <p className="m-0 leading-relaxed text-arena-300/80">{mode.description}</p>
+            </Link>
+          ))}
         </div>
       </section>
     </>
