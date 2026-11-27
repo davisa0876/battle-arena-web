@@ -76,10 +76,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
   )
 
   const logout = useCallback(async () => {
+    // Drop local session first so PvpPresenceKeeper closes the WS immediately.
+    setState(GUEST_STATE)
     try {
       await authApi.logout()
-    } finally {
-      setState(GUEST_STATE)
+    } catch {
+      // Still signed out locally; server presence clear may have failed.
     }
   }, [])
 

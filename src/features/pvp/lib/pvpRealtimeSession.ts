@@ -39,19 +39,33 @@ export class PvpRealtimeSession {
     }
     this.options.onStatus?.('connecting')
     const ticket = await this.options.issueTicket()
+    // Logout / unmount can finish while the ticket request is in flight.
+    if (this.closed) {
+      return
+    }
     const url = new URL(ticket.ws_url)
     url.searchParams.set('ticket', ticket.ticket)
 
     await new Promise<void>((resolve, reject) => {
+      if (this.closed) {
+        resolve()
+        return
+      }
       const socket = new WebSocket(url.toString())
       this.socket = socket
       let settled = false
 
       socket.onopen = () => {
-        // Wait for connection.ready before resolving.
+        if (this.closed) {
+          socket.close()
+        }
       }
 
       socket.onmessage = (event) => {
+        if (this.closed) {
+          socket.close()
+          return
+        }
         void this.handleMessage(String(event.data), () => {
           if (!settled) {
             settled = true
@@ -73,7 +87,11 @@ export class PvpRealtimeSession {
         this.options.onStatus?.('closed')
         if (!settled) {
           settled = true
-          reject(new Error('websocket_closed'))
+          if (this.closed) {
+            resolve()
+          } else {
+            reject(new Error('websocket_closed'))
+          }
         }
       }
     })
