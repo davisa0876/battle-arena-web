@@ -18,6 +18,8 @@ export type PvpInvitation = {
   room_id: string
   status: string
   expires_at: string | null
+  responded_at?: string | null
+  created_at?: string | null
   inviter: PublicPlayer | null
   invitee: PublicPlayer | null
   allowed_actions: string[]
@@ -29,6 +31,8 @@ export type PvpRoom = {
   status: string
   version: number
   closed_reason: string | null
+  closed_at?: string | null
+  created_at?: string | null
   host: PublicPlayer | null
   members: Array<{
     user_id: number

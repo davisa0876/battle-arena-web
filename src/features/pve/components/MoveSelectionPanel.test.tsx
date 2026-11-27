@@ -80,10 +80,10 @@ describe('MoveSelectionPanel', () => {
     )
 
     for (const item of moves) {
-      expect(screen.getByRole('button', { name: new RegExp(item.name, 'i') })).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: new RegExp(`^${item.name}(?![0-9])`, 'i') })).toBeInTheDocument()
     }
 
-    const card = screen.getByRole('button', { name: /Move 1/i })
+    const card = screen.getByRole('button', { name: /^Move 1(?![0-9])/i })
     expect(card).toHaveStyle({ width: '152px', minWidth: '152px', maxWidth: '152px' })
     expect(container.querySelector('.overflow-x-auto')).not.toBeNull()
   })

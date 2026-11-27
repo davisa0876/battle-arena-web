@@ -39,11 +39,24 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [])
 
+  // Initial session check: state is only set from the request callbacks.
   useEffect(() => {
     const controller = new AbortController()
-    void refreshMe(controller.signal)
+    const { signal } = controller
+    authApi.fetchMe(signal).then(
+      (user) => {
+        if (!signal.aborted) {
+          setState(user ? { status: 'authenticated', user } : GUEST_STATE)
+        }
+      },
+      () => {
+        if (!signal.aborted) {
+          setState(GUEST_STATE)
+        }
+      },
+    )
     return () => controller.abort()
-  }, [refreshMe])
+  }, [])
 
   useEffect(() => {
     apiClient.setUnauthorizedHandler(() => setState(GUEST_STATE))

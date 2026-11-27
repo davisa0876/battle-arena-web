@@ -37,6 +37,34 @@ const MOVE_TONES = [
 
 const CARD_WIDTH_PX = 152
 
+type Selection = number | 'basic' | 'recover' | null
+
+/** Keeps the current choice while it is still valid; otherwise picks a default. */
+function resolveSelection(
+  current: Selection,
+  moves: BattleMove[],
+  canBasicStrike: boolean,
+  canRecoverSkip: boolean,
+): Selection {
+  if (current === 'basic' && canBasicStrike) {
+    return current
+  }
+  if (current === 'recover' && canRecoverSkip) {
+    return current
+  }
+  if (typeof current === 'number' && moves.find((move) => move.id === current)?.can_use) {
+    return current
+  }
+  const firstUsable = moves.find((move) => move.can_use && move.id != null)
+  if (firstUsable?.id != null) {
+    return firstUsable.id
+  }
+  if (canRecoverSkip) {
+    return 'recover'
+  }
+  return canBasicStrike ? 'basic' : null
+}
+
 export function MoveSelectionPanel({
   moves,
   disabled,
@@ -47,37 +75,18 @@ export function MoveSelectionPanel({
   canRecoverSkip,
 }: MoveSelectionPanelProps) {
   const { t } = useTranslation('pve')
-  const [selectedId, setSelectedId] = useState<number | 'basic' | 'recover' | null>(null)
+  const [selectedId, setSelectedId] = useState<Selection>(null)
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
   const [overflows, setOverflows] = useState(false)
 
   // Keep the player's choice across REST/realtime refreshes; only re-pick when invalid.
-  useEffect(() => {
-    setSelectedId((current) => {
-      if (current === 'basic' && canBasicStrike) {
-        return current
-      }
-      if (current === 'recover' && canRecoverSkip) {
-        return current
-      }
-      if (typeof current === 'number') {
-        const still = moves.find((move) => move.id === current)
-        if (still?.can_use) {
-          return current
-        }
-      }
-      const firstUsable = moves.find((move) => move.can_use && move.id != null)
-      if (firstUsable?.id != null) {
-        return firstUsable.id
-      }
-      if (canRecoverSkip) {
-        return 'recover'
-      }
-      return canBasicStrike ? 'basic' : null
-    })
-  }, [moves, canBasicStrike, canRecoverSkip])
+  // Adjusted during render (not in an effect) to avoid a cascading second render.
+  const resolvedId = resolveSelection(selectedId, moves, canBasicStrike, canRecoverSkip)
+  if (resolvedId !== selectedId) {
+    setSelectedId(resolvedId)
+  }
 
   useEffect(() => {
     const el = scrollerRef.current
