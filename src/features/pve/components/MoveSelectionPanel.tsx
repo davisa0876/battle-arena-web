@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { BattleMove } from '../types/battle'
 
@@ -35,6 +35,8 @@ const MOVE_TONES = [
   },
 ] as const
 
+const CARD_WIDTH_PX = 152
+
 export function MoveSelectionPanel({
   moves,
   disabled,
@@ -46,6 +48,9 @@ export function MoveSelectionPanel({
 }: MoveSelectionPanelProps) {
   const { t } = useTranslation('pve')
   const [selectedId, setSelectedId] = useState<number | 'basic' | 'recover' | null>(null)
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(false)
 
   // Keep the player's choice across REST/realtime refreshes; only re-pick when invalid.
   useEffect(() => {
@@ -73,7 +78,39 @@ export function MoveSelectionPanel({
     })
   }, [moves, canBasicStrike, canRecoverSkip])
 
+  useEffect(() => {
+    const el = scrollerRef.current
+    if (!el) {
+      return
+    }
+
+    const sync = () => {
+      const max = el.scrollWidth - el.clientWidth
+      setCanScrollLeft(el.scrollLeft > 2)
+      setCanScrollRight(max > 2 && el.scrollLeft < max - 2)
+    }
+
+    sync()
+    el.addEventListener('scroll', sync, { passive: true })
+    const observer = new ResizeObserver(sync)
+    observer.observe(el)
+    return () => {
+      el.removeEventListener('scroll', sync)
+      observer.disconnect()
+    }
+  }, [moves])
+
+  const scrollByDir = (dir: -1 | 1) => {
+    const el = scrollerRef.current
+    if (!el) {
+      return
+    }
+    const step = Math.max(CARD_WIDTH_PX + 8, Math.floor(el.clientWidth * 0.75))
+    el.scrollBy({ left: dir * step, behavior: 'smooth' })
+  }
+
   const selectedMove = typeof selectedId === 'number' ? moves.find((move) => move.id === selectedId) : null
+  const showArrows = canScrollLeft || canScrollRight
 
   return (
     <section aria-label={t('actions.attackPanel')} className="grid gap-3">
@@ -86,62 +123,101 @@ export function MoveSelectionPanel({
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-[repeat(auto-fill,minmax(9.5rem,1fr))]">
-        {moves.map((move, index) => {
-          const selected = selectedId === move.id
-          const tone = MOVE_TONES[index % MOVE_TONES.length]
-          return (
-            <button
-              key={move.id ?? move.slug}
-              type="button"
-              disabled={disabled || !move.can_use || move.id == null}
-              onClick={() => move.id != null && setSelectedId(move.id)}
-              className={`rounded-2xl border px-3 py-3 text-left transition disabled:cursor-not-allowed disabled:opacity-45 ${
-                selected ? tone.selected : tone.idle
-              }`}
-            >
-              <span className="block truncate font-display text-sm font-semibold text-white">{move.name}</span>
-              <span className={`mt-1 block text-[11px] uppercase tracking-[0.12em] ${tone.type}`}>
-                {move.type}
-              </span>
-              <span className="mt-2 block text-xs text-arena-300/80">
-                {t('movePp', { pp: move.pp.current, ppMax: move.pp.max })}
-              </span>
-              <span className="mt-1 block text-[11px] text-arena-300/65">
-                {t('moveStaminaCost', { stamina: move.stamina_cost })}
-              </span>
-            </button>
-          )
-        })}
-        {canRecoverSkip && (
+      <div className="relative">
+        {showArrows && (
           <button
             type="button"
-            disabled={disabled}
-            onClick={() => setSelectedId('recover')}
-            className={`rounded-2xl border px-3 py-3 text-left text-sm font-semibold disabled:opacity-45 ${
-              selectedId === 'recover'
-                ? 'border-signal-ok bg-signal-ok/25 text-white shadow-[0_0_0_1px_rgba(52,211,153,0.35)]'
-                : 'border-signal-ok/45 bg-signal-ok/10 text-arena-300 hover:border-signal-ok/70'
-            }`}
+            aria-label={t('actions.scrollMovesLeft')}
+            disabled={!canScrollLeft}
+            onClick={() => scrollByDir(-1)}
+            className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-[#0a1220]/95 text-lg text-white shadow-lg disabled:cursor-not-allowed disabled:opacity-35"
           >
-            {t('actions.recoverSkip')}
+            ‹
           </button>
         )}
-        {canBasicStrike && (
+
+        <div
+          ref={scrollerRef}
+          className={`overflow-x-auto overscroll-x-contain scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
+            showArrows ? 'px-12' : ''
+          }`}
+        >
+          <div className="flex w-max gap-2">
+            {moves.map((move, index) => {
+              const selected = selectedId === move.id
+              const tone = MOVE_TONES[index % MOVE_TONES.length]
+              return (
+                <button
+                  key={move.id ?? move.slug}
+                  type="button"
+                  disabled={disabled || !move.can_use || move.id == null}
+                  onClick={() => move.id != null && setSelectedId(move.id)}
+                  style={{ width: CARD_WIDTH_PX }}
+                  className={`shrink-0 rounded-2xl border px-3 py-3 text-left transition disabled:cursor-not-allowed disabled:opacity-45 ${
+                    selected ? tone.selected : tone.idle
+                  }`}
+                >
+                  <span className="block truncate font-display text-sm font-semibold text-white">{move.name}</span>
+                  <span className={`mt-1 block text-[11px] uppercase tracking-[0.12em] ${tone.type}`}>
+                    {move.type}
+                  </span>
+                  <span className="mt-2 block text-xs text-arena-300/80">
+                    {t('movePp', { pp: move.pp.current, ppMax: move.pp.max })}
+                  </span>
+                  <span className="mt-1 block text-[11px] text-arena-300/65">
+                    {t('moveStaminaCost', { stamina: move.stamina_cost })}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {showArrows && (
           <button
             type="button"
-            disabled={disabled}
-            onClick={() => setSelectedId('basic')}
-            className={`rounded-2xl border border-dashed px-3 py-3 text-left text-sm font-semibold disabled:opacity-45 ${
-              selectedId === 'basic'
-                ? 'border-gold bg-gold/20 text-white'
-                : 'border-gold/40 bg-gold/5 text-arena-300 hover:border-gold/70'
-            }`}
+            aria-label={t('actions.scrollMovesRight')}
+            disabled={!canScrollRight}
+            onClick={() => scrollByDir(1)}
+            className="absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-border bg-[#0a1220]/95 text-lg text-white shadow-lg disabled:cursor-not-allowed disabled:opacity-35"
           >
-            {t('actions.basicStrike')}
+            ›
           </button>
         )}
       </div>
+
+      {(canRecoverSkip || canBasicStrike) && (
+        <div className="flex flex-wrap gap-2">
+          {canRecoverSkip && (
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={() => setSelectedId('recover')}
+              className={`min-w-[9.5rem] flex-1 rounded-2xl border px-3 py-3 text-left text-sm font-semibold disabled:opacity-45 sm:flex-none ${
+                selectedId === 'recover'
+                  ? 'border-signal-ok bg-signal-ok/25 text-white shadow-[0_0_0_1px_rgba(52,211,153,0.35)]'
+                  : 'border-signal-ok/45 bg-signal-ok/10 text-arena-300 hover:border-signal-ok/70'
+              }`}
+            >
+              {t('actions.recoverSkip')}
+            </button>
+          )}
+          {canBasicStrike && (
+            <button
+              type="button"
+              disabled={disabled}
+              onClick={() => setSelectedId('basic')}
+              className={`min-w-[9.5rem] flex-1 rounded-2xl border border-dashed px-3 py-3 text-left text-sm font-semibold disabled:opacity-45 sm:flex-none ${
+                selectedId === 'basic'
+                  ? 'border-gold bg-gold/20 text-white'
+                  : 'border-gold/40 bg-gold/5 text-arena-300 hover:border-gold/70'
+              }`}
+            >
+              {t('actions.basicStrike')}
+            </button>
+          )}
+        </div>
+      )}
 
       {selectedId === 'recover' && (
         <div className="rounded-2xl border border-signal-ok/35 bg-signal-ok/10 px-4 py-3" role="note">

@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-const DEFENSES = ['endure', 'block', 'dodge', 'recover'] as const
+const DEFENSES = ['endure', 'block', 'dodge', 'recover', 'heal'] as const
 
 const DEFENSE_TONES: Record<(typeof DEFENSES)[number], string> = {
   endure: 'border-arena-400/45 bg-arena-700/40 hover:border-arena-300/70 hover:bg-arena-700/60',
   block: 'border-electric/55 bg-electric/15 hover:border-electric hover:bg-electric/25',
   dodge: 'border-gold/55 bg-gold/15 hover:border-gold hover:bg-gold/25',
   recover: 'border-signal-ok/55 bg-signal-ok/15 hover:border-signal-ok hover:bg-signal-ok/25',
+  heal: 'border-rose-400/55 bg-rose-500/15 hover:border-rose-400 hover:bg-rose-500/25',
 }
 
 const DEFENSE_SELECTED: Record<(typeof DEFENSES)[number], string> = {
@@ -15,6 +16,7 @@ const DEFENSE_SELECTED: Record<(typeof DEFENSES)[number], string> = {
   block: 'border-electric bg-electric/30 shadow-[0_0_0_1px_rgba(39,201,236,0.35)]',
   dodge: 'border-gold bg-gold/30 shadow-[0_0_0_1px_rgba(255,184,77,0.35)]',
   recover: 'border-signal-ok bg-signal-ok/30 shadow-[0_0_0_1px_rgba(52,211,153,0.35)]',
+  heal: 'border-rose-400 bg-rose-500/30 shadow-[0_0_0_1px_rgba(251,113,133,0.35)]',
 }
 
 const DEFENSE_LABEL: Record<(typeof DEFENSES)[number], string> = {
@@ -22,6 +24,7 @@ const DEFENSE_LABEL: Record<(typeof DEFENSES)[number], string> = {
   block: 'text-electric',
   dodge: 'text-gold',
   recover: 'text-signal-ok',
+  heal: 'text-rose-300',
 }
 
 interface DefenseSelectionPanelProps {
@@ -44,7 +47,7 @@ export function DefenseSelectionPanel({ disabled, onDefend }: DefenseSelectionPa
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
         {DEFENSES.map((defense) => (
           <button
             key={defense}

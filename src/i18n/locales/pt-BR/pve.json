@@ -33,6 +33,8 @@
     "defensePanel": "Ações de defesa",
     "attackTab": "Ataque",
     "defenseTab": "Defesa",
+    "scrollMovesLeft": "Rolar ataques para a esquerda",
+    "scrollMovesRight": "Rolar ataques para a direita",
     "chooseAttack": "Escolha um ataque",
     "chooseDefense": "Escolha uma defesa",
     "basicStrike": "Golpe Básico",
@@ -68,6 +70,11 @@
       "label": "Recuperar",
       "hint": "0 stamina · +15 stamina",
       "description": "Recupera 15 de stamina em vez de se defender. Você toma o golpe normalmente, mas recarrega stamina para responder melhor."
+    },
+    "heal": {
+      "label": "Curar",
+      "hint": "25 stamina · +20 HP",
+      "description": "Gasta 25 de stamina para recuperar 20 de HP depois do golpe. O dano ainda é total — use quando puder pagar a stamina."
     }
   },
   "log": {

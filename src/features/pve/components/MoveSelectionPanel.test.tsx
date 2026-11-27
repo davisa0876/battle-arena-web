@@ -58,4 +58,27 @@ describe('MoveSelectionPanel', () => {
     await user.click(screen.getByRole('button', { name: /Use Psybeam/i }))
     expect(onAttack).toHaveBeenCalledWith(2)
   })
+
+  it('renders every attack card for large loadouts', async () => {
+    await i18n.changeLanguage('en')
+    const moves = Array.from({ length: 8 }, (_, index) =>
+      move({ id: index + 1, name: `Move ${index + 1}`, type: 'dark' }),
+    )
+
+    render(
+      <MoveSelectionPanel
+        moves={moves}
+        disabled={false}
+        canBasicStrike={false}
+        canRecoverSkip={false}
+        onAttack={() => undefined}
+        onBasicStrike={() => undefined}
+        onRecoverSkip={() => undefined}
+      />,
+    )
+
+    for (const item of moves) {
+      expect(screen.getByRole('button', { name: new RegExp(item.name, 'i') })).toBeInTheDocument()
+    }
+  })
 })

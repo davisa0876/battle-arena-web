@@ -33,6 +33,8 @@
     "defensePanel": "Azioni di difesa",
     "attackTab": "Attacco",
     "defenseTab": "Difesa",
+    "scrollMovesLeft": "Scorri gli attacchi a sinistra",
+    "scrollMovesRight": "Scorri gli attacchi a destra",
     "chooseAttack": "Scegli un attacco",
     "chooseDefense": "Scegli una difesa",
     "basicStrike": "Colpo base",
@@ -67,6 +69,11 @@
       "label": "Recuperare",
       "hint": "0 stam · +15 stamina",
       "description": "Recupera 15 stamina invece di difenderti. Subisci il colpo, ma ricarichi per rispondere meglio."
+    },
+    "heal": {
+      "label": "Curare",
+      "hint": "25 stam · +20 PS",
+      "description": "Spendi 25 stamina per recuperare 20 PS dopo il colpo. Subisci comunque tutto il danno."
     }
   },
   "log": {

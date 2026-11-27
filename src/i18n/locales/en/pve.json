@@ -33,6 +33,8 @@
     "defensePanel": "Defense actions",
     "attackTab": "Attack",
     "defenseTab": "Defense",
+    "scrollMovesLeft": "Scroll moves left",
+    "scrollMovesRight": "Scroll moves right",
     "chooseAttack": "Choose an attack",
     "chooseDefense": "Choose a defense",
     "basicStrike": "Basic Strike",
@@ -68,6 +70,11 @@
       "label": "Recover",
       "hint": "0 stamina · +15 stamina",
       "description": "Restore 15 stamina instead of defending. You take the hit normally, but refill stamina for stronger replies."
+    },
+    "heal": {
+      "label": "Heal",
+      "hint": "25 stamina · +20 HP",
+      "description": "Spend 25 stamina to restore 20 HP after the hit. You still take full damage — use it to patch up when you can afford the stamina."
     }
   },
   "log": {
