@@ -1,6 +1,7 @@
 export type {
   Creature,
   CreatureBaseStats,
+  CreatureCombatPreview,
   CreatureDetailResponse,
   CreatureListParams,
   CreatureType,
