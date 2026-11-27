@@ -12,7 +12,7 @@ React frontend for Battle Arena. The redesign keeps the existing React Router ro
 
 ## Requirements
 
-- Node.js 22+ (Compose `web` service preferred for tests/typecheck)
+- Node.js 22.12+ for local development and tests
 - Battle Arena API with migrated + imported catalog data
 
 ## Phase 5B.3 — Private PvP arena
@@ -30,7 +30,13 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Set `VITE_API_BASE_URL` if the API is not at `http://localhost:8000`.
+Vite serves on port 3000 by default. When the Compose environment is running it already owns port 3000, so use:
+
+```bash
+npm run dev -- --port 5173
+```
+
+Open [http://localhost:5173](http://localhost:5173); the API and realtime service accept that origin. Set `VITE_API_BASE_URL` if the API is not at `http://localhost:8000`.
 
 ## Structure
 
@@ -82,13 +88,19 @@ npm test
 npm run build
 ```
 
-## Docker development
+## Docker (production build)
 
-Prefer the sibling infra Compose stack:
+The sibling infra Compose environment builds this app (`vite build`) and serves it with Nginx, standing in for S3 + CloudFront:
 
 ```bash
 cd ../battle-arena-infra
-docker compose up --build -d
+docker compose up -d --build
 ```
 
 Web: http://localhost:3000
+
+- There is no hot reload in the container. Rebuild with `docker compose up -d --build web`, or use the Vite dev server above.
+- `VITE_API_BASE_URL` is fixed at build time.
+- Tests, lint and typecheck run on the host, not in the `web` container.
+
+See `../battle-arena-infra/README.md`.
