@@ -2,6 +2,19 @@
 
 React frontend for Battle Arena. The redesign keeps the existing React Router routes while adding a feature-oriented structure, i18n, brand assets, and a cinematic dark UI.
 
+## Running the project locally
+
+The [`battle-arena-infra`](https://github.com/davisa0876/battle-arena-infra) repository is responsible for creating the local environment. Use it to run the whole project (database, Redis, storage, email, API, realtime and web) with Docker.
+
+Clone it next to this repository and the other `battle-arena-*` repositories, then:
+
+```bash
+cd battle-arena-infra
+docker compose up -d --build
+```
+
+First-time setup, environment files, URLs and troubleshooting are in the [infra README](https://github.com/davisa0876/battle-arena-infra#readme). The sections below also describe how to run the Vite dev server for hot reload; it still needs the API from this environment.
+
 ## Stack
 
 - React + Vite + TypeScript
