@@ -51,6 +51,7 @@ export function MoveSelectionPanel({
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
+  const [overflows, setOverflows] = useState(false)
 
   // Keep the player's choice across REST/realtime refreshes; only re-pick when invalid.
   useEffect(() => {
@@ -85,16 +86,23 @@ export function MoveSelectionPanel({
     }
 
     const sync = () => {
-      const max = el.scrollWidth - el.clientWidth
+      const max = Math.max(0, el.scrollWidth - el.clientWidth)
+      setOverflows(max > 2)
       setCanScrollLeft(el.scrollLeft > 2)
       setCanScrollRight(max > 2 && el.scrollLeft < max - 2)
     }
 
     sync()
+    // Layout may settle after paint (fonts/images); re-check once.
+    const raf = window.requestAnimationFrame(sync)
     el.addEventListener('scroll', sync, { passive: true })
     const observer = new ResizeObserver(sync)
     observer.observe(el)
+    if (el.firstElementChild) {
+      observer.observe(el.firstElementChild)
+    }
     return () => {
+      window.cancelAnimationFrame(raf)
       el.removeEventListener('scroll', sync)
       observer.disconnect()
     }
@@ -105,15 +113,14 @@ export function MoveSelectionPanel({
     if (!el) {
       return
     }
-    const step = Math.max(CARD_WIDTH_PX + 8, Math.floor(el.clientWidth * 0.75))
+    const step = CARD_WIDTH_PX + 8
     el.scrollBy({ left: dir * step, behavior: 'smooth' })
   }
 
   const selectedMove = typeof selectedId === 'number' ? moves.find((move) => move.id === selectedId) : null
-  const showArrows = canScrollLeft || canScrollRight
 
   return (
-    <section aria-label={t('actions.attackPanel')} className="grid gap-3">
+    <section aria-label={t('actions.attackPanel')} className="grid min-w-0 w-full gap-3">
       <div className="flex flex-wrap gap-2">
         <span className="rounded-full bg-ember/20 px-3 py-1.5 text-xs font-extrabold uppercase tracking-[0.12em] text-ember">
           {t('actions.attackTab')}
@@ -123,8 +130,8 @@ export function MoveSelectionPanel({
         </span>
       </div>
 
-      <div className="relative">
-        {showArrows && (
+      <div className="relative min-w-0 w-full">
+        {overflows && (
           <button
             type="button"
             aria-label={t('actions.scrollMovesLeft')}
@@ -138,11 +145,11 @@ export function MoveSelectionPanel({
 
         <div
           ref={scrollerRef}
-          className={`overflow-x-auto overscroll-x-contain scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${
-            showArrows ? 'px-12' : ''
+          className={`min-w-0 w-full max-w-full overflow-x-auto overscroll-x-contain scroll-smooth [scrollbar-width:thin] ${
+            overflows ? 'px-12' : ''
           }`}
         >
-          <div className="flex w-max gap-2">
+          <div className="flex w-max flex-nowrap gap-2">
             {moves.map((move, index) => {
               const selected = selectedId === move.id
               const tone = MOVE_TONES[index % MOVE_TONES.length]
@@ -152,8 +159,13 @@ export function MoveSelectionPanel({
                   type="button"
                   disabled={disabled || !move.can_use || move.id == null}
                   onClick={() => move.id != null && setSelectedId(move.id)}
-                  style={{ width: CARD_WIDTH_PX }}
-                  className={`shrink-0 rounded-2xl border px-3 py-3 text-left transition disabled:cursor-not-allowed disabled:opacity-45 ${
+                  style={{
+                    flex: `0 0 ${CARD_WIDTH_PX}px`,
+                    width: CARD_WIDTH_PX,
+                    minWidth: CARD_WIDTH_PX,
+                    maxWidth: CARD_WIDTH_PX,
+                  }}
+                  className={`box-border rounded-2xl border px-3 py-3 text-left transition disabled:cursor-not-allowed disabled:opacity-45 ${
                     selected ? tone.selected : tone.idle
                   }`}
                 >
@@ -173,7 +185,7 @@ export function MoveSelectionPanel({
           </div>
         </div>
 
-        {showArrows && (
+        {overflows && (
           <button
             type="button"
             aria-label={t('actions.scrollMovesRight')}

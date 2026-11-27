@@ -59,26 +59,32 @@ describe('MoveSelectionPanel', () => {
     expect(onAttack).toHaveBeenCalledWith(2)
   })
 
-  it('renders every attack card for large loadouts', async () => {
+  it('keeps fixed-width cards for large loadouts', async () => {
     await i18n.changeLanguage('en')
     const moves = Array.from({ length: 8 }, (_, index) =>
       move({ id: index + 1, name: `Move ${index + 1}`, type: 'dark' }),
     )
 
-    render(
-      <MoveSelectionPanel
-        moves={moves}
-        disabled={false}
-        canBasicStrike={false}
-        canRecoverSkip={false}
-        onAttack={() => undefined}
-        onBasicStrike={() => undefined}
-        onRecoverSkip={() => undefined}
-      />,
+    const { container } = render(
+      <div style={{ width: 420 }}>
+        <MoveSelectionPanel
+          moves={moves}
+          disabled={false}
+          canBasicStrike={false}
+          canRecoverSkip={false}
+          onAttack={() => undefined}
+          onBasicStrike={() => undefined}
+          onRecoverSkip={() => undefined}
+        />
+      </div>,
     )
 
     for (const item of moves) {
       expect(screen.getByRole('button', { name: new RegExp(item.name, 'i') })).toBeInTheDocument()
     }
+
+    const card = screen.getByRole('button', { name: /Move 1/i })
+    expect(card).toHaveStyle({ width: '152px', minWidth: '152px', maxWidth: '152px' })
+    expect(container.querySelector('.overflow-x-auto')).not.toBeNull()
   })
 })

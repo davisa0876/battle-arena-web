@@ -257,11 +257,13 @@ export function PvpBattlePage() {
 
   const meView = battle.me ? toBattlefieldCombatant(battle.me, true) : null
   const oppView = battle.opponent ? toBattlefieldCombatant(battle.opponent, false) : null
-  const defending = battle.phase === 'awaiting_defense' && battle.allowed_actions.some((a) => ['endure', 'block', 'dodge', 'recover'].includes(a))
+  const defending =
+    battle.phase === 'awaiting_defense' &&
+    battle.allowed_actions.some((a) => ['endure', 'block', 'dodge', 'recover', 'heal'].includes(a))
   const attacking = battle.phase === 'awaiting_attack' && (fallback.canAttackMove || fallback.canBasicStrike || fallback.canRecoverSkip)
 
   return (
-    <div className="mx-auto flex w-[min(1180px,calc(100%-2rem))] flex-col gap-3 py-4 sm:gap-4 sm:py-5">
+    <div className="mx-auto flex w-[min(1180px,calc(100%-2rem))] min-w-0 flex-col gap-3 py-4 sm:gap-4 sm:py-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="m-0 text-xs font-extrabold uppercase tracking-[0.18em] text-ember">{t('eyebrow')}</p>
@@ -427,6 +429,7 @@ export function PvpBattlePage() {
           </button>
         </section>
       ) : attacking ? (
+        <div className="min-w-0 w-full">
         <MoveSelectionPanel
           moves={meView?.moves ?? []}
           disabled={busy}
@@ -450,6 +453,7 @@ export function PvpBattlePage() {
             )
           }
         />
+        </div>
       ) : defending ? (
         <DefenseSelectionPanel
           disabled={busy}

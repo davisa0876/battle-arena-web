@@ -322,7 +322,7 @@ export function PveBattlePage() {
         : 'border-border bg-surface text-arena-300'
 
   return (
-    <div className="mx-auto flex w-[min(1180px,calc(100%-2rem))] flex-col gap-3 py-4 sm:gap-4 sm:py-5">
+    <div className="mx-auto flex w-[min(1180px,calc(100%-2rem))] min-w-0 flex-col gap-3 py-4 sm:gap-4 sm:py-5">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="m-0 text-xs font-extrabold uppercase tracking-[0.18em] text-ember">{t('eyebrow')}</p>
@@ -368,7 +368,7 @@ export function PveBattlePage() {
       </div>
 
       {/* In-flow dock: always visible after the arena, never covers HP/sprites. */}
-      <div className="sticky bottom-0 z-20 rounded-[20px] border border-border bg-surface/95 p-3 shadow-[0_-12px_40px_rgba(0,0,0,0.35)] backdrop-blur-md sm:p-4">
+      <div className="sticky bottom-0 z-20 min-w-0 w-full rounded-[20px] border border-border bg-surface/95 p-3 shadow-[0_-12px_40px_rgba(0,0,0,0.35)] backdrop-blur-md sm:p-4">
         {battle.phase === 'awaiting_player_attack' && (
           <MoveSelectionPanel
             moves={battle.player.moves ?? []}
