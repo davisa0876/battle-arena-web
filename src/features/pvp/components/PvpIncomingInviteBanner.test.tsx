@@ -9,6 +9,8 @@ import { PvpIncomingInviteBanner } from './PvpIncomingInviteBanner'
 function pvpAuth() {
   return authenticatedValue({
     user: makeUser({
+      // Matches the room host below: accepted-invite alerts are shown to the host only.
+      id: 2,
       progress: makeProgress({ level: 6, pvp_level_unlocked: true }),
     }),
   })
